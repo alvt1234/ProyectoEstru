@@ -1,4 +1,4 @@
-# Install script for directory: /home/anareyes/Documentos/Proyecto
+# Install script for directory: /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/anareyes/Documentos/Proyecto/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

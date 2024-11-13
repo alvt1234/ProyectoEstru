@@ -81,7 +81,7 @@ void dibujarCarro() {
 
 // Función para dibujar el mapa (calles, edificios, etc.)
 void dibujarMapa(botones& boton) {
-    SDL_SetRenderDrawColor(renderer, 135, 206, 235, 255); // Azul claro
+    SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
     SDL_RenderClear(renderer);
 
     // Dibujar calles y edificios

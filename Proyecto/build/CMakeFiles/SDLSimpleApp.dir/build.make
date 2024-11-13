@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/anareyes/Documentos/Proyecto
+CMAKE_SOURCE_DIR = /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/anareyes/Documentos/Proyecto/build
+CMAKE_BINARY_DIR = /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SDLSimpleApp.dir/depend.make
@@ -70,32 +70,32 @@ include CMakeFiles/SDLSimpleApp.dir/progress.make
 include CMakeFiles/SDLSimpleApp.dir/flags.make
 
 CMakeFiles/SDLSimpleApp.dir/main.cpp.o: CMakeFiles/SDLSimpleApp.dir/flags.make
-CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/Proyecto/main.cpp
+CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp
 CMakeFiles/SDLSimpleApp.dir/main.cpp.o: CMakeFiles/SDLSimpleApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/anareyes/Documentos/Proyecto/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SDLSimpleApp.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLSimpleApp.dir/main.cpp.o -MF CMakeFiles/SDLSimpleApp.dir/main.cpp.o.d -o CMakeFiles/SDLSimpleApp.dir/main.cpp.o -c /home/anareyes/Documentos/Proyecto/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SDLSimpleApp.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLSimpleApp.dir/main.cpp.o -MF CMakeFiles/SDLSimpleApp.dir/main.cpp.o.d -o CMakeFiles/SDLSimpleApp.dir/main.cpp.o -c /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp
 
 CMakeFiles/SDLSimpleApp.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SDLSimpleApp.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anareyes/Documentos/Proyecto/main.cpp > CMakeFiles/SDLSimpleApp.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp > CMakeFiles/SDLSimpleApp.dir/main.cpp.i
 
 CMakeFiles/SDLSimpleApp.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SDLSimpleApp.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anareyes/Documentos/Proyecto/main.cpp -o CMakeFiles/SDLSimpleApp.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp -o CMakeFiles/SDLSimpleApp.dir/main.cpp.s
 
 CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: CMakeFiles/SDLSimpleApp.dir/flags.make
-CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/Proyecto/grafo.cpp
+CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.cpp
 CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: CMakeFiles/SDLSimpleApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/anareyes/Documentos/Proyecto/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o -MF CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o.d -o CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o -c /home/anareyes/Documentos/Proyecto/grafo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o -MF CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o.d -o CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o -c /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.cpp
 
 CMakeFiles/SDLSimpleApp.dir/grafo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SDLSimpleApp.dir/grafo.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anareyes/Documentos/Proyecto/grafo.cpp > CMakeFiles/SDLSimpleApp.dir/grafo.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.cpp > CMakeFiles/SDLSimpleApp.dir/grafo.cpp.i
 
 CMakeFiles/SDLSimpleApp.dir/grafo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SDLSimpleApp.dir/grafo.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anareyes/Documentos/Proyecto/grafo.cpp -o CMakeFiles/SDLSimpleApp.dir/grafo.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.cpp -o CMakeFiles/SDLSimpleApp.dir/grafo.cpp.s
 
 # Object files for target SDLSimpleApp
 SDLSimpleApp_OBJECTS = \
@@ -112,7 +112,7 @@ SDLSimpleApp: /usr/lib64/libSDL2-2.0.so.0.3000.3
 SDLSimpleApp: /usr/lib64/libSDL2main.a
 SDLSimpleApp: /usr/lib64/libSDL2_image.so
 SDLSimpleApp: CMakeFiles/SDLSimpleApp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/anareyes/Documentos/Proyecto/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable SDLSimpleApp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable SDLSimpleApp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SDLSimpleApp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -124,6 +124,6 @@ CMakeFiles/SDLSimpleApp.dir/clean:
 .PHONY : CMakeFiles/SDLSimpleApp.dir/clean
 
 CMakeFiles/SDLSimpleApp.dir/depend:
-	cd /home/anareyes/Documentos/Proyecto/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/anareyes/Documentos/Proyecto /home/anareyes/Documentos/Proyecto /home/anareyes/Documentos/Proyecto/build /home/anareyes/Documentos/Proyecto/build /home/anareyes/Documentos/Proyecto/build/CMakeFiles/SDLSimpleApp.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/build/CMakeFiles/SDLSimpleApp.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/SDLSimpleApp.dir/depend
 

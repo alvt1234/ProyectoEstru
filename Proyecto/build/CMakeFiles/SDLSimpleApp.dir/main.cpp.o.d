@@ -1,17 +1,18 @@
 CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
- /home/anareyes/Documentos/Proyecto/main.cpp /usr/include/stdc-predef.h \
- /usr/include/SDL2/SDL.h /usr/include/SDL2/SDL_main.h \
- /usr/include/SDL2/SDL_stdinc.h /usr/include/SDL2/SDL_config.h \
- /usr/include/SDL2/SDL_config-x86_64.h /usr/include/SDL2/SDL_platform.h \
- /usr/include/SDL2/begin_code.h /usr/include/SDL2/close_code.h \
- /usr/include/sys/types.h /usr/include/features.h \
- /usr/include/features-time64.h /usr/include/bits/wordsize.h \
- /usr/include/bits/timesize.h /usr/include/sys/cdefs.h \
- /usr/include/bits/long-double.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-64.h /usr/include/bits/types.h \
- /usr/include/bits/typesizes.h /usr/include/bits/time64.h \
- /usr/include/bits/types/clock_t.h /usr/include/bits/types/clockid_t.h \
- /usr/include/bits/types/time_t.h /usr/include/bits/types/timer_t.h \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp \
+ /usr/include/stdc-predef.h /usr/include/SDL2/SDL.h \
+ /usr/include/SDL2/SDL_main.h /usr/include/SDL2/SDL_stdinc.h \
+ /usr/include/SDL2/SDL_config.h /usr/include/SDL2/SDL_config-x86_64.h \
+ /usr/include/SDL2/SDL_platform.h /usr/include/SDL2/begin_code.h \
+ /usr/include/SDL2/close_code.h /usr/include/sys/types.h \
+ /usr/include/features.h /usr/include/features-time64.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/long-double.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/time64.h /usr/include/bits/types/clock_t.h \
+ /usr/include/bits/types/clockid_t.h /usr/include/bits/types/time_t.h \
+ /usr/include/bits/types/timer_t.h \
  /usr/lib/gcc/x86_64-redhat-linux/14/include/stddef.h \
  /usr/include/bits/stdint-intn.h /usr/include/endian.h \
  /usr/include/bits/endian.h /usr/include/bits/endianness.h \
@@ -179,9 +180,10 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
  /usr/include/SDL2/SDL_system.h /usr/include/SDL2/SDL_timer.h \
  /usr/include/SDL2/SDL_version.h /usr/include/SDL2/SDL_locale.h \
  /usr/include/SDL2/SDL_misc.h /usr/include/SDL2/SDL_image.h \
- /usr/include/SDL2/SDL.h /home/anareyes/Documentos/Proyecto/botones.hpp \
- /home/anareyes/Documentos/Proyecto/grafo.hpp /usr/include/c++/14/vector \
- /usr/include/c++/14/bits/stl_algobase.h \
+ /usr/include/SDL2/SDL.h \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/botones.hpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
+ /usr/include/c++/14/vector /usr/include/c++/14/bits/stl_algobase.h \
  /usr/include/c++/14/bits/functexcept.h \
  /usr/include/c++/14/bits/exception_defines.h \
  /usr/include/c++/14/ext/numeric_traits.h \
