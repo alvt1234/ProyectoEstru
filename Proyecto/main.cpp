@@ -2,7 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include "botones.hpp"
 #include "grafo.hpp"
-
+#include <cmath>
 // Crear variables globales
 SDL_Surface * screen;  // espacio en memoria de la pantalla
 SDL_Surface * imagen;  // espacio en memoria de la imagen
@@ -17,6 +17,30 @@ Grafo grafo;  // Grafo que representa las intersecciones y las calles
 void calles();
 void edificios();
 void dibujarMapa(botones& boton);
+
+
+
+void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
+ {
+    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Color de la rotonda (gris oscuro)
+    for (int w = 0; w < radio * 2; w++) {
+        for (int h = 0; h < radio * 2; h++) {
+            int dx = radio - w; // distancia horizontal al centro
+            int dy = radio - h; // distancia vertical al centro
+            if ((dx * dx + dy * dy) <= (radio * radio)) {
+                SDL_RenderDrawPoint(renderer, centroX + dx, centroY + dy);
+            }
+        }
+    }
+
+  
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Color de las líneas amarillas
+    for (int i = 0; i < 360; i += 45) {
+        int x = centroX + (radio - 5) * cos(i * M_PI / 180);
+        int y = centroY + (radio - 5) * sin(i * M_PI / 180);
+        SDL_RenderDrawPoint(renderer, x, y);
+    }
+}
 
 
 // Función para manejar los eventos
@@ -103,14 +127,25 @@ void dibujarMapa(botones& boton) {
 }
 
 
-// Función para dibujar las calles
+/*void dibujarMediaCurva(SDL_Renderer* renderer, int x1, int y1, int x2, int y2, int radio) {
+    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro para la curva
+    int cx = (x1 + x2) / 2; // Centro en x de la curva
+    int cy = (y1 + y2) / 2; // Centro en y de la curva
+
+    for (double t = 0; t < M_PI / 2; t += 0.01) {
+        int x = cx + radio * cos(t);
+        int y = cy - radio * sin(t);
+        SDL_RenderDrawPoint(renderer, x, y);
+    }
+}
+*/
+
 void calles() {
     SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
-
-    int anchoCalle = 40;  // Reducido el ancho de las calles
-    int grosorLinea = 2;  // Grosor de las líneas amarillas
-    int espacio = 80;     // Espacio entre calles
-    int anchoMapa = 1500; // Reservar espacio para el menú a la derecha
+    int anchoCalle = 40;  
+    int grosorLinea = 2;  
+    int espacio = 80;     
+    int anchoMapa = 1500; 
 
     // Dibujar calles horizontales
     for (int y = espacio; y < 1080; y += espacio + anchoCalle) {
@@ -122,7 +157,7 @@ void calles() {
         SDL_Rect linea = {0, y + anchoCalle / 2 - grosorLinea / 2, anchoMapa, grosorLinea};
         SDL_RenderFillRect(renderer, &linea);
 
-        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Volver a color de calle
+        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
     }
 
     // Dibujar calles verticales
@@ -135,8 +170,18 @@ void calles() {
         SDL_Rect linea = {x + anchoCalle / 2 - grosorLinea / 2, 0, grosorLinea, 1080};
         SDL_RenderFillRect(renderer, &linea);
 
-        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Volver a color de calle
+        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
     }
+
+    
+    dibujarCirculo(renderer, 200, 400, 100);  //primero: coordenada x, segundo cordenada: y, tercero: radio del circulo
+
+    // Dibujar otras rotondas
+    dibujarCirculo(renderer, 1000, 800, 100);  
+    dibujarCirculo(renderer, 1000, 200, 100); 
+
+   
+   
 }
 
 
