@@ -1,5 +1,5 @@
 CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/main.cpp \
  /usr/include/stdc-predef.h /usr/include/SDL2/SDL.h \
  /usr/include/SDL2/SDL_main.h /usr/include/SDL2/SDL_stdinc.h \
  /usr/include/SDL2/SDL_config.h /usr/include/SDL2/SDL_config-x86_64.h \
@@ -181,8 +181,8 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
  /usr/include/SDL2/SDL_version.h /usr/include/SDL2/SDL_locale.h \
  /usr/include/SDL2/SDL_misc.h /usr/include/SDL2/SDL_image.h \
  /usr/include/SDL2/SDL.h \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/botones.hpp \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/botones.hpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
  /usr/include/c++/14/vector /usr/include/c++/14/bits/stl_algobase.h \
  /usr/include/c++/14/bits/functexcept.h \
  /usr/include/c++/14/bits/exception_defines.h \

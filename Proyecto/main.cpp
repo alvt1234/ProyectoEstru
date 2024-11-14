@@ -22,7 +22,7 @@ void dibujarMapa(botones& boton);
 
 void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
  {
-    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Color de la rotonda (gris oscuro)
+   // SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Color de la rotonda (gris oscuro)
     for (int w = 0; w < radio * 2; w++) {
         for (int h = 0; h < radio * 2; h++) {
             int dx = radio - w; // distancia horizontal al centro
@@ -84,7 +84,8 @@ void crearPantalla()
 
 // Función para cargar la imagen del carro
 void ponerCarro() {
-    SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
+    //SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
+    SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
     if (!carSurface) {
         fprintf(stderr, "Error al cargar la imagen del carro: %s\n", SDL_GetError());
         exit(1);
@@ -173,12 +174,31 @@ void calles() {
         SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
     }
 
-    
-    dibujarCirculo(renderer, 200, 400, 100);  //primero: coordenada x, segundo cordenada: y, tercero: radio del circulo
+    //primero: coordenada x, segundo cordenada: y, tercero: radio del circulo
+    //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //circulo blanco linea afuera
+    //dibujarCirculo(renderer, 770, 500, 249);
 
+    //SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);//circulo negro mas grande
+    //dibujarCirculo(renderer, 770, 500, 245);  
+
+    //SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //linea amarilla, esta tendra que ser la blanca
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    dibujarCirculo(renderer, 770, 500, 200);
+
+    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);//circulo negro mas peque
+    dibujarCirculo(renderer, 770, 500, 198);
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    dibujarCirculo(renderer, 770, 500, 150);
+    //SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);  //circulo verde de fondo
+    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
+    dibujarCirculo(renderer, 770, 500, 148);
+
+    SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);
+    dibujarCirculo(renderer, 770, 500, 100);
     // Dibujar otras rotondas
-    dibujarCirculo(renderer, 1000, 800, 100);  
-    dibujarCirculo(renderer, 1000, 200, 100); 
+    //dibujarCirculo(renderer, 1000, 800, 100);  
+    //dibujarCirculo(renderer, 1000, 200, 100); 
 
    
    
