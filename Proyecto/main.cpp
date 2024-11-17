@@ -17,12 +17,11 @@ Grafo grafo;  // Grafo que representa las intersecciones y las calles
 
 // Funciones auxiliares
 //void calles();
-void edificios();
+//void edificios();
 void dibujarMapa(botones& boton);
 
-
 void cargarImg() {
-    imagen = IMG_Load("/home/anareyes/Documentos/Proyecto/img/map.bmp");
+    imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
     if (imagen == NULL) {
         fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
         exit(1);
@@ -30,22 +29,23 @@ void cargarImg() {
 
     // Crear una textura desde la superficie cargada
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imagen);
-    SDL_FreeSurface(imagen);  // Liberar la superficie, ya que la textura es suficiente para renderizar
+    SDL_FreeSurface(imagen);  // Liberar la superficie
     if (texture == NULL) {
         fprintf(stderr, "No se pudo crear la textura: %s\n", SDL_GetError());
         exit(1);
     }
 
     // Renderizar la textura en la pantalla
-    SDL_RenderCopy(renderer, texture, NULL, NULL);  // Renderizar la imagen completa
+    SDL_Rect destino = {0, 0, 1550, 1080};  // Área donde se dibujará la imagen
+    SDL_RenderCopy(renderer, texture, NULL, &destino);
+
     SDL_DestroyTexture(texture);  // Liberar la textura después de usarla
 }
 
-
 //std::vector<Semaforo> semaforos;
 
-/*void inicializarSemaforos() {
-    // Coloca semáforos en intersecciones de calles principales
+/*void inicializarSemaforos() { // hace las calles y despues pongo los semaforos 
+
     std::vector<std::pair<int, int>> posicionesPrincipales = {
         {100, 100}, {100, 300}, {100, 500},
         {300, 100}, {300, 300}, {300, 500},
@@ -123,6 +123,7 @@ void iniciar()
 void crearPantalla()
 {
     window = SDL_CreateWindow("Ventana SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1920, 1080, SDL_WINDOW_SHOWN);
+
     if (window == NULL) {
         fprintf(stderr, "No se pudo crear la ventana: %s\n", SDL_GetError());
         exit(1);
@@ -163,8 +164,7 @@ void dibujarMapa(botones& boton) {
     SDL_RenderClear(renderer);
 
     // Dibujar el mapa cargado (imagen de fondo)
-    cargarImg(); // Llamar para dibujar el mapa (la imagen)
-
+    cargarImg();
     // Dibujar calles y edificios (si es necesario)
     // calles();
 
@@ -287,12 +287,52 @@ void moverCarro() {
     }
    
 }
+/*void cargarVariables(){
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        fprintf(stderr, "No se pudo inicializar SDL: %s\n", SDL_GetError());
+        exit(1);
+    }
 
+    screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE);
+    if (screen == NULL) {
+        fprintf(stderr, "No se pudo crear la ventana: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    imagen = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    if (imagen == NULL){
+        fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
+        exit(1);
+    }
+}
+
+void ponerImagen() {
+    float aspectRatio = (float)imagen->w / imagen->h;
+    int newWidth = screen->w;
+    int newHeight = screen->h;
+
+    if (aspectRatio > 1) {
+        newHeight = screen->w / aspectRatio;
+    } else {
+        newWidth = screen->h * aspectRatio;
+    }
+
+    SDL_Rect destRect = { (screen->w - newWidth) / 2, (screen->h - newHeight) / 2, newWidth, newHeight };
+
+    if (SDL_BlitScaled(imagen, NULL, screen, &destRect) < 0) {
+        fprintf(stderr, "Error al blitear la imagen: %s\n", SDL_GetError());
+    }
+
+    SDL_Flip(screen);  // Para actualizar la pantalla
+}
+*/
 int main(int argc, char * args[]) {
     iniciar();
     crearPantalla();
     ponerCarro();
     cargarImg();
+   //cargarVariables();
+   // ponerImagen();
     inicializarGrafo();
   //inicializarSemaforos(); 
 
