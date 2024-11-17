@@ -16,10 +16,30 @@ SDL_Rect carRect = {10, 100, 90, 70};  // Posición inicial y tamaño del carro
 Grafo grafo;  // Grafo que representa las intersecciones y las calles
 
 // Funciones auxiliares
-void calles();
+//void calles();
 void edificios();
 void dibujarMapa(botones& boton);
-//void dibujarFlechasAmarillas(SDL_Renderer* renderer, int inicioX, int inicioY, int largo);
+
+
+void cargarImg() {
+    imagen = IMG_Load("/home/anareyes/Documentos/Proyecto/img/map.bmp");
+    if (imagen == NULL) {
+        fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    // Crear una textura desde la superficie cargada
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imagen);
+    SDL_FreeSurface(imagen);  // Liberar la superficie, ya que la textura es suficiente para renderizar
+    if (texture == NULL) {
+        fprintf(stderr, "No se pudo crear la textura: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    // Renderizar la textura en la pantalla
+    SDL_RenderCopy(renderer, texture, NULL, NULL);  // Renderizar la imagen completa
+    SDL_DestroyTexture(texture);  // Liberar la textura después de usarla
+}
 
 
 //std::vector<Semaforo> semaforos;
@@ -50,7 +70,7 @@ void dibujarSemaforos(SDL_Renderer* renderer) {
 }
 */
 
-void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
+/*void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
  {
    // SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Color de la rotonda (gris oscuro)
     for (int w = 0; w < radio * 2; w++) {
@@ -71,7 +91,7 @@ void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
         SDL_RenderDrawPoint(renderer, x, y);
     }
 }
-
+*/
 
 
 
@@ -142,11 +162,11 @@ void dibujarMapa(botones& boton) {
     SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
     SDL_RenderClear(renderer);
 
-    // Dibujar calles y edificios
-    calles();
+    // Dibujar el mapa cargado (imagen de fondo)
+    cargarImg(); // Llamar para dibujar el mapa (la imagen)
 
-    // Dibujar semáforos
-   // dibujarSemaforos(renderer);
+    // Dibujar calles y edificios (si es necesario)
+    // calles();
 
     // Dibujar el carro si está activo
     if (boton.startClickeado) {
@@ -160,7 +180,7 @@ void dibujarMapa(botones& boton) {
 
 
 
-void calles() {
+/*void calles() {
     SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
     int anchoCalleAncha = 120;   // Calle ancha
     int anchoCalleEstrecha = 60; // Calle estrecha
@@ -209,7 +229,7 @@ void calles() {
     dibujarCirculo(renderer, centroRotondaX, centroRotondaY, radioRotonda);
 }
 
-
+*/
 
 
 
@@ -272,7 +292,7 @@ int main(int argc, char * args[]) {
     iniciar();
     crearPantalla();
     ponerCarro();
- 
+    cargarImg();
     inicializarGrafo();
   //inicializarSemaforos(); 
 
