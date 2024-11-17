@@ -3,6 +3,8 @@
 #include "botones.hpp"
 #include "grafo.hpp"
 #include <cmath>
+#include <vector>
+#include "Semaforo.hpp" 
 // Crear variables globales
 SDL_Surface * screen;  // espacio en memoria de la pantalla
 SDL_Surface * imagen;  // espacio en memoria de la imagen
@@ -17,8 +19,36 @@ Grafo grafo;  // Grafo que representa las intersecciones y las calles
 void calles();
 void edificios();
 void dibujarMapa(botones& boton);
+//void dibujarFlechasAmarillas(SDL_Renderer* renderer, int inicioX, int inicioY, int largo);
 
 
+//std::vector<Semaforo> semaforos;
+
+/*void inicializarSemaforos() {
+    // Coloca semáforos en intersecciones de calles principales
+    std::vector<std::pair<int, int>> posicionesPrincipales = {
+        {100, 100}, {100, 300}, {100, 500},
+        {300, 100}, {300, 300}, {300, 500},
+        {500, 100}, {500, 300}, {500, 500}
+    };
+
+    for (const auto& pos : posicionesPrincipales) {
+        semaforos.emplace_back(pos.first, pos.second);
+    }
+}
+*/
+/*void actualizarSemaforos() {
+    for (auto& semaforo : semaforos) {
+        semaforo.actualizarEstado();
+    }
+}
+
+void dibujarSemaforos(SDL_Renderer* renderer) {
+    for (const auto& semaforo : semaforos) {
+        semaforo.dibujar(renderer);
+    }
+}
+*/
 
 void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
  {
@@ -41,6 +71,9 @@ void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
         SDL_RenderDrawPoint(renderer, x, y);
     }
 }
+
+
+
 
 
 // Función para manejar los eventos
@@ -84,8 +117,8 @@ void crearPantalla()
 
 // Función para cargar la imagen del carro
 void ponerCarro() {
-    //SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
-    SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
+    SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
+    //SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
     if (!carSurface) {
         fprintf(stderr, "Error al cargar la imagen del carro: %s\n", SDL_GetError());
         exit(1);
@@ -111,130 +144,75 @@ void dibujarMapa(botones& boton) {
 
     // Dibujar calles y edificios
     calles();
-    //edificios();
 
-    // Dibujar nodos (intersecciones)
-    
+    // Dibujar semáforos
+   // dibujarSemaforos(renderer);
 
-    // Si el botón de inicio está presionado, dibujamos el carro
+    // Dibujar el carro si está activo
     if (boton.startClickeado) {
         dibujarCarro();
         grafo.dibujar();
     }
 
     boton.dibujarBotones(renderer);
-
     SDL_RenderPresent(renderer);
 }
 
 
-/*void dibujarMediaCurva(SDL_Renderer* renderer, int x1, int y1, int x2, int y2, int radio) {
-    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro para la curva
-    int cx = (x1 + x2) / 2; // Centro en x de la curva
-    int cy = (y1 + y2) / 2; // Centro en y de la curva
-
-    for (double t = 0; t < M_PI / 2; t += 0.01) {
-        int x = cx + radio * cos(t);
-        int y = cy - radio * sin(t);
-        SDL_RenderDrawPoint(renderer, x, y);
-    }
-}
-*/
 
 void calles() {
     SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
-    int anchoCalle = 40;  
-    int grosorLinea = 2;  
-    int espacio = 80;     
-    int anchoMapa = 1500; 
+    int anchoCalleAncha = 120;   // Calle ancha
+    int anchoCalleEstrecha = 60; // Calle estrecha
+    int grosorLinea = 4;         // Grosor de la línea amarilla
+    int radioRotonda = 200;      // Radio de la rotonda
+    int centroRotondaX = 770, centroRotondaY = 500;  // Centro de la rotonda
 
-    // Dibujar calles horizontales
-    for (int y = espacio; y < 1080; y += espacio + anchoCalle) {
-        SDL_Rect calle = {0, y, anchoMapa, anchoCalle};
+    // Dibujar calles rectas
+    auto dibujarCalleRecta = [&](int x, int y, int w, int h, bool horizontal) {
+        SDL_Rect calle = {x, y, w, h};
         SDL_RenderFillRect(renderer, &calle);
-        
-        // Línea amarilla en el centro de la calle
-        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-        SDL_Rect linea = {0, y + anchoCalle / 2 - grosorLinea / 2, anchoMapa, grosorLinea};
-        SDL_RenderFillRect(renderer, &linea);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);  // Amarillo para la línea
+        if (horizontal) {
+            for (int i = 1; i < grosorLinea; i++) {
+                SDL_RenderDrawLine(renderer, x, y + h / 2 - i, x + w, y + h / 2 - i);  // Línea amarilla
+            }
+        } else {
+            for (int i = 1; i < grosorLinea; i++) {
+                SDL_RenderDrawLine(renderer, x + w / 2 - i, y, x + w / 2 - i, y + h);  // Línea amarilla
+            }
+        }
+        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Regresar a color gris
+    };
+   ///principales horizontales
+    dibujarCalleRecta(0, 500 - anchoCalleAncha / 2, 700, anchoCalleAncha, true);  // calle principal 1
+    dibujarCalleRecta(850, 500 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);  // Calleprincipal 2 estrecha
 
-        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
-    }
+    //probar
+    dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);
+    dibujarCalleRecta(180 - anchoCalleEstrecha / 2, 220, anchoCalleEstrecha, 250, false);
+    dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //estrecha abajo
+    dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); //derecha alta
+    dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true);
 
-    // Dibujar calles verticales
-    for (int x = espacio; x < anchoMapa; x += espacio + anchoCalle) {
-        SDL_Rect calle = {x, 0, anchoCalle, 1080};
-        SDL_RenderFillRect(renderer, &calle);
-        
-        // Línea amarilla en el centro de la calle
-        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-        SDL_Rect linea = {x + anchoCalle / 2 - grosorLinea / 2, 0, grosorLinea, 1080};
-        SDL_RenderFillRect(renderer, &linea);
 
-        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
-    }
 
-    //primero: coordenada x, segundo cordenada: y, tercero: radio del circulo
-    //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //circulo blanco linea afuera
-    //dibujarCirculo(renderer, 770, 500, 249);
+  
 
-    //SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);//circulo negro mas grande
-    //dibujarCirculo(renderer, 770, 500, 245);  
 
-    //SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //linea amarilla, esta tendra que ser la blanca
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    dibujarCirculo(renderer, 770, 500, 200);
+    // Dibujar calles verticales (una ancha, una estrecha)
+    dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
+    dibujarCalleRecta(770 - anchoCalleAncha / 2, 600, anchoCalleAncha, 480, false);  // Calle principal 4 ancha
+    
 
-    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);//circulo negro mas peque
-    dibujarCirculo(renderer, 770, 500, 198);
-
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    dibujarCirculo(renderer, 770, 500, 150);
-    //SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);  //circulo verde de fondo
-    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
-    dibujarCirculo(renderer, 770, 500, 148);
-
-    SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);
-    dibujarCirculo(renderer, 770, 500, 100);
-    // Dibujar otras rotondas
-    //dibujarCirculo(renderer, 1000, 800, 100);  
-    //dibujarCirculo(renderer, 1000, 200, 100); 
-
-   
-   
+    // Dibujar la rotonda
+    dibujarCirculo(renderer, centroRotondaX, centroRotondaY, radioRotonda);
 }
 
 
-// Función para dibujar los edificios
-/*void edificios() {
-    SDL_SetRenderDrawColor(renderer, 100, 110, 130, 255);  // Color gris
 
-    SDL_Rect edificio1 = { 80, 20, 60, 80 };
-    SDL_RenderFillRect(renderer, &edificio1);
 
-    SDL_Rect edificio2 = { 1040, 20, 60, 80 };
-    SDL_RenderFillRect(renderer, &edificio2);
 
-    SDL_Rect edificio3 = { 320, 380, 60, 100 };
-    SDL_RenderFillRect(renderer, &edificio3);
-
-    SDL_Rect edificio4 = { 840, 450, 60, 100 };
-    SDL_RenderFillRect(renderer, &edificio4);
-
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);  // Color blanco
-
-    int ventana_ancho = 15, ventana_alto = 15, espacio_horizontal = 5, espacio_vertical = 5;
-
-    // Dibujar ventanas en edificios
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 2; ++j) {
-            SDL_Rect ventana = { edificio1.x + 10 + j * (ventana_ancho + espacio_horizontal),
-                                 edificio1.y + 10 + i * (ventana_alto + espacio_vertical), 
-                                 ventana_ancho, ventana_alto };
-            SDL_RenderFillRect(renderer, &ventana);
-        }
-    }
-}*/
 
 int escalaX(int x) {
     return (x - 100) * 1280 / (300 - 100);  
@@ -294,7 +272,9 @@ int main(int argc, char * args[]) {
     iniciar();
     crearPantalla();
     ponerCarro();
+ 
     inicializarGrafo();
+  //inicializarSemaforos(); 
 
     botones boton(renderer);
     bool corriendo = true;
@@ -302,13 +282,14 @@ int main(int argc, char * args[]) {
 
     while (corriendo) {
         eventos(e, corriendo, boton, renderer);
+        
+        // Actualizar estado de los semáforos
+        //actualizarSemaforos();
 
-        // Mover el carro automáticamente
-        moverCarro();
-
-        // Dibujar la interfaz completa
+        // Dibujar todo
         dibujarMapa(boton);
     }
+
 
     SDL_Delay(5000); // Esperar 5 segundos
     SDL_FreeSurface(imagen);  // Liberar memoria para la imagen
