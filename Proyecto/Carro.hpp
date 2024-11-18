@@ -2,7 +2,7 @@
 #define BCD25E07_30ED_4976_B6F1_C318CD369A0A
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h> // Para las imágenes PNG
-
+/*
 class carro {
 public:
     SDL_Texture * texturaCarro;
@@ -74,5 +74,26 @@ void carro::dibujarCarro(SDL_Renderer* renderer) {
     SDL_RenderCopy(renderer, texturaCarro, NULL, &rectCarro);
 }
 
+*/
+class Carro {
+public:
+    SDL_Rect rect; // Representa la posición y tamaño del auto
 
+    Carro(int x, int y, int w, int h) {
+        rect.x = x;  // Posición inicial en x
+        rect.y = y;  // Posición inicial en y
+        rect.w = w;  // Ancho del auto
+        rect.h = h;  // Alto del auto
+    }
+
+    void mover(int dx, int dy) {
+        rect.x += dx;
+        rect.y += dy;
+    }
+
+    const SDL_Rect& getRect() const {
+    return rect;
+}
+
+};
 #endif /* BCD25E07_30ED_4976_B6F1_C318CD369A0A */

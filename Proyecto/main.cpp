@@ -5,6 +5,7 @@
 #include <cmath>
 #include <vector>
 #include "Semaforo.hpp" 
+#include "Carro.hpp"
 // Crear variables globales
 SDL_Surface * screen;  // espacio en memoria de la pantalla
 SDL_Surface * imagen;  // espacio en memoria de la imagen
@@ -16,12 +17,13 @@ SDL_Rect carRect = {10, 100, 90, 70};  // Posición inicial y tamaño del carro
 Grafo grafo;  // Grafo que representa las intersecciones y las calles
 
 // Funciones auxiliares
-//void calles();
+void calles();
 //void edificios();
 void dibujarMapa(botones& boton);
 
 void cargarImg() {
-    imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    //imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    imagen = IMG_Load("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
     if (imagen == NULL) {
         fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
         exit(1);
@@ -70,7 +72,7 @@ void dibujarSemaforos(SDL_Renderer* renderer) {
 }
 */
 
-/*void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
+void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
  {
    // SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Color de la rotonda (gris oscuro)
     for (int w = 0; w < radio * 2; w++) {
@@ -91,7 +93,7 @@ void dibujarSemaforos(SDL_Renderer* renderer) {
         SDL_RenderDrawPoint(renderer, x, y);
     }
 }
-*/
+
 
 
 
@@ -138,8 +140,8 @@ void crearPantalla()
 
 // Función para cargar la imagen del carro
 void ponerCarro() {
-    SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
-    //SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
+    //SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
+    SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
     if (!carSurface) {
         fprintf(stderr, "Error al cargar la imagen del carro: %s\n", SDL_GetError());
         exit(1);
@@ -153,83 +155,85 @@ void ponerCarro() {
     }
 }
 
-// Función para dibujar el carro
-void dibujarCarro() {
-    SDL_RenderCopy(renderer, carTexture, NULL, &carRect);
+    // Función para dibujar el carro
+    /*void dibujarCarro() {
+        SDL_RenderCopy(renderer, carTexture, NULL, &carRect);
+    }*/
+   void dibujarCarro() {
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Color rojo para el carro
+    SDL_RenderFillRect(renderer, &carRect);
 }
 
-// Función para dibujar el mapa (calles, edificios, etc.)
-void dibujarMapa(botones& boton) {
-    SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
-    SDL_RenderClear(renderer);
 
-    // Dibujar el mapa cargado (imagen de fondo)
-    cargarImg();
-    // Dibujar calles y edificios (si es necesario)
-    // calles();
+    // Función para dibujar el mapa (calles, edificios, etc.)
+    void dibujarMapa(botones& boton) {
+        SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
+        //SDL_RenderClear(renderer);
 
-    // Dibujar el carro si está activo
-    if (boton.startClickeado) {
-        dibujarCarro();
-        grafo.dibujar();
+        // Dibujar el mapa cargado (imagen de fondo)
+        //cargarImg();
+        // Dibujar calles y edificios (si es necesario)
+        calles();
+
+        // Dibujar el carro si está activo
+        if (boton.startClickeado) {
+            dibujarCarro();
+            grafo.dibujar();
+        }
+
+        boton.dibujarBotones(renderer);
+        //SDL_RenderPresent(renderer);
     }
 
-    boton.dibujarBotones(renderer);
-    SDL_RenderPresent(renderer);
-}
 
 
+    void calles() {
+        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
+        int anchoCalleAncha = 120;   // Calle ancha
+        int anchoCalleEstrecha = 60; // Calle estrecha
+        int grosorLinea = 4;         // Grosor de la línea amarilla
+        int radioRotonda = 200;      // Radio de la rotonda
+        int centroRotondaX = 770, centroRotondaY = 500;  // Centro de la rotonda
 
-/*void calles() {
-    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
-    int anchoCalleAncha = 120;   // Calle ancha
-    int anchoCalleEstrecha = 60; // Calle estrecha
-    int grosorLinea = 4;         // Grosor de la línea amarilla
-    int radioRotonda = 200;      // Radio de la rotonda
-    int centroRotondaX = 770, centroRotondaY = 500;  // Centro de la rotonda
-
-    // Dibujar calles rectas
-    auto dibujarCalleRecta = [&](int x, int y, int w, int h, bool horizontal) {
-        SDL_Rect calle = {x, y, w, h};
-        SDL_RenderFillRect(renderer, &calle);
-        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);  // Amarillo para la línea
-        if (horizontal) {
-            for (int i = 1; i < grosorLinea; i++) {
-                SDL_RenderDrawLine(renderer, x, y + h / 2 - i, x + w, y + h / 2 - i);  // Línea amarilla
+        // Dibujar calles rectas
+        auto dibujarCalleRecta = [&](int x, int y, int w, int h, bool horizontal) {
+            SDL_Rect calle = {x, y, w, h};
+            SDL_RenderFillRect(renderer, &calle);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);  // Amarillo para la línea
+            if (horizontal) {
+                for (int i = 1; i < grosorLinea; i++) {
+                    SDL_RenderDrawLine(renderer, x, y + h / 2 - i, x + w, y + h / 2 - i);  // Línea amarilla
+                }
+            } else {
+                for (int i = 1; i < grosorLinea; i++) {
+                    SDL_RenderDrawLine(renderer, x + w / 2 - i, y, x + w / 2 - i, y + h);  // Línea amarilla
+                }
             }
-        } else {
-            for (int i = 1; i < grosorLinea; i++) {
-                SDL_RenderDrawLine(renderer, x + w / 2 - i, y, x + w / 2 - i, y + h);  // Línea amarilla
-            }
-        }
-        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Regresar a color gris
-    };
-   ///principales horizontales
-    dibujarCalleRecta(0, 500 - anchoCalleAncha / 2, 700, anchoCalleAncha, true);  // calle principal 1
-    dibujarCalleRecta(850, 500 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);  // Calleprincipal 2 estrecha
+            SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Regresar a color gris
+        };
+    ///principales horizontales
+        dibujarCalleRecta(0, 500 - anchoCalleAncha / 2, 700, anchoCalleAncha, true);  // calle principal 1
+        dibujarCalleRecta(850, 500 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);  // Calleprincipal 2 estrecha
 
-    //probar
-    dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);
-    dibujarCalleRecta(180 - anchoCalleEstrecha / 2, 220, anchoCalleEstrecha, 250, false);
-    dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //estrecha abajo
-    dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); //derecha alta
-    dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true);
+        //probar
+        dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);
+        dibujarCalleRecta(180 - anchoCalleEstrecha / 2, 220, anchoCalleEstrecha, 250, false);
+        dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //estrecha abajo
+        dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); //derecha alta
+        dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true);
+
+        // Dibujar calles verticales (una ancha, una estrecha)
+        dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
+        dibujarCalleRecta(770 - anchoCalleAncha / 2, 600, anchoCalleAncha, 480, false);  // Calle principal 4 ancha
+        
+
+        // Dibujar la rotonda
+        dibujarCirculo(renderer, centroRotondaX, centroRotondaY, radioRotonda);
+        
+        
+    }
 
 
-
-  
-
-
-    // Dibujar calles verticales (una ancha, una estrecha)
-    dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
-    dibujarCalleRecta(770 - anchoCalleAncha / 2, 600, anchoCalleAncha, 480, false);  // Calle principal 4 ancha
-    
-
-    // Dibujar la rotonda
-    dibujarCirculo(renderer, centroRotondaX, centroRotondaY, radioRotonda);
-}
-
-*/
 
 
 
@@ -326,33 +330,67 @@ void ponerImagen() {
     SDL_Flip(screen);  // Para actualizar la pantalla
 }
 */
-int main(int argc, char * args[]) {
+
+/*int main(int argc, char *args[]) {
     iniciar();
     crearPantalla();
     ponerCarro();
-    cargarImg();
-   //cargarVariables();
-   // ponerImagen();
+    //cargarImg();  // Cargar la imagen del mapa
     inicializarGrafo();
-  //inicializarSemaforos(); 
-
+    
     botones boton(renderer);
     bool corriendo = true;
     SDL_Event e;
+    Carro carro(100, 100, 20, 10);  // Crear un carro con posición inicial
 
     while (corriendo) {
+        // Procesar eventos
         eventos(e, corriendo, boton, renderer);
-        
-        // Actualizar estado de los semáforos
-        //actualizarSemaforos();
+        // Dibujar el mapa
+        dibujarMapa(boton);  // Asegúrate de que esta función dibuja el mapa en cada fotograma
+        //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Fondo blanco
+        SDL_RenderClear(renderer);
 
-        // Dibujar todo
-        dibujarMapa(boton);
+        // Actualizar y dibujar el auto
+        carro.mover(1, 0); // Mover el carro hacia la derecha
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Color rojo para el auto
+        SDL_RenderFillRect(renderer, &carro.getRect());
+
+        // Actualizar pantalla
+        SDL_RenderPresent(renderer);
+        // Controlar el framerate
+        SDL_Delay(16); // Aproximadamente 60 FPS
     }
 
-
-    SDL_Delay(5000); // Esperar 5 segundos
+    // Limpiar recursos al salir del bucle
     SDL_FreeSurface(imagen);  // Liberar memoria para la imagen
+    SDL_Quit();
+    return 0;
+}*/
+int main(int argc, char *args[]) {
+    iniciar();
+    crearPantalla();
+    inicializarGrafo();
+    botones boton(renderer);
+    bool corriendo = true;
+    SDL_Event e;
+    Carro carro(100, 100, 20, 10);  // Crear un carro con posición inicial
+
+    while (corriendo) {
+        // Procesar eventos
+         eventos(e, corriendo, boton, renderer);
+     SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Color de fondo del mapa
+        SDL_RenderClear(renderer);
+        dibujarMapa(boton);
+        // Limpiar la pantalla al inicio de cada iteración
+        carRect.x += 1;
+         dibujarCarro();
+           SDL_RenderPresent(renderer);
+
+        // Controlar el framerate
+        SDL_Delay(16); // Aproximadamente 60 FPS
+    }
+
     SDL_Quit();
     return 0;
 }
