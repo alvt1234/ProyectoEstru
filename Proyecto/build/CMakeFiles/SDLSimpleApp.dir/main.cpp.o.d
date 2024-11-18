@@ -1,5 +1,5 @@
 CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/main.cpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp \
  /usr/include/stdc-predef.h /usr/include/SDL2/SDL.h \
  /usr/include/SDL2/SDL_main.h /usr/include/SDL2/SDL_stdinc.h \
  /usr/include/SDL2/SDL_config.h /usr/include/SDL2/SDL_config-x86_64.h \
@@ -181,8 +181,8 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
  /usr/include/SDL2/SDL_version.h /usr/include/SDL2/SDL_locale.h \
  /usr/include/SDL2/SDL_misc.h /usr/include/SDL2/SDL_image.h \
  /usr/include/SDL2/SDL.h \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/botones.hpp \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/botones.hpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
  /usr/include/c++/14/vector /usr/include/c++/14/bits/stl_algobase.h \
  /usr/include/c++/14/bits/functexcept.h \
  /usr/include/c++/14/bits/exception_defines.h \
@@ -276,5 +276,5 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
  /usr/include/c++/14/bits/basic_ios.tcc \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Carro.hpp
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Carro.hpp

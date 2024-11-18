@@ -22,8 +22,8 @@ void calles();
 void dibujarMapa(botones& boton);
 
 void cargarImg() {
-    //imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
-    imagen = IMG_Load("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    //imagen = IMG_Load("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
     if (imagen == NULL) {
         fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
         exit(1);
@@ -140,8 +140,8 @@ void crearPantalla()
 
 // Función para cargar la imagen del carro
 void ponerCarro() {
-    //SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
-    SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
+    SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
+    //SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
     if (!carSurface) {
         fprintf(stderr, "Error al cargar la imagen del carro: %s\n", SDL_GetError());
         exit(1);
@@ -189,8 +189,8 @@ void ponerCarro() {
 
     void calles() {
         SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
-        int anchoCalleAncha = 120;   // Calle ancha
-        int anchoCalleEstrecha = 60; // Calle estrecha
+        int anchoCalleAncha = 100;   // Calle ancha
+        int anchoCalleEstrecha = 40; // Calle estrecha
         int grosorLinea = 4;         // Grosor de la línea amarilla
         int radioRotonda = 200;      // Radio de la rotonda
         int centroRotondaX = 770, centroRotondaY = 500;  // Centro de la rotonda
@@ -215,22 +215,50 @@ void ponerCarro() {
         dibujarCalleRecta(0, 500 - anchoCalleAncha / 2, 700, anchoCalleAncha, true);  // calle principal 1
         dibujarCalleRecta(850, 500 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);  // Calleprincipal 2 estrecha
 
-        //probar
-        dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);
-        dibujarCalleRecta(180 - anchoCalleEstrecha / 2, 220, anchoCalleEstrecha, 250, false);
+        //primer cuadrante
+        dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 550, anchoCalleEstrecha, true); // calle acostada en L
+        dibujarCalleRecta(180 - anchoCalleEstrecha / 5, 230, anchoCalleEstrecha, 240, false);
+        dibujarCalleRecta(0, 400 - anchoCalleEstrecha / 2, 700, anchoCalleEstrecha, true); //horizontak
+        dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false); //vrtical
+        dibujarCalleRecta(0, 100 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);
+        dibujarCalleRecta(400 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 450, false); 
+        //----
         dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //estrecha abajo
         dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); //derecha alta
-        dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true);
+        dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true); //calle horizontal arriba
+        dibujarCalleRecta(950 - anchoCalleAncha /2, 600, anchoCalleEstrecha,580, false); 
+        dibujarCalleRecta(1100 - anchoCalleAncha /5,500, anchoCalleEstrecha,250, false); 
+        dibujarCalleRecta(1100 - anchoCalleAncha /5,150, anchoCalleEstrecha,350, false); //calle morada derecha vertical --segundo cuadrante
+        dibujarCalleRecta(750, 150 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true); //calle recta arriba de morada --segundo cuadrante
+        dibujarCalleRecta(900 - anchoCalleAncha /5,10, anchoCalleEstrecha,550, false); //cuarti
+        dibujarCalleRecta(900, 900 - anchoCalleEstrecha / 2, 450, anchoCalleEstrecha, true); //cuarto
+        dibujarCalleRecta(1250 - anchoCalleAncha /5,500, anchoCalleEstrecha,700, false);//cuarto  cuadrante
+        //tercer cuadrante
+        dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, 480, false); //calle vertical a la izquierda de la princiap 4
+        dibujarCalleRecta(0, 620 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);  //calle horizontal abajo de la principal 1
+        dibujarCalleRecta(300 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, 480, false);//segunda ertical a la izquierda de la principal 4
+        dibujarCalleRecta(170 - anchoCalleEstrecha / 2, 800, anchoCalleEstrecha, 300, false);//segunda ertical a la izquierda de la principal 4
+        dibujarCalleRecta(0, 820 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);  //tercer cuadrante
+        dibujarCalleRecta(300, 900- anchoCalleEstrecha / 2, 450, anchoCalleEstrecha, true);
 
-        // Dibujar calles verticales (una ancha, una estrecha)
+        // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
         dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
         dibujarCalleRecta(770 - anchoCalleAncha / 2, 600, anchoCalleAncha, 480, false);  // Calle principal 4 ancha
-        
+      
+    // Dibujar la rotonda
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    dibujarCirculo(renderer, 770, 500, 200);
 
-        // Dibujar la rotonda
-        dibujarCirculo(renderer, centroRotondaX, centroRotondaY, radioRotonda);
-        
-        
+    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);//circulo negro mas peque
+    dibujarCirculo(renderer, 770, 500, 198);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    dibujarCirculo(renderer, 770, 500, 150);
+    SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);  //circulo verde de fondo
+    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
+    dibujarCirculo(renderer, 770, 500, 148);
+    SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);
+    dibujarCirculo(renderer, 770, 500, 100);
+ 
     }
 
 
