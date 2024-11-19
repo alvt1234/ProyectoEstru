@@ -22,8 +22,8 @@ void calles();
 void dibujarMapa(botones& boton);
 
 void cargarImg() {
-    imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
-    //imagen = IMG_Load("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    //imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    imagen = IMG_Load("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
     if (imagen == NULL) {
         fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
         exit(1);
@@ -140,8 +140,8 @@ void crearPantalla()
 
 // Función para cargar la imagen del carro
 void ponerCarro() {
-    SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
-    //SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
+    //SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
+    SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
     if (!carSurface) {
         fprintf(stderr, "Error al cargar la imagen del carro: %s\n", SDL_GetError());
         exit(1);
@@ -217,32 +217,36 @@ void ponerCarro() {
 
         //primer cuadrante
         dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 550, anchoCalleEstrecha, true); // calle acostada en L
-        dibujarCalleRecta(180 - anchoCalleEstrecha / 5, 230, anchoCalleEstrecha, 240, false);
+        dibujarCalleRecta(175 - anchoCalleEstrecha / 5, 230, anchoCalleEstrecha, 220, false);//calle #1 vertical 
         dibujarCalleRecta(0, 400 - anchoCalleEstrecha / 2, 700, anchoCalleEstrecha, true); //horizontak
-        dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false); //vrtical
-        dibujarCalleRecta(0, 100 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);
-        dibujarCalleRecta(400 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 450, false); 
+        dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false); //calle #3 vertical arriba
+        dibujarCalleRecta(0, 100 - anchoCalleEstrecha / 2, 647, anchoCalleEstrecha, true);//calle #2 horizontal 
+        dibujarCalleRecta(400 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 450, false); //calle #2 vertical
         //----
+        dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
         dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //estrecha abajo
         dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); //derecha alta
+        dibujarCalleRecta(900 - anchoCalleAncha /5,10, anchoCalleEstrecha,550, false); //cuarti
         dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true); //calle horizontal arriba
         dibujarCalleRecta(950 - anchoCalleAncha /2, 600, anchoCalleEstrecha,580, false); 
         dibujarCalleRecta(1100 - anchoCalleAncha /5,500, anchoCalleEstrecha,250, false); 
         dibujarCalleRecta(1100 - anchoCalleAncha /5,150, anchoCalleEstrecha,350, false); //calle morada derecha vertical --segundo cuadrante
-        dibujarCalleRecta(750, 150 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true); //calle recta arriba de morada --segundo cuadrante
-        dibujarCalleRecta(900 - anchoCalleAncha /5,10, anchoCalleEstrecha,550, false); //cuarti
-        dibujarCalleRecta(900, 900 - anchoCalleEstrecha / 2, 450, anchoCalleEstrecha, true); //cuarto
+        dibujarCalleRecta(770, 150 - anchoCalleEstrecha / 2, 580, anchoCalleEstrecha, true); //calle recta arriba de morada --segundo cuadrante
+        dibujarCalleRecta(940, 900 - anchoCalleEstrecha / 2, 410, anchoCalleEstrecha, true); //cuarto
         dibujarCalleRecta(1250 - anchoCalleAncha /5,500, anchoCalleEstrecha,700, false);//cuarto  cuadrante
         //tercer cuadrante
+        
         dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, 480, false); //calle vertical a la izquierda de la princiap 4
         dibujarCalleRecta(0, 620 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);  //calle horizontal abajo de la principal 1
-        dibujarCalleRecta(300 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, 480, false);//segunda ertical a la izquierda de la principal 4
-        dibujarCalleRecta(170 - anchoCalleEstrecha / 2, 800, anchoCalleEstrecha, 300, false);//segunda ertical a la izquierda de la principal 4
-        dibujarCalleRecta(0, 820 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);  //tercer cuadrante
+        dibujarCalleRecta(300 - anchoCalleEstrecha / 2, 620, anchoCalleEstrecha, 460, false);//segunda ertical a la izquierda de la principal 4
+        
+        dibujarCalleRecta(0, 820 - anchoCalleEstrecha / 2, 645, anchoCalleEstrecha, true);  //tercer cuadrante
+
+        dibujarCalleRecta(170 - anchoCalleEstrecha / 2, 820, anchoCalleEstrecha, 300, false);//segunda ertical a la izquierda de la principal 4
         dibujarCalleRecta(300, 900- anchoCalleEstrecha / 2, 450, anchoCalleEstrecha, true);
 
         // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
-        dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
+        
         dibujarCalleRecta(770 - anchoCalleAncha / 2, 600, anchoCalleAncha, 480, false);  // Calle principal 4 ancha
       
     // Dibujar la rotonda
