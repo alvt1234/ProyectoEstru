@@ -13,7 +13,7 @@ SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Texture* carTexture = NULL;  // Textura para el carro
 SDL_Rect carRect = {10, 100, 90, 70};  // Posición inicial y tamaño del carro
-
+std::vector<Carro> carros;
 Grafo grafo;  // Grafo que representa las intersecciones y las calles
 
 // Funciones auxiliares
@@ -178,7 +178,7 @@ void ponerCarro() {
         // Dibujar el carro si está activo
         if (boton.startClickeado) {
             dibujarCarro();
-            grafo.dibujar();
+            //grafo.dibujar();
         }
 
         boton.dibujarBotones(renderer);
@@ -226,7 +226,7 @@ void ponerCarro() {
         dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
         dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //estrecha abajo
         dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); //derecha alta
-        dibujarCalleRecta(900 - anchoCalleAncha /5,10, anchoCalleEstrecha,550, false); //cuarti
+        dibujarCalleRecta(900 - anchoCalleAncha /5,0, anchoCalleEstrecha,550, false); //cuarti
         dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true); //calle horizontal arriba
         dibujarCalleRecta(950 - anchoCalleAncha /2, 600, anchoCalleEstrecha,580, false); 
         dibujarCalleRecta(1100 - anchoCalleAncha /5,500, anchoCalleEstrecha,250, false); 
@@ -278,7 +278,7 @@ int escalaY(int y) {
     return (y - 65) * 720 / (300 - 100);  
 }
 // Inicializar el grafo con nodos (intersecciones) y aristas (calles)
-void inicializarGrafo() {
+/*void inicializarGrafo() {
     // Crear nodos (intersecciones) con las coordenadas escaladas
     grafo.agregarNodo(escalaX(0), escalaY(100), {255, 0, 0, 255});  
     grafo.agregarNodo(escalaX(100), escalaY(100), {0, 255, 0, 255});  
@@ -289,7 +289,7 @@ void inicializarGrafo() {
     grafo.agregarArista(escalaX(0), escalaY(100), escalaX(100), escalaY(100));  // Calle entre nodo rojo y verde
     grafo.agregarArista(escalaX(100), escalaY(100), escalaX(200), escalaY(200));  // Calle entre nodo verde y azul
     grafo.agregarArista(escalaX(200), escalaY(200), escalaX(300), escalaY(100));  // Calle entre nodo azul y amarillo
-}
+}*/
 
 
 void moverCarro() {
@@ -323,6 +323,86 @@ void moverCarro() {
     }
    
 }
+void detectarInterseccionYDecidir(Carro& carro, const Grafo& grafo) {
+    for (const auto& nodo : grafo.getNodos()) {
+        // Detecta si el carro está cerca de un nodo
+        if (std::abs(carro.rect.x - nodo.x) < 5 && std::abs(carro.rect.y - nodo.y) < 5) {
+            carro.girarHaciaArista(grafo);  // Decidir nueva dirección aleatoria
+            break;
+        }
+    }
+}
+
+
+void inicializarCarros() {
+    // Ejemplo: Crear 3 carros con diferentes posiciones iniciales
+    carros.push_back(Carro(0, 5, 20, 10));
+    carros.push_back(Carro(30, 5, 20, 10));
+    carros.push_back(Carro(60, 5, 20, 10));
+    carros.push_back(Carro(90, 5, 20, 10));
+    std::vector<Carro> carros = {
+        Carro(100, 500, 50, 30, 'H', 2),  // Carro en nodo inicial
+        Carro(200, 500, 50, 30, 'H', 2)   // Otro carro
+    };
+}
+
+void actualizarCarros(Grafo& grafo) {
+    for (auto& carro : carros) {
+        detectarInterseccionYDecidir(carro, grafo);  // Verificar si necesita girar
+        carro.mover();  // Mover el carro
+        carro.dibujar(renderer);  // Dibujar el carro
+    }
+}
+
+void inicializarGrafo(Grafo& grafo) {
+    // Colores para los nodos (puedes cambiarlos si quieres visualizarlos diferentes)
+    SDL_Color colorNodo = {255, 0, 0, 255};  // Rojo para las intersecciones
+
+    // Agregar nodos (intersecciones)
+    // Primer cuadrante
+    grafo.agregarNodo(380, 5, colorNodo);    // Nodo A (calle principal 1)
+    grafo.agregarNodo(630, 5, colorNodo);  // Nodo B (final calle principal 1)
+    grafo.agregarNodo(750, 5, colorNodo);  // Nodo C (inicio calle principal 2)
+    grafo.agregarNodo(892, 5, colorNodo); // Nodo D (final calle principal 2)
+    grafo.agregarNodo(1350, 5, colorNodo); // Nodo E
+    grafo.agregarNodo(380, 85, colorNodo);  // Nodo F
+    grafo.agregarNodo(0, 85, colorNodo);  // Nodo G
+    grafo.agregarNodo(380, 400, colorNodo);  // Nodo H
+    grafo.agregarNodo(630, 85, colorNodo);  // Nodo I
+    //grafo.agregarNodo(380, 85, colorNodo);  // Nodo I
+    //grafo.agregarNodo(0, 85, colorNodo);  // Nodo J
+    //grafo.agregarNodo(380, 365, colorNodo);  // Nodo K
+    // Rotonda
+    //grafo.agregarNodo(770, 500, colorNodo);  // Nodo E (centro de la rotonda)
+
+    // Calle acostada en L (primer cuadrante)
+   
+    // Calles verticales y horizontales (primer cuadrante)
+    grafo.agregarNodo(400, 0, colorNodo);    // Nodo I
+    //grafo.agregarNodo(1100, 150, colorNodo); // Nodo L
+
+    // Cuadrante inferior
+    grafo.agregarNodo(300, 900, colorNodo);  // Nodo M
+    grafo.agregarNodo(770, 900, colorNodo);  // Nodo N
+    //grafo.agregarNodo(1250, 900, colorNodo); // Nodo O
+
+    // Aristas
+    grafo.agregarArista(0, 1);  // A -> B (calle principal 1)
+    grafo.agregarArista(1, 2);  // B -> C (inicio principal 2)
+    grafo.agregarArista(2, 3);  // C -> D (final principal 2)
+    grafo.agregarArista(3, 4);  // D -> E (conexión a rotonda)
+    grafo.agregarArista(0, 5);  // A -> F (rotonda a L)
+    grafo.agregarArista(5, 6);  // F -> G (continuación de L)
+    grafo.agregarArista(5, 7);  // F -> H (bajada de L)
+    grafo.agregarArista(8, 5);  // F -> I (conexión a vertical)
+    grafo.agregarArista(1, 8);  // B -> I (conexión a siguiente vertical)
+    //grafo.agregarArista(9, 10); // J -> K (conexión a principal vertical)
+    //grafo.agregarArista(4, 11); // E -> L (rotonda a cuadrante derecho)
+    //grafo.agregarArista(11, 12); // L -> M (hacia cuadrante inferior)
+    //grafo.agregarArista(12, 13); // M -> N (cuadrante inferior)
+    //grafo.agregarArista(13, 14); // N -> O (final en cuadrante derecho)
+}
+
 /*void cargarVariables(){
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         fprintf(stderr, "No se pudo inicializar SDL: %s\n", SDL_GetError());
@@ -398,29 +478,28 @@ void ponerImagen() {
     SDL_FreeSurface(imagen);  // Liberar memoria para la imagen
     SDL_Quit();
     return 0;
-}*/
-int main(int argc, char *args[]) {
+}*/int main(int argc, char *args[]) {
     iniciar();
     crearPantalla();
-    inicializarGrafo();
+    Grafo grafo;
+    inicializarGrafo(grafo);
+    inicializarCarros();  // Inicializa varios carros
     botones boton(renderer);
     bool corriendo = true;
     SDL_Event e;
-    Carro carro(100, 100, 20, 10);  // Crear un carro con posición inicial
 
     while (corriendo) {
-        // Procesar eventos
-         eventos(e, corriendo, boton, renderer);
-     SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Color de fondo del mapa
-        SDL_RenderClear(renderer);
-        dibujarMapa(boton);
-        // Limpiar la pantalla al inicio de cada iteración
-        carRect.x += 1;
-         dibujarCarro();
-           SDL_RenderPresent(renderer);
+        eventos(e, corriendo, boton, renderer);
 
-        // Controlar el framerate
-        SDL_Delay(16); // Aproximadamente 60 FPS
+        SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Color de fondo del mapa
+        SDL_RenderClear(renderer);
+    grafo.dibujar(renderer);
+
+        dibujarMapa(boton);  // Dibuja el mapa
+        actualizarCarros(grafo);  // Mueve y dibuja todos los carros
+
+        SDL_RenderPresent(renderer);
+        SDL_Delay(16);  // Aproximadamente 60 FPS
     }
 
     SDL_Quit();
