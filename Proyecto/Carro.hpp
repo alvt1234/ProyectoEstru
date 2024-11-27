@@ -105,7 +105,7 @@ public:
     int velocidad;
     char direccion;  // 'H' para horizontal, 'V' para vertical
 
-    Carro(int x, int y, int ancho, int alto, char dir = 'H', int vel = 2)
+    Carro(int x, int y, int ancho, int alto, char dir = 'H', int vel = 5)
         : velocidad(vel), direccion(dir) {
         rect = {x, y, ancho, alto};
     }

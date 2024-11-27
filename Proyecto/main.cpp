@@ -224,19 +224,19 @@ void ponerCarro() {
         dibujarCalleRecta(400 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 450, false); //calle #2 vertical
         //----
         dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
-        dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //estrecha abajo
+        dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //calle alli
         dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); //derecha alta
         dibujarCalleRecta(900 - anchoCalleAncha /5,0, anchoCalleEstrecha,550, false); //cuarti
         dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true); //calle horizontal arriba
-        dibujarCalleRecta(950 - anchoCalleAncha /2, 600, anchoCalleEstrecha,580, false); 
-        dibujarCalleRecta(1100 - anchoCalleAncha /5,500, anchoCalleEstrecha,250, false); 
+        dibujarCalleRecta(950 - anchoCalleAncha /2, 600, anchoCalleEstrecha,580, false); //calle samaritana
+        dibujarCalleRecta(1100 - anchoCalleAncha /5,500, anchoCalleEstrecha,250, false); //calle barrial
         dibujarCalleRecta(1100 - anchoCalleAncha /5,150, anchoCalleEstrecha,350, false); //calle morada derecha vertical --segundo cuadrante
-        dibujarCalleRecta(770, 150 - anchoCalleEstrecha / 2, 580, anchoCalleEstrecha, true); //calle recta arriba de morada --segundo cuadrante
-        dibujarCalleRecta(940, 900 - anchoCalleEstrecha / 2, 410, anchoCalleEstrecha, true); //cuarto
-        dibujarCalleRecta(1250 - anchoCalleAncha /5,500, anchoCalleEstrecha,700, false);//cuarto  cuadrante
+        dibujarCalleRecta(770, 150 - anchoCalleEstrecha / 2, 580, anchoCalleEstrecha, true); //calle recta arriba de morada --segundo cuadrante calle guamilito
+        dibujarCalleRecta(940, 900 - anchoCalleEstrecha / 2, 410, anchoCalleEstrecha, true); //calle roma
+        dibujarCalleRecta(1250 - anchoCalleAncha /5,500, anchoCalleEstrecha,700, false);//calle horizona*/
         //tercer cuadrante
         
-        dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, 480, false); //calle vertical a la izquierda de la princiap 4
+        /*dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, 480, false); //calle vertical a la izquierda de la princiap 4/*
         dibujarCalleRecta(0, 620 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);  //calle horizontal abajo de la principal 1
         dibujarCalleRecta(300 - anchoCalleEstrecha / 2, 620, anchoCalleEstrecha, 460, false);//segunda ertical a la izquierda de la principal 4
         
@@ -247,7 +247,7 @@ void ponerCarro() {
 
         // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
         
-        dibujarCalleRecta(770 - anchoCalleAncha / 2, 600, anchoCalleAncha, 480, false);  // Calle principal 4 ancha
+        dibujarCalleRecta(770 - anchoCalleAncha / 2, 600, anchoCalleAncha, 480, false);  // Calle principal 4 ancha*/
       
     // Dibujar la rotonda
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -332,10 +332,42 @@ void detectarInterseccionYDecidir(Carro& carro, const Grafo& grafo) {
         }
     }
 }
+void agregarNodosRotonda(Grafo& grafo) {
+    SDL_Color colorNodo = {255, 255, 0, 255};  // Amarillo para los nodos de la rotonda
+    int centroX = 770;  // Coordenada X del centro de la rotonda
+    int centroY = 500;  // Coordenada Y del centro de la rotonda
+    int radio = 150;    // Radio de la rotonda
 
+    // Crear 8 nodos distribuidos uniformemente en la rotonda
+    for (int i = 0; i < 8; ++i) {
+        double angulo = i * (2 * M_PI / 8);  // Dividir el círculo en 8 partes
+        int x = static_cast<int>(centroX + radio * cos(angulo));  // Coordenada X
+        int y = static_cast<int>(centroY + radio * sin(angulo));  // Coordenada Y
+        grafo.agregarNodo(x, y, colorNodo);  // Agregar el nodo al grafo
+    }
+
+    // Conectar los nodos de la rotonda en un círculo
+    int inicioRotonda = grafo.getCantidadNodos() - 8;  // Índice del primer nodo de la rotonda
+    for (int i = 0; i < 8; ++i) {
+        grafo.agregarArista(inicioRotonda + i, inicioRotonda + (i + 1) % 8);
+    }
+}
+
+void conectarRotondaConCalles(Grafo& grafo) {
+    int inicioRotonda = grafo.getCantidadNodos() - 8;  // Índice del primer nodo de la rotonda
+
+    // Conectar entradas/salidas de la rotonda con las calles
+    grafo.agregarArista(54, inicioRotonda);  // Nodo B -> Entrada de la rotonda
+    grafo.agregarArista(inicioRotonda + 4, 3);  // Salida de la rotonda -> Nodo D
+}
 
 void inicializarCarros() {
     // Ejemplo: Crear 3 carros con diferentes posiciones iniciales
+  
+    carros.push_back(Carro(0, 28, 20, 10));
+    carros.push_back(Carro(30, 28, 20, 10));
+    carros.push_back(Carro(60, 28, 20, 10));
+    carros.push_back(Carro(90, 28, 20, 10));
     carros.push_back(Carro(0, 5, 20, 10));
     carros.push_back(Carro(30, 5, 20, 10));
     carros.push_back(Carro(60, 5, 20, 10));
@@ -359,48 +391,183 @@ void inicializarGrafo(Grafo& grafo) {
     SDL_Color colorNodo = {255, 0, 0, 255};  // Rojo para las intersecciones
 
     // Agregar nodos (intersecciones)
-    // Primer cuadrante
+    // Primer cuadrante carril
+    
     grafo.agregarNodo(380, 5, colorNodo);    // Nodo A (calle principal 1)
-    grafo.agregarNodo(630, 5, colorNodo);  // Nodo B (final calle principal 1)
-    grafo.agregarNodo(750, 5, colorNodo);  // Nodo C (inicio calle principal 2)
-    grafo.agregarNodo(892, 5, colorNodo); // Nodo D (final calle principal 2)
-    grafo.agregarNodo(1350, 5, colorNodo); // Nodo E
-    grafo.agregarNodo(380, 85, colorNodo);  // Nodo F
-    grafo.agregarNodo(0, 85, colorNodo);  // Nodo G
-    grafo.agregarNodo(380, 400, colorNodo);  // Nodo H
-    grafo.agregarNodo(630, 85, colorNodo);  // Nodo I
-    //grafo.agregarNodo(380, 85, colorNodo);  // Nodo I
-    //grafo.agregarNodo(0, 85, colorNodo);  // Nodo J
-    //grafo.agregarNodo(380, 365, colorNodo);  // Nodo K
-    // Rotonda
-    //grafo.agregarNodo(770, 500, colorNodo);  // Nodo E (centro de la rotonda)
+    grafo.agregarNodo(650, 5, colorNodo);  // Nodo B (final calle principal 1)
+    grafo.agregarNodo(770, 5, colorNodo);  // Nodo C (inicio calle principal 2)
+    grafo.agregarNodo(925, 5, colorNodo); // Nodo D (final calle principal 2)
+    grafo.agregarNodo(1370, 5, colorNodo); // Nodo E
 
-    // Calle acostada en L (primer cuadrante)
-   
-    // Calles verticales y horizontales (primer cuadrante)
-    grafo.agregarNodo(400, 0, colorNodo);    // Nodo I
-    //grafo.agregarNodo(1100, 150, colorNodo); // Nodo L
-
-    // Cuadrante inferior
-    grafo.agregarNodo(300, 900, colorNodo);  // Nodo M
-    grafo.agregarNodo(770, 900, colorNodo);  // Nodo N
-    //grafo.agregarNodo(1250, 900, colorNodo); // Nodo O
-
+    //segundo carril calle 1 hor
+    grafo.agregarNodo(400, 28, colorNodo);    // Nodo F (calle principal 1)
+    grafo.agregarNodo(630, 28, colorNodo);  // Nodo G (final calle principal 1)
+    grafo.agregarNodo(750, 28, colorNodo);  // Nodo H (inicio calle principal 2)
+    grafo.agregarNodo(905, 28, colorNodo); // Nodo I (final calle principal 2)
+    grafo.agregarNodo(1350, 28, colorNodo); // Nodo J
+    grafo.agregarNodo(630, 85, colorNodo); // Nodo k
+    grafo.agregarNodo(650, 105, colorNodo); // Nodo L
+    grafo.agregarNodo(400, 85, colorNodo); // Nodo M
+    grafo.agregarNodo(380, 105, colorNodo); // Nodo N
+    grafo.agregarNodo(0, 85, colorNodo);  // Nodo N`
+    grafo.agregarNodo(0, 105, colorNodo);  // Nodo O
+    grafo.agregarNodo(630, 235, colorNodo);  // Nodo P
+    grafo.agregarNodo(650, 255, colorNodo);  // Nodo Q
+    grafo.agregarNodo(400, 235, colorNodo);  // Nodo R
+    grafo.agregarNodo(380, 255, colorNodo);  // Nodo S
+    grafo.agregarNodo(165, 235, colorNodo);  // Nodo T
+    grafo.agregarNodo(185, 255, colorNodo);  // Nodo U
+    grafo.agregarNodo(165, 385, colorNodo);  // Nodo V
+    grafo.agregarNodo(185, 405, colorNodo);  // Nodo W
+    grafo.agregarNodo(0, 385, colorNodo);  // Nodo X
+    grafo.agregarNodo(0, 405, colorNodo);  // Nodo Y
+    grafo.agregarNodo(1350, 135, colorNodo);  // Nodo Z
+    grafo.agregarNodo(1370, 155, colorNodo);  // Nodo 27
+    grafo.agregarNodo(1080, 135, colorNodo);  // Nodo 28
+    grafo.agregarNodo(1100, 155, colorNodo);  // Nodo 29
+    grafo.agregarNodo(1080, 505, colorNodo);  // Nodo 30
+    grafo.agregarNodo(1100, 485, colorNodo);  // Nodo 31
+    grafo.agregarNodo(1350, 485, colorNodo);  // Nodo 32
+    grafo.agregarNodo(1370, 505, colorNodo);  // Nodo 33
+    grafo.agregarNodo(1350, 755, colorNodo);  // Nodo 34
+    grafo.agregarNodo(1370, 775, colorNodo);  // Nodo 35
+    grafo.agregarNodo(1350, 885, colorNodo);  // Nodo 36
+    grafo.agregarNodo(1370, 905, colorNodo);  // Nodo 37
+    grafo.agregarNodo(1350, 975, colorNodo);  // Nodo 38
+    grafo.agregarNodo(1370, 995, colorNodo);  // Nodo 39
+    grafo.agregarNodo(1080, 755, colorNodo);  // Nodo 40
+    grafo.agregarNodo(1100, 775, colorNodo);  // Nodo 41
+    grafo.agregarNodo(1230, 485, colorNodo);  // Nodo 42
+    grafo.agregarNodo(1250, 505, colorNodo);  // Nodo 43
+    grafo.agregarNodo(1230, 755, colorNodo);  // Nodo 44
+    grafo.agregarNodo(1250, 775, colorNodo);  // Nodo 45
+    grafo.agregarNodo(1230, 905, colorNodo);  // Nodo 46
+    grafo.agregarNodo(1250, 885, colorNodo);  // Nodo 47
+    grafo.agregarNodo(1230, 995, colorNodo);  // Nodo 48
+    grafo.agregarNodo(1250, 975, colorNodo);  // Nodo 49
+    grafo.agregarNodo(925, 885, colorNodo);  // Nodo 50
+    grafo.agregarNodo(905, 905, colorNodo);  // Nodo 51
+    grafo.agregarNodo(925, 755, colorNodo);  // Nodo 52
+    grafo.agregarNodo(905, 775, colorNodo);  // Nodo 53
+    grafo.agregarNodo(925, 600, colorNodo);  // Nodo 54
+    grafo.agregarNodo(905, 590, colorNodo);  // Nodo 55
+    grafo.agregarNodo(770, 255, colorNodo);  // Nodo 56
+    grafo.agregarNodo(750, 235, colorNodo);  // Nodo 57
+    grafo.agregarNodo(925, 135, colorNodo);  // Nodo 58
+    grafo.agregarNodo(905, 155, colorNodo);  // Nodo 59
+    grafo.agregarNodo(925, 385, colorNodo);  // Nodo 60
+    grafo.agregarNodo(905, 405, colorNodo);  // Nodo 61
+    grafo.agregarNodo(770, 135, colorNodo);  // Nodo 62
+    grafo.agregarNodo(750, 155, colorNodo);  // Nodo 63
+    grafo.agregarNodo(380, 385, colorNodo);  // Nodo 64
+    grafo.agregarNodo(400, 405, colorNodo);  // Nodo 65
+    grafo.agregarNodo(630, 385, colorNodo);  // Nodo 66
+    grafo.agregarNodo(650, 405, colorNodo);  // Nodo 67
+     //agregarNodosRotonda(grafo);
     // Aristas
-    grafo.agregarArista(0, 1);  // A -> B (calle principal 1)
-    grafo.agregarArista(1, 2);  // B -> C (inicio principal 2)
-    grafo.agregarArista(2, 3);  // C -> D (final principal 2)
-    grafo.agregarArista(3, 4);  // D -> E (conexión a rotonda)
-    grafo.agregarArista(0, 5);  // A -> F (rotonda a L)
-    grafo.agregarArista(5, 6);  // F -> G (continuación de L)
-    grafo.agregarArista(5, 7);  // F -> H (bajada de L)
-    grafo.agregarArista(8, 5);  // F -> I (conexión a vertical)
-    grafo.agregarArista(1, 8);  // B -> I (conexión a siguiente vertical)
-    //grafo.agregarArista(9, 10); // J -> K (conexión a principal vertical)
-    //grafo.agregarArista(4, 11); // E -> L (rotonda a cuadrante derecho)
-    //grafo.agregarArista(11, 12); // L -> M (hacia cuadrante inferior)
-    //grafo.agregarArista(12, 13); // M -> N (cuadrante inferior)
-    //grafo.agregarArista(13, 14); // N -> O (final en cuadrante derecho)
+    grafo.agregarArista(0, 1);  // A -> B 
+    grafo.agregarArista(1, 2);  // B -> C 
+    grafo.agregarArista(2, 3);  // C -> D 
+    grafo.agregarArista(3, 4);  // D -> E 
+    grafo.agregarArista(5, 6);  // F -> G 
+    grafo.agregarArista(6, 7);  // G -> H 
+    grafo.agregarArista(7, 8);  // H -> I 
+    grafo.agregarArista(8, 9);  // I -> J 
+    grafo.agregarArista(6, 10);  // G -> K
+    grafo.agregarArista(1, 11); // B -> L 
+    grafo.agregarArista(10, 12); // k -> M
+    grafo.agregarArista(12, 5); // M -> F 
+    grafo.agregarArista(11, 13); // L -> N
+    grafo.agregarArista(13, 0); // N -> A
+    grafo.agregarArista(12, 14); // M -> N`
+    grafo.agregarArista(13, 15); // N -> O
+    grafo.agregarArista(10, 16); // M -> N`
+    grafo.agregarArista(11, 17); // N -> O
+    grafo.agregarArista(16, 18); // M -> N`
+    grafo.agregarArista(17, 19); // N -> O
+    grafo.agregarArista(18, 12); // M -> N`
+    grafo.agregarArista(19, 13); // N -> O
+    grafo.agregarArista(18, 20); // M -> N`
+    grafo.agregarArista(19, 21); // N -> O
+    grafo.agregarArista(20, 22); // M -> N`
+    grafo.agregarArista(21, 23); // N -> O
+    grafo.agregarArista(22, 24); // M -> N`
+    grafo.agregarArista(23, 25); // N -> O
+    grafo.agregarArista(9, 26); // N -> O
+    grafo.agregarArista(4, 27); // N -> O
+    grafo.agregarArista(26, 28); // N -> O
+    grafo.agregarArista(27, 29);
+    grafo.agregarArista(28, 30); // N -> O
+    grafo.agregarArista(29, 31);
+    grafo.agregarArista(30, 43);
+    grafo.agregarArista(31, 42);
+    grafo.agregarArista(43, 33);
+    grafo.agregarArista(42, 32);
+    grafo.agregarArista(26, 32);
+    grafo.agregarArista(27, 33);
+    grafo.agregarArista(32, 34);
+    grafo.agregarArista(33, 35);
+    grafo.agregarArista(34, 36);
+    grafo.agregarArista(35, 37);
+    grafo.agregarArista(36, 38);
+    grafo.agregarArista(37, 39);
+
+    grafo.agregarArista(34, 44);
+    grafo.agregarArista(35, 45);
+    grafo.agregarArista(45, 41);
+    grafo.agregarArista(44, 40);
+
+    grafo.agregarArista(42, 44);
+    grafo.agregarArista(43, 45);
+    grafo.agregarArista(30, 40);
+    grafo.agregarArista(31, 41);
+    grafo.agregarArista(45, 47);
+    grafo.agregarArista(44, 46);
+    grafo.agregarArista(46, 37);
+    grafo.agregarArista(47, 36);
+    grafo.agregarArista(47, 49);
+    grafo.agregarArista(46, 48);
+    grafo.agregarArista(50, 47);
+    grafo.agregarArista(51, 46);
+    grafo.agregarArista(40, 52);
+    grafo.agregarArista(41, 53);
+    grafo.agregarArista(50, 52);
+    grafo.agregarArista(51, 53);
+    grafo.agregarArista(52, 54);
+    grafo.agregarArista(53, 55);
+    grafo.agregarArista(63, 57);
+    grafo.agregarArista(7, 63);
+    grafo.agregarArista(2, 62);
+    grafo.agregarArista(62, 56);
+    grafo.agregarArista(57, 16);
+    grafo.agregarArista(56, 17);
+    grafo.agregarArista(58, 3);
+    grafo.agregarArista(59, 8);
+    grafo.agregarArista(60, 58);
+    grafo.agregarArista(61, 59);
+    grafo.agregarArista(28, 58);
+    grafo.agregarArista(29, 59);
+    grafo.agregarArista(28, 58);
+    grafo.agregarArista(29, 59);
+    grafo.agregarArista(59, 63);
+    grafo.agregarArista(58, 62);
+    grafo.agregarArista(64, 22);
+    grafo.agregarArista(65, 23);
+    grafo.agregarArista(64, 19);
+    grafo.agregarArista(65, 18);
+    grafo.agregarArista(67, 65);
+    grafo.agregarArista(66, 64);
+    //grafo.agregarArista(67, 61);
+    //grafo.agregarArista(66, 60);
+    grafo.agregarArista(16, 66);
+    grafo.agregarArista(17, 67);
+    //grafo.agregarArista(54, 60);
+    //grafo.agregarArista(55, 61);
+    //grafo.agregarArista(54, 56);
+    //grafo.agregarArista(55, 56);
+     //grafo.agregarArista(56, 57);
+       //conectarRotondaConCalles(grafo);
+    
 }
 
 /*void cargarVariables(){
@@ -443,42 +610,8 @@ void ponerImagen() {
 }
 */
 
-/*int main(int argc, char *args[]) {
-    iniciar();
-    crearPantalla();
-    ponerCarro();
-    //cargarImg();  // Cargar la imagen del mapa
-    inicializarGrafo();
-    
-    botones boton(renderer);
-    bool corriendo = true;
-    SDL_Event e;
-    Carro carro(100, 100, 20, 10);  // Crear un carro con posición inicial
 
-    while (corriendo) {
-        // Procesar eventos
-        eventos(e, corriendo, boton, renderer);
-        // Dibujar el mapa
-        dibujarMapa(boton);  // Asegúrate de que esta función dibuja el mapa en cada fotograma
-        //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Fondo blanco
-        SDL_RenderClear(renderer);
-
-        // Actualizar y dibujar el auto
-        carro.mover(1, 0); // Mover el carro hacia la derecha
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Color rojo para el auto
-        SDL_RenderFillRect(renderer, &carro.getRect());
-
-        // Actualizar pantalla
-        SDL_RenderPresent(renderer);
-        // Controlar el framerate
-        SDL_Delay(16); // Aproximadamente 60 FPS
-    }
-
-    // Limpiar recursos al salir del bucle
-    SDL_FreeSurface(imagen);  // Liberar memoria para la imagen
-    SDL_Quit();
-    return 0;
-}*/int main(int argc, char *args[]) {
+int main(int argc, char *args[]) {
     iniciar();
     crearPantalla();
     Grafo grafo;
