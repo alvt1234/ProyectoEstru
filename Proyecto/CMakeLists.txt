@@ -7,6 +7,6 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)  
 
 add_executable(SDLSimpleApp main.cpp
-grafo.cpp)
+grafo.cpp Semaforos.cpp)
 
 target_link_libraries(SDLSimpleApp SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)

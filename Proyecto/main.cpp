@@ -94,7 +94,7 @@ void crearPantalla()
 
     void actualizarSemaforos() {
     for (auto& semaforo : semaforos) {
-        semaforo.actualizarEstado();
+        semaforo.actualizarEstado(carros); 
     }
     }
 

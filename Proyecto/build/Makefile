@@ -129,6 +129,30 @@ SDLSimpleApp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLSimpleApp.dir/build.make CMakeFiles/SDLSimpleApp.dir/build
 .PHONY : SDLSimpleApp/fast
 
+Semaforos.o: Semaforos.cpp.o
+.PHONY : Semaforos.o
+
+# target to build an object file
+Semaforos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLSimpleApp.dir/build.make CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o
+.PHONY : Semaforos.cpp.o
+
+Semaforos.i: Semaforos.cpp.i
+.PHONY : Semaforos.i
+
+# target to preprocess a source file
+Semaforos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLSimpleApp.dir/build.make CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.i
+.PHONY : Semaforos.cpp.i
+
+Semaforos.s: Semaforos.cpp.s
+.PHONY : Semaforos.s
+
+# target to generate assembly for a file
+Semaforos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SDLSimpleApp.dir/build.make CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.s
+.PHONY : Semaforos.cpp.s
+
 grafo.o: grafo.cpp.o
 .PHONY : grafo.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SDLSimpleApp"
+	@echo "... Semaforos.o"
+	@echo "... Semaforos.i"
+	@echo "... Semaforos.s"
 	@echo "... grafo.o"
 	@echo "... grafo.i"
 	@echo "... grafo.s"
