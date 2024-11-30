@@ -212,45 +212,44 @@ void ponerCarro() {
             SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Regresar a color gris
         };
     ///principales horizontales
-        dibujarCalleRecta(0, 500 - anchoCalleAncha / 2, 700, anchoCalleAncha, true);  // calle principal 1
-        dibujarCalleRecta(850, 500 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, true);  // Calleprincipal 2 estrecha
+        dibujarCalleRecta(0, 500 - anchoCalleAncha / 2, 740, anchoCalleAncha, true);  // calle dobele Horizontal
+        dibujarCalleRecta(820, 505 , 630, anchoCalleEstrecha, true);  // Calle perito
 
         //primer cuadrante
-        dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 550, anchoCalleEstrecha, true); // calle acostada en L
-        dibujarCalleRecta(175 - anchoCalleEstrecha / 5, 230, anchoCalleEstrecha, 220, false);//calle #1 vertical 
-        dibujarCalleRecta(0, 400 - anchoCalleEstrecha / 2, 700, anchoCalleEstrecha, true); //horizontak
-        dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false); //calle #3 vertical arriba
-        dibujarCalleRecta(0, 100 - anchoCalleEstrecha / 2, 647, anchoCalleEstrecha, true);//calle #2 horizontal 
-        dibujarCalleRecta(400 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 450, false); //calle #2 vertical
+        dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 550, anchoCalleEstrecha, true); // calle acamparito Horizontal
+        dibujarCalleRecta(175 - anchoCalleEstrecha / 5, 230, anchoCalleEstrecha, 220, false);//calle #1 vertical Villa
+        dibujarCalleRecta(0, 400 - anchoCalleEstrecha / 2, 670, anchoCalleEstrecha, true); //horizonta pedro
+        dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false); //calle #3 vertical arriba bajada
+        dibujarCalleRecta(0, 100 - anchoCalleEstrecha / 2, 647, anchoCalleEstrecha, true);//calle #2 horizontal curacao
+        dibujarCalleRecta(400 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 450, false); //calle #2 vertical Rosi
         //----
         dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
         dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //calle alli
-        dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); //derecha alta
-        dibujarCalleRecta(900 - anchoCalleAncha /5,0, anchoCalleEstrecha,550, false); //cuarti
-        dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true); //calle horizontal arriba
-        dibujarCalleRecta(950 - anchoCalleAncha /2, 600, anchoCalleEstrecha,580, false); //calle samaritana
+        dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); // vertical doble segunda
+        dibujarCalleRecta(920 - anchoCalleAncha /5,0, anchoCalleEstrecha,1100, false); //calle vertical palo alto
+        dibujarCalleRecta(0, 2 - anchoCalleEstrecha/ 50, 1350, anchoCalleEstrecha, true); //calle horizontal arriba principal
         dibujarCalleRecta(1100 - anchoCalleAncha /5,500, anchoCalleEstrecha,250, false); //calle barrial
-        dibujarCalleRecta(1100 - anchoCalleAncha /5,150, anchoCalleEstrecha,350, false); //calle morada derecha vertical --segundo cuadrante
-        dibujarCalleRecta(770, 150 - anchoCalleEstrecha / 2, 580, anchoCalleEstrecha, true); //calle recta arriba de morada --segundo cuadrante calle guamilito
+        dibujarCalleRecta(1100 - anchoCalleAncha /5,150, anchoCalleEstrecha,350, false); //calle Guamilito**/
+        dibujarCalleRecta(770, 150 - anchoCalleEstrecha / 2, 580, anchoCalleEstrecha, true); //calle horizontal sofia
         dibujarCalleRecta(940, 900 - anchoCalleEstrecha / 2, 410, anchoCalleEstrecha, true); //calle roma
-        dibujarCalleRecta(1250 - anchoCalleAncha /5,500, anchoCalleEstrecha,700, false);//calle horizona*/
+        dibujarCalleRecta(1250 - anchoCalleAncha /5,530, anchoCalleEstrecha,700, false);//calle horizona
         //tercer cuadrante
         
-        /*dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, 480, false); //calle vertical a la izquierda de la princiap 4/*
-        dibujarCalleRecta(0, 620 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);  //calle horizontal abajo de la principal 1
-        dibujarCalleRecta(300 - anchoCalleEstrecha / 2, 620, anchoCalleEstrecha, 460, false);//segunda ertical a la izquierda de la principal 4
+        dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 600, anchoCalleEstrecha, 480, false); //calle vertical comercio
+        dibujarCalleRecta(0, 620 - anchoCalleEstrecha / 2, 650, anchoCalleEstrecha, true);  //calle horizontal abajo san marcos
+        dibujarCalleRecta(300 - anchoCalleEstrecha / 2, 620, anchoCalleEstrecha, 460, false);//calle vertical morazan
         
-        dibujarCalleRecta(0, 820 - anchoCalleEstrecha / 2, 645, anchoCalleEstrecha, true);  //tercer cuadrante
+        dibujarCalleRecta(0, 820 - anchoCalleEstrecha / 2, 720, anchoCalleEstrecha, true);  //calle horizontal constantinopla
 
-        dibujarCalleRecta(170 - anchoCalleEstrecha / 2, 820, anchoCalleEstrecha, 300, false);//segunda ertical a la izquierda de la principal 4
-        dibujarCalleRecta(300, 900- anchoCalleEstrecha / 2, 450, anchoCalleEstrecha, true);
+        dibujarCalleRecta(170 - anchoCalleEstrecha / 2, 820, anchoCalleEstrecha, 300, false);//calle vertical rosario
+        dibujarCalleRecta(300, 900- anchoCalleEstrecha / 2, 450, anchoCalleEstrecha, true); //calle horizontal real
 
         // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
-        
-        dibujarCalleRecta(770 - anchoCalleAncha / 2, 600, anchoCalleAncha, 480, false);  // Calle principal 4 ancha*/
+        //MODIFICAR*/
+        dibujarCalleRecta(770 - anchoCalleAncha / 2, 0, anchoCalleAncha, 1100, false);  // Calle doble carril vertical */
       
     // Dibujar la rotonda
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    /*SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     dibujarCirculo(renderer, 770, 500, 200);
 
     SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);//circulo negro mas peque
@@ -261,7 +260,7 @@ void ponerCarro() {
     SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
     dibujarCirculo(renderer, 770, 500, 148);
     SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);
-    dibujarCirculo(renderer, 770, 500, 100);
+    dibujarCirculo(renderer, 770, 500, 100);*/
  
     }
 
@@ -391,183 +390,331 @@ void inicializarGrafo(Grafo& grafo) {
     SDL_Color colorNodo = {255, 0, 0, 255};  // Rojo para las intersecciones
 
     // Agregar nodos (intersecciones)
-    // Primer cuadrante carril
-    
-    grafo.agregarNodo(380, 5, colorNodo);    // Nodo A (calle principal 1)
-    grafo.agregarNodo(650, 5, colorNodo);  // Nodo B (final calle principal 1)
-    grafo.agregarNodo(770, 5, colorNodo);  // Nodo C (inicio calle principal 2)
-    grafo.agregarNodo(925, 5, colorNodo); // Nodo D (final calle principal 2)
-    grafo.agregarNodo(1370, 5, colorNodo); // Nodo E
 
-    //segundo carril calle 1 hor
-    grafo.agregarNodo(400, 28, colorNodo);    // Nodo F (calle principal 1)
-    grafo.agregarNodo(630, 28, colorNodo);  // Nodo G (final calle principal 1)
-    grafo.agregarNodo(750, 28, colorNodo);  // Nodo H (inicio calle principal 2)
-    grafo.agregarNodo(905, 28, colorNodo); // Nodo I (final calle principal 2)
-    grafo.agregarNodo(1350, 28, colorNodo); // Nodo J
-    grafo.agregarNodo(630, 85, colorNodo); // Nodo k
-    grafo.agregarNodo(650, 105, colorNodo); // Nodo L
-    grafo.agregarNodo(400, 85, colorNodo); // Nodo M
-    grafo.agregarNodo(380, 105, colorNodo); // Nodo N
-    grafo.agregarNodo(0, 85, colorNodo);  // Nodo N`
-    grafo.agregarNodo(0, 105, colorNodo);  // Nodo O
-    grafo.agregarNodo(630, 235, colorNodo);  // Nodo P
-    grafo.agregarNodo(650, 255, colorNodo);  // Nodo Q
-    grafo.agregarNodo(400, 235, colorNodo);  // Nodo R
-    grafo.agregarNodo(380, 255, colorNodo);  // Nodo S
-    grafo.agregarNodo(165, 235, colorNodo);  // Nodo T
-    grafo.agregarNodo(185, 255, colorNodo);  // Nodo U
-    grafo.agregarNodo(165, 385, colorNodo);  // Nodo V
-    grafo.agregarNodo(185, 405, colorNodo);  // Nodo W
-    grafo.agregarNodo(0, 385, colorNodo);  // Nodo X
-    grafo.agregarNodo(0, 405, colorNodo);  // Nodo Y
-    grafo.agregarNodo(1350, 135, colorNodo);  // Nodo Z
-    grafo.agregarNodo(1370, 155, colorNodo);  // Nodo 27
-    grafo.agregarNodo(1080, 135, colorNodo);  // Nodo 28
-    grafo.agregarNodo(1100, 155, colorNodo);  // Nodo 29
-    grafo.agregarNodo(1080, 505, colorNodo);  // Nodo 30
-    grafo.agregarNodo(1100, 485, colorNodo);  // Nodo 31
-    grafo.agregarNodo(1350, 485, colorNodo);  // Nodo 32
-    grafo.agregarNodo(1370, 505, colorNodo);  // Nodo 33
-    grafo.agregarNodo(1350, 755, colorNodo);  // Nodo 34
-    grafo.agregarNodo(1370, 775, colorNodo);  // Nodo 35
-    grafo.agregarNodo(1350, 885, colorNodo);  // Nodo 36
-    grafo.agregarNodo(1370, 905, colorNodo);  // Nodo 37
-    grafo.agregarNodo(1350, 975, colorNodo);  // Nodo 38
-    grafo.agregarNodo(1370, 995, colorNodo);  // Nodo 39
-    grafo.agregarNodo(1080, 755, colorNodo);  // Nodo 40
-    grafo.agregarNodo(1100, 775, colorNodo);  // Nodo 41
-    grafo.agregarNodo(1230, 485, colorNodo);  // Nodo 42
-    grafo.agregarNodo(1250, 505, colorNodo);  // Nodo 43
-    grafo.agregarNodo(1230, 755, colorNodo);  // Nodo 44
-    grafo.agregarNodo(1250, 775, colorNodo);  // Nodo 45
-    grafo.agregarNodo(1230, 905, colorNodo);  // Nodo 46
-    grafo.agregarNodo(1250, 885, colorNodo);  // Nodo 47
-    grafo.agregarNodo(1230, 995, colorNodo);  // Nodo 48
-    grafo.agregarNodo(1250, 975, colorNodo);  // Nodo 49
-    grafo.agregarNodo(925, 885, colorNodo);  // Nodo 50
-    grafo.agregarNodo(905, 905, colorNodo);  // Nodo 51
-    grafo.agregarNodo(925, 755, colorNodo);  // Nodo 52
-    grafo.agregarNodo(905, 775, colorNodo);  // Nodo 53
-    grafo.agregarNodo(925, 600, colorNodo);  // Nodo 54
-    grafo.agregarNodo(905, 590, colorNodo);  // Nodo 55
-    grafo.agregarNodo(770, 255, colorNodo);  // Nodo 56
-    grafo.agregarNodo(750, 235, colorNodo);  // Nodo 57
-    grafo.agregarNodo(925, 135, colorNodo);  // Nodo 58
-    grafo.agregarNodo(905, 155, colorNodo);  // Nodo 59
-    grafo.agregarNodo(925, 385, colorNodo);  // Nodo 60
-    grafo.agregarNodo(905, 405, colorNodo);  // Nodo 61
-    grafo.agregarNodo(770, 135, colorNodo);  // Nodo 62
-    grafo.agregarNodo(750, 155, colorNodo);  // Nodo 63
-    grafo.agregarNodo(380, 385, colorNodo);  // Nodo 64
-    grafo.agregarNodo(400, 405, colorNodo);  // Nodo 65
-    grafo.agregarNodo(630, 385, colorNodo);  // Nodo 66
-    grafo.agregarNodo(650, 405, colorNodo);  // Nodo 67
-     //agregarNodosRotonda(grafo);
-    // Aristas
-    grafo.agregarArista(0, 1);  // A -> B 
-    grafo.agregarArista(1, 2);  // B -> C 
-    grafo.agregarArista(2, 3);  // C -> D 
-    grafo.agregarArista(3, 4);  // D -> E 
-    grafo.agregarArista(5, 6);  // F -> G 
-    grafo.agregarArista(6, 7);  // G -> H 
-    grafo.agregarArista(7, 8);  // H -> I 
-    grafo.agregarArista(8, 9);  // I -> J 
-    grafo.agregarArista(6, 10);  // G -> K
-    grafo.agregarArista(1, 11); // B -> L 
-    grafo.agregarArista(10, 12); // k -> M
-    grafo.agregarArista(12, 5); // M -> F 
-    grafo.agregarArista(11, 13); // L -> N
-    grafo.agregarArista(13, 0); // N -> A
-    grafo.agregarArista(12, 14); // M -> N`
-    grafo.agregarArista(13, 15); // N -> O
-    grafo.agregarArista(10, 16); // M -> N`
-    grafo.agregarArista(11, 17); // N -> O
-    grafo.agregarArista(16, 18); // M -> N`
-    grafo.agregarArista(17, 19); // N -> O
-    grafo.agregarArista(18, 12); // M -> N`
-    grafo.agregarArista(19, 13); // N -> O
-    grafo.agregarArista(18, 20); // M -> N`
-    grafo.agregarArista(19, 21); // N -> O
-    grafo.agregarArista(20, 22); // M -> N`
-    grafo.agregarArista(21, 23); // N -> O
-    grafo.agregarArista(22, 24); // M -> N`
-    grafo.agregarArista(23, 25); // N -> O
-    grafo.agregarArista(9, 26); // N -> O
-    grafo.agregarArista(4, 27); // N -> O
-    grafo.agregarArista(26, 28); // N -> O
+    // Primer cuadrante carril
+    grafo.agregarNodo(0, 5, colorNodo);  // Nodo 0
+    grafo.agregarNodo(0, 28, colorNodo);  // Nodo 1
+    grafo.agregarNodo(380, 5, colorNodo);    // Nodo 2
+    grafo.agregarNodo(400, 28, colorNodo);    // Nodo 3
+    grafo.agregarNodo(630, 28, colorNodo);  // Nodo 4
+    grafo.agregarNodo(650, 5, colorNodo);  // Nodo 5
+    grafo.agregarNodo(630, 85, colorNodo); // Nodo 6
+    grafo.agregarNodo(650, 105, colorNodo); // Nodo 7
+    grafo.agregarNodo(400, 85, colorNodo); // Nodo 8
+    grafo.agregarNodo(380, 105, colorNodo); // Nodo 9
+    grafo.agregarNodo(0, 85, colorNodo); // Nodo 10
+    grafo.agregarNodo(0, 105, colorNodo); // Nodo 11
+    grafo.agregarNodo(630, 235, colorNodo); // Nodo 12
+    grafo.agregarNodo(650, 255, colorNodo); // Nodo 13
+    grafo.agregarNodo(400, 235, colorNodo); // Nodo 14
+    grafo.agregarNodo(380, 255, colorNodo); // Nodo 15
+    grafo.agregarNodo(165, 235, colorNodo);  // Nodo 16
+    grafo.agregarNodo(185, 255, colorNodo);  // Nodo 17
+    grafo.agregarNodo(165, 385, colorNodo);  // Nodo 18
+    grafo.agregarNodo(185, 405, colorNodo);  // Nodo 19
+    grafo.agregarNodo(0, 385, colorNodo);  // Nodo 20
+    grafo.agregarNodo(0, 405, colorNodo);  // Nodo 21
+    grafo.agregarNodo(630, 385, colorNodo);  // Nodo 22
+    grafo.agregarNodo(650, 405, colorNodo);  // Nodo 23
+    grafo.agregarNodo(400, 385, colorNodo);  // Nodo 24
+    grafo.agregarNodo(380, 405, colorNodo);  // Nodo 25
+    grafo.agregarNodo(0, 455, colorNodo);  // Nodo 26
+    grafo.agregarNodo(0, 475, colorNodo);  // Nodo 27
+    grafo.agregarNodo(185, 455, colorNodo);  // Nodo 28
+    grafo.agregarNodo(165, 475, colorNodo);  // Nodo 29
+    grafo.agregarNodo(380, 455, colorNodo);  // Nodo 30
+    grafo.agregarNodo(400, 475, colorNodo);  // Nodo 31
+    grafo.agregarNodo(725, 455, colorNodo);  // Nodo 32
+    grafo.agregarNodo(745, 475, colorNodo);  // Nodo 33
+    grafo.agregarNodo(725, 255, colorNodo);  // Nodo 34
+    grafo.agregarNodo(745, 235, colorNodo);  // Nodo 35
+    grafo.agregarNodo(725, 5, colorNodo);  // Nodo 36
+    grafo.agregarNodo(745, 28, colorNodo);  // Nodo 37
+    grafo.agregarNodo(770, 455, colorNodo);  // Nodo 38
+    grafo.agregarNodo(790, 475, colorNodo);  // Nodo 39
+    grafo.agregarNodo(770, 255, colorNodo);  // Nodo 40
+    grafo.agregarNodo(790, 235, colorNodo);  // Nodo 41
+    grafo.agregarNodo(790, 5, colorNodo);  // Nodo 42
+    grafo.agregarNodo(770, 28, colorNodo);  // Nodo 43
+    grafo.agregarNodo(770, 515, colorNodo);  // Nodo 44
+    grafo.agregarNodo(790, 535, colorNodo);  // Nodo 45
+    grafo.agregarNodo(400, 515, colorNodo);  // Nodo 46
+    grafo.agregarNodo(380, 535, colorNodo);  // Nodo 47
+    grafo.agregarNodo(185, 535, colorNodo);  // Nodo 48
+    grafo.agregarNodo(165, 515, colorNodo);  // Nodo 49
+    grafo.agregarNodo(290, 605, colorNodo);  // Nodo 50
+    grafo.agregarNodo(310, 625, colorNodo);  // Nodo 51
+    grafo.agregarNodo(290, 805, colorNodo);  // Nodo 52
+    grafo.agregarNodo(310, 825, colorNodo);  // Nodo 53
+    grafo.agregarNodo(180, 805, colorNodo);  // Nodo 54
+    grafo.agregarNodo(160, 825, colorNodo);  // Nodo 55
+    grafo.agregarNodo(0, 805, colorNodo);  // Nodo 56
+    grafo.agregarNodo(0, 825, colorNodo);  // Nodo 57
+    grafo.agregarNodo(160, 1000, colorNodo);  // Nodo 58
+    grafo.agregarNodo(180, 1000, colorNodo);  // Nodo 59
+    grafo.agregarNodo(290, 910, colorNodo);  // Nodo 60
+    grafo.agregarNodo(310, 890, colorNodo);  // Nodo 61
+    grafo.agregarNodo(290, 1000, colorNodo);  // Nodo 62
+    grafo.agregarNodo(310, 1000, colorNodo);  // Nodo 63
+    grafo.agregarNodo(660, 605, colorNodo);  // Nodo 64
+    grafo.agregarNodo(640, 625, colorNodo);  // Nodo 65
+    grafo.agregarNodo(640, 805, colorNodo);  // Nodo 66
+    grafo.agregarNodo(660, 825, colorNodo);  // Nodo 67
+    grafo.agregarNodo(640, 910, colorNodo);  // Nodo 68
+    grafo.agregarNodo(660, 890, colorNodo);  // Nodo 69
+    grafo.agregarNodo(640, 1000, colorNodo);  // Nodo 70
+    grafo.agregarNodo(660, 1000, colorNodo);  // Nodo 71
+    grafo.agregarNodo(725, 805, colorNodo);  // Nodo 72
+    grafo.agregarNodo(745, 825, colorNodo);  // Nodo 73
+    grafo.agregarNodo(725, 890, colorNodo);  // Nodo 74
+    grafo.agregarNodo(745, 910, colorNodo);  // Nodo 75
+
+    grafo.agregarNodo(770, 775, colorNodo);  // Nodo 76
+    grafo.agregarNodo(790, 755, colorNodo);  // Nodo 77
+
+    grafo.agregarNodo(770, 805, colorNodo);  // Nodo 78
+    grafo.agregarNodo(790, 825, colorNodo);  // Nodo 79
+    grafo.agregarNodo(770, 890, colorNodo);  // Nodo 80
+    grafo.agregarNodo(790, 910, colorNodo);  // Nodo 81
+    grafo.agregarNodo(900, 515, colorNodo);  // Nodo 82
+    grafo.agregarNodo(920, 535, colorNodo);  // Nodo 83
+    grafo.agregarNodo(790, 135, colorNodo);  // Nodo 84
+    grafo.agregarNodo(770, 155, colorNodo);  // Nodo 85
+    grafo.agregarNodo(900, 135, colorNodo);  // Nodo 86
+    grafo.agregarNodo(920, 155, colorNodo);  // Nodo 87
+    grafo.agregarNodo(900, 5, colorNodo);  // Nodo 88
+    grafo.agregarNodo(920, 28, colorNodo);  // Nodo 89
+    grafo.agregarNodo(900, 755, colorNodo);  // Nodo 90
+    grafo.agregarNodo(920, 775, colorNodo);  // Nodo 91
+    grafo.agregarNodo(920, 890, colorNodo);  // Nodo 92
+    grafo.agregarNodo(900, 910, colorNodo);  // Nodo 93
+    grafo.agregarNodo(1350, 28, colorNodo);  // Nodo 94
+    grafo.agregarNodo(1370, 5, colorNodo);  // Nodo 95
+    grafo.agregarNodo(1350, 135, colorNodo);  // Nodo 96
+    grafo.agregarNodo(1370, 155, colorNodo);  // Nodo 97
+    grafo.agregarNodo(1085, 135, colorNodo);  // Nodo 98
+    grafo.agregarNodo(1105, 155, colorNodo);  // Nodo 99
+    grafo.agregarNodo(1105, 515, colorNodo);  // Nodo 100
+    grafo.agregarNodo(1085, 535, colorNodo);  // Nodo 101
+    grafo.agregarNodo(1270, 515, colorNodo);  // Nodo 102
+    grafo.agregarNodo(1250, 535, colorNodo);  // Nodo 103
+    grafo.agregarNodo(1370, 515, colorNodo);  // Nodo 104
+    grafo.agregarNodo(1350, 535, colorNodo);  // Nodo 105
+    grafo.agregarNodo(1085, 755, colorNodo);  // Nodo 106
+    grafo.agregarNodo(1105, 775, colorNodo);  // Nodo 107
+    grafo.agregarNodo(1250, 755, colorNodo);  // Nodo 108
+    grafo.agregarNodo(1270, 775, colorNodo);  // Nodo 109
+    grafo.agregarNodo(1350, 755, colorNodo);  // Nodo 110
+    grafo.agregarNodo(1370, 775, colorNodo);  // Nodo 111
+    grafo.agregarNodo(900, 1000, colorNodo);  // Nodo 112
+    grafo.agregarNodo(920, 1000, colorNodo);  // Nodo 113
+    grafo.agregarNodo(1085, 890, colorNodo);  // Nodo 114
+    grafo.agregarNodo(1105, 910, colorNodo);  // Nodo 115
+    grafo.agregarNodo(1370, 890, colorNodo);  // Nodo 116
+    grafo.agregarNodo(1350, 910, colorNodo);  // Nodo 117
+    grafo.agregarNodo(1400, 890, colorNodo);  // Nodo 118
+    grafo.agregarNodo(1420, 910, colorNodo);  // Nodo 119
+    grafo.agregarNodo(1400, 755, colorNodo);  // Nodo 120
+    grafo.agregarNodo(1420, 775, colorNodo);  // Nodo 121
+    grafo.agregarNodo(1400, 515, colorNodo);  // Nodo 122
+    grafo.agregarNodo(1420, 535, colorNodo);  // Nodo 123
+    grafo.agregarNodo(1400, 135, colorNodo);  // Nodo 124
+    grafo.agregarNodo(1420, 155, colorNodo);  // Nodo 125
+     grafo.agregarNodo(1400, 5, colorNodo);  // Nodo 124
+    grafo.agregarNodo(1420, 5, colorNodo);  // Nodo 125
+
+    grafo.agregarArista(124, 126);
+    grafo.agregarArista(125, 127); 
+
+    grafo.agregarArista(122, 124);
+    grafo.agregarArista(123, 125); 
+
+    grafo.agregarArista(124, 96);
+    grafo.agregarArista(125, 97); 
+
+     grafo.agregarArista(104, 122);
+    grafo.agregarArista(105, 123); 
+
+
+    grafo.agregarArista(120, 122);
+    grafo.agregarArista(121, 123); 
+
+    grafo.agregarArista(120, 110);
+    grafo.agregarArista(121, 111); 
+
+    grafo.agregarArista(118, 120);
+    grafo.agregarArista(119, 121); 
+
+    grafo.agregarArista(116, 118);
+    grafo.agregarArista(117, 119); 
+
+    grafo.agregarArista(110, 117);
+    grafo.agregarArista(111, 116); 
+     grafo.agregarArista(92, 114);
+    grafo.agregarArista(93, 115); 
+     grafo.agregarArista(115, 117);
+    grafo.agregarArista(114, 116); 
+    grafo.agregarArista(113, 92);
+    grafo.agregarArista(112, 93); 
+    grafo.agregarArista(110, 108);
+    grafo.agregarArista(111, 109); 
+    grafo.agregarArista(105, 110);
+    grafo.agregarArista(104, 111); 
+    grafo.agregarArista(103, 108);
+    grafo.agregarArista(102, 109); 
+    grafo.agregarArista(108, 106);
+    grafo.agregarArista(109, 107); 
+    grafo.agregarArista(106, 90);
+    grafo.agregarArista(107, 91); 
+    grafo.agregarArista(100, 107);
+    grafo.agregarArista(101, 106); 
+    grafo.agregarArista(102, 104);
+    grafo.agregarArista(103, 105); 
+    grafo.agregarArista(101, 103);
+    grafo.agregarArista(100, 102); 
+    grafo.agregarArista(97, 104);
+    grafo.agregarArista(96, 105); 
+    grafo.agregarArista(99, 100);
+    grafo.agregarArista(98, 101); 
+    grafo.agregarArista(82, 100);
+    grafo.agregarArista(83, 101); 
+    grafo.agregarArista(98, 86);
+    grafo.agregarArista(99, 87); 
+    grafo.agregarArista(96, 98);
+    grafo.agregarArista(97, 99); 
+    grafo.agregarArista(94, 96);
+    grafo.agregarArista(95, 97); 
+    grafo.agregarArista(88, 95);
+    grafo.agregarArista(89, 94); 
+    grafo.agregarArista(90, 82);
+    grafo.agregarArista(91, 83); 
+    grafo.agregarArista(91, 76);
+    grafo.agregarArista(90, 77); 
+    grafo.agregarArista(93, 90);
+    grafo.agregarArista(92, 91); 
+    grafo.agregarArista(82, 86);
+    grafo.agregarArista(83, 87); 
+    grafo.agregarArista(43, 89); 
+    grafo.agregarArista(42, 88);
+    grafo.agregarArista(87, 85); 
+    grafo.agregarArista(86, 84);
+    grafo.agregarArista(86, 88); 
+    grafo.agregarArista(87, 89); 
+    grafo.agregarArista(78, 72); 
+    grafo.agregarArista(79, 73);
+    grafo.agregarArista(78, 80); 
+    grafo.agregarArista(79, 81);
+    grafo.agregarArista(74, 80); 
+    grafo.agregarArista(75, 81);  
+    grafo.agregarArista(44, 76); 
+    grafo.agregarArista(45, 77);
+    grafo.agregarArista(76, 78); 
+    grafo.agregarArista(77, 79);  
+    grafo.agregarArista(69, 74); 
+    grafo.agregarArista(68, 75);
+    grafo.agregarArista(72, 66); 
+    grafo.agregarArista(73, 67);  
+    grafo.agregarArista(72, 32); 
+    grafo.agregarArista(73, 33);  
+    grafo.agregarArista(74, 72); 
+    grafo.agregarArista(75, 73);  
+    grafo.agregarArista(68, 70); 
+    grafo.agregarArista(69, 71);  
+    grafo.agregarArista(66, 68); 
+    grafo.agregarArista(67, 69);    
+    grafo.agregarArista(60, 68); 
+    grafo.agregarArista(61, 69);
+    grafo.agregarArista(65, 66); 
+    grafo.agregarArista(64, 67);    
+    grafo.agregarArista(66, 52); 
+    grafo.agregarArista(67, 53);
+    grafo.agregarArista(50, 64); 
+    grafo.agregarArista(51, 65);    
+    grafo.agregarArista(60, 62); 
+    grafo.agregarArista(61, 63);
+    grafo.agregarArista(53, 61); 
+    grafo.agregarArista(52, 60);
+    grafo.agregarArista(50, 52); 
+    grafo.agregarArista(51, 53);
+    grafo.agregarArista(53, 55); 
+    grafo.agregarArista(52, 54);
+    grafo.agregarArista(54, 56); 
+    grafo.agregarArista(55, 57);
+    grafo.agregarArista(59, 54); 
+    grafo.agregarArista(58, 55);
+    grafo.agregarArista(0, 1); 
+    grafo.agregarArista(1, 3);
+    grafo.agregarArista(3, 4);
+    grafo.agregarArista(2, 5);
+    grafo.agregarArista(4, 6);
+    grafo.agregarArista(5, 7);
+    grafo.agregarArista(6, 8);
+    grafo.agregarArista(7, 9);
+    grafo.agregarArista(8, 3);
+    grafo.agregarArista(9, 2);
+    grafo.agregarArista(8, 10);
+    grafo.agregarArista(9, 11);
+    grafo.agregarArista(6, 12);
+    grafo.agregarArista(7, 13);
+    grafo.agregarArista(12, 14);
+    grafo.agregarArista(13, 15);
+    grafo.agregarArista(14, 8);
+    grafo.agregarArista(15, 9);
+    grafo.agregarArista(14, 16);
+    grafo.agregarArista(15, 17);
+    grafo.agregarArista(16, 18);
+    grafo.agregarArista(17, 19);
+    grafo.agregarArista(18, 20);
+    grafo.agregarArista(19, 21);
+    grafo.agregarArista(12, 22);
+    grafo.agregarArista(13, 23);
+    grafo.agregarArista(22, 24);
+    grafo.agregarArista(23, 25);
+    grafo.agregarArista(24, 14);
+    grafo.agregarArista(25, 15);
+    grafo.agregarArista(24, 18);
+    grafo.agregarArista(25, 19);
+    grafo.agregarArista(26, 28);
     grafo.agregarArista(27, 29);
-    grafo.agregarArista(28, 30); // N -> O
+    grafo.agregarArista(18, 29);
+    grafo.agregarArista(19, 28);
+    grafo.agregarArista(30, 25);
+    grafo.agregarArista(31, 24);
+    grafo.agregarArista(28, 30);
     grafo.agregarArista(29, 31);
-    grafo.agregarArista(30, 43);
-    grafo.agregarArista(31, 42);
-    grafo.agregarArista(43, 33);
-    grafo.agregarArista(42, 32);
-    grafo.agregarArista(26, 32);
-    grafo.agregarArista(27, 33);
+    grafo.agregarArista(30, 32);
+    grafo.agregarArista(31, 33);
     grafo.agregarArista(32, 34);
     grafo.agregarArista(33, 35);
+    grafo.agregarArista(35, 12);
+    grafo.agregarArista(34, 13);
     grafo.agregarArista(34, 36);
     grafo.agregarArista(35, 37);
-    grafo.agregarArista(36, 38);
-    grafo.agregarArista(37, 39);
-
-    grafo.agregarArista(34, 44);
-    grafo.agregarArista(35, 45);
-    grafo.agregarArista(45, 41);
-    grafo.agregarArista(44, 40);
-
-    grafo.agregarArista(42, 44);
-    grafo.agregarArista(43, 45);
-    grafo.agregarArista(30, 40);
-    grafo.agregarArista(31, 41);
+    grafo.agregarArista(5, 36);
+    grafo.agregarArista(4, 37);
+    grafo.agregarArista(40, 38);
+    grafo.agregarArista(41, 39);
+    grafo.agregarArista(43, 85);
+    grafo.agregarArista(42, 84);
+    grafo.agregarArista(85, 40);
+    grafo.agregarArista(84, 41);
+    grafo.agregarArista(37, 43);
+    grafo.agregarArista(36, 42);
+    grafo.agregarArista(38, 44);
+     grafo.agregarArista(44, 46);
     grafo.agregarArista(45, 47);
-    grafo.agregarArista(44, 46);
-    grafo.agregarArista(46, 37);
-    grafo.agregarArista(47, 36);
-    grafo.agregarArista(47, 49);
-    grafo.agregarArista(46, 48);
-    grafo.agregarArista(50, 47);
-    grafo.agregarArista(51, 46);
-    grafo.agregarArista(40, 52);
-    grafo.agregarArista(41, 53);
-    grafo.agregarArista(50, 52);
-    grafo.agregarArista(51, 53);
-    grafo.agregarArista(52, 54);
-    grafo.agregarArista(53, 55);
-    grafo.agregarArista(63, 57);
-    grafo.agregarArista(7, 63);
-    grafo.agregarArista(2, 62);
-    grafo.agregarArista(62, 56);
-    grafo.agregarArista(57, 16);
-    grafo.agregarArista(56, 17);
-    grafo.agregarArista(58, 3);
-    grafo.agregarArista(59, 8);
-    grafo.agregarArista(60, 58);
-    grafo.agregarArista(61, 59);
-    grafo.agregarArista(28, 58);
-    grafo.agregarArista(29, 59);
-    grafo.agregarArista(28, 58);
-    grafo.agregarArista(29, 59);
-    grafo.agregarArista(59, 63);
-    grafo.agregarArista(58, 62);
-    grafo.agregarArista(64, 22);
-    grafo.agregarArista(65, 23);
-    grafo.agregarArista(64, 19);
-    grafo.agregarArista(65, 18);
-    grafo.agregarArista(67, 65);
-    grafo.agregarArista(66, 64);
-    //grafo.agregarArista(67, 61);
-    //grafo.agregarArista(66, 60);
-    grafo.agregarArista(16, 66);
-    grafo.agregarArista(17, 67);
-    //grafo.agregarArista(54, 60);
-    //grafo.agregarArista(55, 61);
-    //grafo.agregarArista(54, 56);
-    //grafo.agregarArista(55, 56);
-     //grafo.agregarArista(56, 57);
-       //conectarRotondaConCalles(grafo);
-    
+    grafo.agregarArista(46, 31);
+    grafo.agregarArista(47, 30);
+     grafo.agregarArista(46, 49);
+    grafo.agregarArista(47, 48);
+    grafo.agregarArista(28, 48);
+    grafo.agregarArista(29, 49);
+     grafo.agregarArista(38, 44);
+    grafo.agregarArista(39, 45);
+    grafo.agregarArista(44, 82);
+    grafo.agregarArista(45, 83);
+   
+
 }
 
 /*void cargarVariables(){
