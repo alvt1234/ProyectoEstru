@@ -8,7 +8,7 @@ public:
     Estado estadoActual;
     SDL_Rect semaforoRect;
     Uint32 tiempoInicio;
-    Uint32 duracionRojo = 5000;  // Duración en milisegundos
+    Uint32 duracionRojo = 7000;  // Duración en milisegundos
     Uint32 duracionAmarillo = 2000;
     Uint32 duracionVerde = 4000;
 

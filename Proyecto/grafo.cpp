@@ -45,7 +45,7 @@ void Grafo::dibujar(SDL_Renderer* renderer) const {
     // Dibujar nodos como círculos
     for (const auto& nodo : nodos) {
         SDL_SetRenderDrawColor(renderer, nodo.color.r, nodo.color.g, nodo.color.b, nodo.color.a);
-        SDL_Rect rect = {nodo.x - 5, nodo.y - 5, 10, 10};  // Nodo de tamaño 10x10
+        SDL_Rect rect = {nodo.x - 5, nodo.y - 5, 15, 15};  // Nodo de tamaño 10x10
         SDL_RenderFillRect(renderer, &rect);
     }
 

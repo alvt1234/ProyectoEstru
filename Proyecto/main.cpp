@@ -15,12 +15,35 @@ SDL_Texture* carTexture = NULL;  // Textura para el carro
 SDL_Rect carRect = {10, 100, 90, 70};  // Posición inicial y tamaño del carro
 std::vector<Carro> carros;
 std::vector<Semaforo> semaforos;
+Uint32 ultimoCarro = 0;  // Temporizador para la generación de carros
+int intervaloGeneracion = 3000;  // Intervalo en milisegundos para generar carros
+int screenWidth = 1920;  // Ancho de la pantalla
+
+SDL_Color generarColorAleatorio() {
+    SDL_Color color;
+    color.r = rand() % 256;
+    //color.g = rand() % 256;
+    color.b = rand() % 256;
+    color.a = 255; // Opacidad total
+    return color;
+}
+
+void generarCarros(int intervalo) {
+    Uint32 tiempoActual = SDL_GetTicks();
+    SDL_Color color = generarColorAleatorio();
+    if (tiempoActual - ultimoCarro > intervalo) {
+        // Crear un nuevo carro en una posición inicial predeterminada
+        carros.push_back(Carro(0, 5, 15, 10, 'H', 2,false,color));  // Carro nuevo
+        carros.push_back(Carro(1430, 910, 15, 10, 'V', 1,false,color));  // Carro nuevo
+        carros.push_back(Carro(1370, 5, 18, 10, 'V', 1,false,color));  // Carro nuevo
+        carros.push_back(Carro(0, 605, 18, 10, 'H', 3,true,color));  // Carro nuevo
+        ultimoCarro = tiempoActual;
+    }
+}
+
 
 void calles();
 void dibujarMapa(botones& boton);
-
-
-
 
 
 // Función para manejar los eventos
@@ -97,7 +120,7 @@ void crearPantalla()
     void calles() {
         SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
         int anchoCalleAncha = 100;   // Calle ancha
-        int anchoCalleEstrecha = 40; // Calle estrecha
+        int anchoCalleEstrecha = 45; // Calle estrecha
         int grosorLinea = 4;         // Grosor de la línea amarilla
         int radioRotonda = 200;      // Radio de la rotonda
         int centroRotondaX = 770, centroRotondaY = 500;  // Centro de la rotonda
@@ -179,17 +202,17 @@ void inicializarSemaforos(){
 }
 
 
-void detectarInterseccionYDecidir(Carro& carro, const Grafo& grafo) {
-    for (const auto& nodo : grafo.getNodos()) {
-        // Detecta si el carro está cerca de un nodo
-        if (std::abs(carro.rect.x - nodo.x) < 5 && std::abs(carro.rect.y - nodo.y) < 5) {
-            carro.girarHaciaArista(grafo);  // Decidir nueva dirección aleatoria
-            break;
+    void detectarInterseccionYDecidir(Carro& carro, const Grafo& grafo) {
+        for (const auto& nodo : grafo.getNodos()) {
+            if (carro.detectarNodo(nodo)) {
+                carro.girarHaciaArista(grafo);
+                break;
+            }
         }
     }
-}
 
-void inicializarCarros() {
+
+    /*void inicializarCarros() {
     carros.push_back(Carro(0, 28, 20, 10));
     carros.push_back(Carro(30, 28, 20, 10));
     carros.push_back(Carro(60, 28, 20, 10));
@@ -202,15 +225,31 @@ void inicializarCarros() {
         Carro(100, 500, 50, 30, 'H', 2),  // Carro en nodo inicial
         Carro(200, 500, 50, 30, 'H', 2)   // Otro carro
     };
+}*/
+void inicializarCarros() {
+    carros.push_back(Carro(0, 5, 15, 10, 'H', 1));  // Carro normal
+    carros.push_back(Carro(30, 5, 15, 10, 'H', 1));  // Carro normal
+    carros.push_back(Carro(60, 5, 15, 10, 'H', 1));  // Carro normal
+    carros.push_back(Carro(120, 5, 20, 10, 'H',1));
+    carros.push_back(Carro(0, 28, 20, 10, 'H', 3, true)); // Carro de emergencia
+    carros.push_back(Carro(30, 28, 20, 10, 'H', 3, true)); // Carro de emergencia
+    carros.push_back(Carro(90, 28, 20, 10, 'H', 3, true)); // Carro de emergencia
 }
 
-void actualizarCarros(Grafo& grafo) {
-    for (auto& carro : carros) {
-        detectarInterseccionYDecidir(carro, grafo);  // Verificar si necesita girar
-        carro.mover();  // Mover el carro
-        carro.dibujar(renderer);  // Dibujar el carro
+void actualizarCarros(const Grafo& grafo, const std::vector<Semaforo>& semaforos) {
+    for (size_t i = 0; i < carros.size(); ++i) {
+        detectarInterseccionYDecidir(carros[i], grafo);  // Verificar si necesita girar
+        carros[i].mover(semaforos,carros);  // Pasar los semáforos para detenerse si es necesario
+        carros[i].dibujar(renderer);  // Dibujar el carro
+
+        // Si el carro sale de la pantalla, eliminarlo del vector
+        if (carros[i].rect.x > screenWidth) {  // getX() debe devolver la posición X del carro
+            carros.erase(carros.begin() + i);
+            --i;  // Ajustar índice tras borrar
+        }
     }
 }
+
 void inicializarGrafo(Grafo& grafo) {
     SDL_Color colorNodo = {255, 0, 0, 255};  // Rojo para las intersecciones
 
@@ -222,22 +261,22 @@ void inicializarGrafo(Grafo& grafo) {
         {165, 385}, {185, 405}, {0, 385}, {0, 405}, {630, 385}, {650, 405},
         {400, 385}, {380, 405}, {0, 455}, {0, 475}, {185, 455}, {165, 475},
         {380, 455}, {400, 475}, {725, 455}, {745, 475}, {725, 255}, {745, 235},
-        {725, 5}, {745, 28}, {770, 455}, {790, 475}, {770, 255}, {790, 235},
-        {790, 5}, {770, 28}, {770, 515}, {790, 535}, {400, 515}, {380, 535},
+        {725, 5}, {745, 28}, {780, 455}, {800, 475}, {780, 255}, {800, 235},
+        {800, 5}, {780, 28}, {780, 515}, {800, 535}, {400, 515}, {380, 535},
         {185, 535}, {165, 515}, {295, 605}, {315, 625}, {295, 805}, {315, 825},
         {180, 805}, {160, 825}, {0, 805}, {0, 825}, {160, 1000}, {180, 1000},
         {295, 910}, {315, 890}, {295, 1000}, {315, 1000}, {660, 605}, {640, 625},
         {640, 805}, {660, 825}, {640, 910}, {660, 890}, {640, 1000}, {660, 1000},
-        {725, 805}, {745, 825}, {725, 890}, {745, 910}, {770, 775}, {790, 755},
-        {770, 805}, {790, 825}, {770, 890}, {790, 910}, {900, 515}, {920, 535},
-        {790, 135}, {770, 155}, {900, 135}, {920, 155}, {900, 5}, {920, 28},
+        {725, 805}, {745, 825}, {725, 890}, {745, 910}, {780, 775}, {800, 755},
+        {780, 805}, {800, 825}, {780, 890}, {800, 910}, {900, 515}, {920, 535},
+        {800, 135}, {780, 155}, {900, 135}, {920, 155}, {900, 5}, {920, 28},
         {900, 755}, {920, 775}, {920, 890}, {900, 910}, {1350, 28}, {1370, 5},
-        {1350, 135}, {1370, 155}, {1085, 135}, {1105, 155}, {1105, 515}, {1085, 535},
-        {1270, 515}, {1250, 535}, {1370, 515}, {1350, 535}, {1085, 755}, {1105, 775},
-        {1250, 755}, {1270, 775}, {1350, 755}, {1370, 775}, {900, 1000}, {920, 1000},
-        {1085, 890}, {1105, 910}, {1370, 890}, {1350, 910}, {1400, 890}, {1420, 910},
-        {1400, 755}, {1420, 775}, {1400, 515}, {1420, 535}, {1400, 135}, {1420, 155}, 
-        {1400, 5}, {1420, 5}, {0,535}, {0,515}
+        {1350, 135}, {1370, 155}, {1080, 135}, {1100, 155}, {1100, 515}, {1080, 535},
+        {1250, 515}, {1230, 535}, {1370, 515}, {1350, 535}, {1080, 755}, {1100, 775},
+        {1230, 755}, {1250, 775}, {1350, 755}, {1370, 775}, {900, 1000}, {920, 1000},
+        {1085, 890}, {1105, 910}, {1370, 890}, {1350, 910}, {1410, 890}, {1430, 910},
+        {1410, 755}, {1430, 775}, {1410, 515}, {1430, 535}, {1410, 135}, {1430, 155}, 
+        {1410, 40}, {1430, 5}, {0,535}, {0,515}
     };
 
     // Agregar los nodos al grafo
@@ -249,22 +288,22 @@ void inicializarGrafo(Grafo& grafo) {
     std::vector<std::pair<int, int>> aristas = {
        {124, 126}, {125, 127}, {122, 124}, {123, 125}, {124, 96}, {125, 97},
         {104, 122}, {105, 123}, {120, 122}, {121, 123}, {120, 110}, {121, 111},
-        {118, 120}, {119, 121}, {116, 118}, {117, 119}, {110, 117}, {111, 116},
+        {118, 120}, {119, 121}, {116, 118}, {117, 119}, {110, 117}, 
         {92, 114}, {93, 115}, {115, 117}, {114, 116}, {113, 92}, {112, 93},
         {110, 108}, {111, 109}, {105, 110}, {104, 111}, {103, 108}, {102, 109},
         {108, 106}, {109, 107}, {106, 90}, {107, 91}, {100, 107}, {101, 106},
         {102, 104}, {103, 105}, {101, 103}, {100, 102}, {97, 104}, {96, 105},
-        {99, 100}, {98, 101}, {82, 100}, {83, 101}, {98, 86}, {99, 87},
+        {99, 100}, {98, 101}, {82, 100}, {83, 103}, {98, 86}, {99, 87},
         {96, 98}, {97, 99}, {94, 96}, {95, 97}, {88, 95}, {89, 94}, {90, 82},
-        {91, 83}, {91, 76}, {90, 77}, {93, 90}, {92, 91}, {82, 86}, {83, 87},
+         {91, 76}, {90, 77}, {93, 90}, {92, 91}, {82, 86}, {83, 87},
         {43, 89}, {42, 88}, {87, 85}, {86, 84}, {86, 88}, {87, 89}, {78, 72},
         {79, 73}, {78, 80}, {79, 81}, {74, 80}, {75, 81}, {44, 76}, {45, 77},
         {76, 78}, {77, 79}, {69, 74}, {68, 75}, {72, 66}, {73, 67}, {72, 32},
         {73, 33}, {74, 72}, {75, 73}, {68, 70}, {69, 71}, {66, 68}, {67, 69},
         {60, 68}, {61, 69}, {65, 66}, {64, 67}, {66, 52}, {67, 53}, {50, 64},
         {51, 65}, {60, 62}, {61, 63}, {53, 61}, {52, 60}, {50, 52}, {51, 53},
-        {53, 55}, {52, 54}, {54, 56}, {55, 57}, {59, 54}, {58, 55}, {0, 1},
-        {1, 3}, {3, 4}, {2, 5}, {4, 6}, {5, 7}, {6, 8}, {7, 9}, {8, 3}, {9, 2},
+        {53, 55}, {52, 54}, {54, 56}, {55, 57}, {59, 54}, {58, 55}, {0, 2},
+        {1, 3}, {3, 4}, {2, 5}, {4, 6}, {5, 7}, {6, 8}, {7, 9}, {8, 3}, 
         {8, 10}, {9, 11}, {6, 12}, {7, 13}, {12, 14}, {13, 15}, {14, 8}, {15, 9},
         {14, 16}, {15, 17}, {16, 18}, {17, 19}, {18, 20}, {19, 21}, {12, 22},
         {13, 23}, {22, 24}, {23, 25}, {24, 14}, {25, 15}, {24, 18}, {25, 19},
@@ -295,22 +334,20 @@ int main(int argc, char *args[]) {
     SDL_Event e;
 
     while (corriendo) {
-        eventos(e, corriendo, boton, renderer);
+    eventos(e, corriendo, boton, renderer);
 
-        SDL_SetRenderDrawColor(renderer, 100, 149, 237, 255); // Azul cornflower
+    SDL_SetRenderDrawColor(renderer, 100, 149, 237, 255); // Azul cornflower
+    SDL_RenderClear(renderer);
 
-        SDL_RenderClear(renderer);
-        grafo.dibujar(renderer);
-        
+    grafo.dibujar(renderer);  // Dibuja el grafo
+    dibujarMapa(boton);       // Dibuja el mapa
 
-        dibujarMapa(boton);  // Dibuja el mapa
-       
-        actualizarCarros(grafo);  // Mueve y dibuja todos los carros
+    generarCarros(intervaloGeneracion);  // Generar nuevos carros según el intervalo
+    actualizarCarros(grafo, semaforos);  // Actualizar y dibujar los carros
 
-
-        SDL_RenderPresent(renderer);
-        SDL_Delay(16);  // Aproximadamente 60 FPS
-    }
+    SDL_RenderPresent(renderer);
+    SDL_Delay(16);  // Aproximadamente 60 FPS
+}
 
     SDL_Quit();
     return 0;
