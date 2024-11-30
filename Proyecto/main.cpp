@@ -6,7 +6,7 @@
 #include <vector>
 #include "Semaforo.hpp" 
 #include "Carro.hpp"
-// Crear variables globales
+
 SDL_Surface * screen;  // espacio en memoria de la pantalla
 SDL_Surface * imagen;  // espacio en memoria de la imagen
 SDL_Window* window = NULL;
@@ -14,71 +14,14 @@ SDL_Renderer* renderer = NULL;
 SDL_Texture* carTexture = NULL;  // Textura para el carro
 SDL_Rect carRect = {10, 100, 90, 70};  // Posición inicial y tamaño del carro
 std::vector<Carro> carros;
-Grafo grafo;  // Grafo que representa las intersecciones y las calles
 std::vector<Semaforo> semaforos;
 
-// Funciones auxiliares
 void calles();
-//void edificios();
 void dibujarMapa(botones& boton);
 
 
-void cargarImg() {
-    imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
-    //imagen = IMG_Load("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
-    if (imagen == NULL) {
-        fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
-        exit(1);
-    }
-
-    // Crear una textura desde la superficie cargada
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imagen);
-    SDL_FreeSurface(imagen);  // Liberar la superficie
-    if (texture == NULL) {
-        fprintf(stderr, "No se pudo crear la textura: %s\n", SDL_GetError());
-        exit(1);
-    }
-
-    // Renderizar la textura en la pantalla
-    SDL_Rect destino = {0, 0, 1550, 1080};  // Área donde se dibujará la imagen
-    SDL_RenderCopy(renderer, texture, NULL, &destino);
-
-    SDL_DestroyTexture(texture);  // Liberar la textura después de usarla
-}
 
 
-void actualizarSemaforos() {
-    for (auto& semaforo : semaforos) {
-        semaforo.actualizarEstado();
-    }
-}
-
-void dibujarSemaforos(SDL_Renderer* renderer) {
-    for (const auto& semaforo : semaforos) {
-        semaforo.dibujar(renderer);
-    }
-}
-
-void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
- {
-   // SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Color de la rotonda (gris oscuro)
-    for (int w = 0; w < radio * 2; w++) {
-        for (int h = 0; h < radio * 2; h++) {
-            int dx = radio - w; // distancia horizontal al centro
-            int dy = radio - h; // distancia vertical al centro
-            if ((dx * dx + dy * dy) <= (radio * radio)) {
-                SDL_RenderDrawPoint(renderer, centroX + dx, centroY + dy);
-            }
-        }
-    }
-  
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Color de las líneas amarillas
-    for (int i = 0; i < 360; i += 45) {
-        int x = centroX + (radio - 5) * cos(i * M_PI / 180);
-        int y = centroY + (radio - 5) * sin(i * M_PI / 180);
-        SDL_RenderDrawPoint(renderer, x, y);
-    }
-}
 
 // Función para manejar los eventos
 void eventos(SDL_Event& e, bool& corriendo, botones& boton, SDL_Renderer* renderer) 
@@ -120,29 +63,23 @@ void crearPantalla()
     }
 }
 
-// Función para cargar la imagen del carro
-void ponerCarro() {
-    SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
-    //SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
-    if (!carSurface) {
-        fprintf(stderr, "Error al cargar la imagen del carro: %s\n", SDL_GetError());
-        exit(1);
-    }
-
-    carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-    SDL_FreeSurface(carSurface);
-    if (!carTexture) {
-        fprintf(stderr, "Error al crear la textura del carro: %s\n", SDL_GetError());
-        exit(1);
-    }
-}
-
    void dibujarCarro() {
     SDL_SetRenderDrawColor(renderer, 128, 0, 128, 255); // Color morado
     SDL_RenderFillRect(renderer, &carRect);
-}
+    }
 
 
+    void actualizarSemaforos() {
+    for (auto& semaforo : semaforos) {
+        semaforo.actualizarEstado();
+    }
+    }
+
+    void dibujarSemaforos(SDL_Renderer* renderer) {
+    for (const auto& semaforo : semaforos) {
+        semaforo.dibujar(renderer);
+    }
+    }
     // Función para dibujar el mapa (calles, edificios, etc.)
     void dibujarMapa(botones& boton) {
         SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
@@ -151,14 +88,11 @@ void ponerCarro() {
         dibujarSemaforos(renderer);  // Dibuja los semáforos
         if (boton.startClickeado) {
             dibujarCarro();
-            //grafo.dibujar();
         }
 
         boton.dibujarBotones(renderer);
         
     }
-
-
 
     void calles() {
         SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
@@ -192,16 +126,10 @@ void ponerCarro() {
         //primer cuadrante
         dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 550, anchoCalleEstrecha, true); // calle acamparito Horizontal
         dibujarCalleRecta(175 - anchoCalleEstrecha / 5, 230, anchoCalleEstrecha, 220, false);//calle #1 vertical Villa
-        
-        semaforos.push_back(Semaforo(210, 270)); //no tocar
-
         dibujarCalleRecta(0, 400 - anchoCalleEstrecha / 2, 670, anchoCalleEstrecha, true); //horizonta pedro
         dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false); //calle #3 vertical arriba bajada
-        semaforos.push_back(Semaforo(690, 390));  // no tocra
-
         dibujarCalleRecta(0, 100 - anchoCalleEstrecha / 2, 647, anchoCalleEstrecha, true);//calle #2 horizontal curacao
         dibujarCalleRecta(400 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 450, false); //calle #2 vertical Rosi
-        //----
         dibujarCalleRecta(770 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false);  // Calle principal3 estrecha
         dibujarCalleRecta(800, 750 - anchoCalleEstrecha / 20, 650, anchoCalleEstrecha, true); //calle alli
         dibujarCalleRecta(1350 - anchoCalleAncha / 150, 0, anchoCalleAncha, 1920, false); // vertical doble segunda
@@ -231,7 +159,9 @@ void ponerCarro() {
 
     
 void inicializarSemaforos(){
- semaforos.push_back(Semaforo(425, 120)); // Intersección Curacao y Rosi
+        semaforos.push_back(Semaforo(210, 270)); //no tocar
+        semaforos.push_back(Semaforo(690, 390));  // no tocra
+        semaforos.push_back(Semaforo(425, 120)); // Intersección Curacao y Rosi
         semaforos.push_back(Semaforo(425, 320)); // Intersección Rosi y Principal 3
         semaforos.push_back(Semaforo(870, 445)); // Intersección Principal 3 y Sofia
         semaforos.push_back(Semaforo(875, 788)); // Intersección Alli y Roma
@@ -249,49 +179,6 @@ void inicializarSemaforos(){
 }
 
 
-
-
-
-int escalaX(int x) {
-    return (x - 100) * 1280 / (300 - 100);  
-}
-
-int escalaY(int y) {
-    return (y - 65) * 720 / (300 - 100);  
-}
-
-
-void moverCarro() {
-    static int nodoActual = 0;  // Nodo actual en el que está el carro
-    static int nodoSiguiente = 1;  // Nodo al que nos movemos
-
-    // Obtener las coordenadas escaladas del nodo actual y el siguiente
-    int xActual = grafo.getNodo(nodoActual).x;
-    int yActual = grafo.getNodo(nodoActual).y;
-    int xSiguiente = grafo.getNodo(nodoSiguiente).x;
-    int ySiguiente = grafo.getNodo(nodoSiguiente).y;
-
-    // Mover el carro hacia el siguiente nodo
- if (carRect.x < xSiguiente) {
-        carRect.x += 1;  // Mover a la derecha
-    } else if (carRect.x > xSiguiente) {
-        carRect.x -= 1;  // Mover a la izquierda
-    }
-
-    // Mover el carro en el eje 
-    if (carRect.y < ySiguiente) {
-        carRect.y += 2;  // Mover hacia abajo
-    } else if (carRect.y > ySiguiente) {
-        carRect.y -= 2;  // Mover hacia arriba
-    }
-
-    // Si el carro llega al nodo siguiente (tanto en X como en Y)
-    if (carRect.x == xSiguiente && carRect.y == ySiguiente) {
-        nodoActual = nodoSiguiente;
-        nodoSiguiente = (nodoSiguiente + 1) % grafo.getCantidadNodos();  
-    }
-   
-}
 void detectarInterseccionYDecidir(Carro& carro, const Grafo& grafo) {
     for (const auto& nodo : grafo.getNodos()) {
         // Detecta si el carro está cerca de un nodo
@@ -303,8 +190,6 @@ void detectarInterseccionYDecidir(Carro& carro, const Grafo& grafo) {
 }
 
 void inicializarCarros() {
-    // Ejemplo: Crear 3 carros con diferentes posiciones iniciales
-  
     carros.push_back(Carro(0, 28, 20, 10));
     carros.push_back(Carro(30, 28, 20, 10));
     carros.push_back(Carro(60, 28, 20, 10));
@@ -327,7 +212,6 @@ void actualizarCarros(Grafo& grafo) {
     }
 }
 void inicializarGrafo(Grafo& grafo) {
-    // Colores para los nodos (puedes cambiarlos si quieres visualizarlos diferentes)
     SDL_Color colorNodo = {255, 0, 0, 255};  // Rojo para las intersecciones
 
     // Lista de coordenadas de los nodos (x, y)
