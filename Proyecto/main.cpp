@@ -84,7 +84,6 @@ void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
             }
         }
     }
-
   
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Color de las líneas amarillas
     for (int i = 0; i < 360; i += 45) {
@@ -93,10 +92,6 @@ void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
         SDL_RenderDrawPoint(renderer, x, y);
     }
 }
-
-
-
-
 
 // Función para manejar los eventos
 void eventos(SDL_Event& e, bool& corriendo, botones& boton, SDL_Renderer* renderer) 
@@ -164,21 +159,13 @@ void ponerCarro() {
     // Función para dibujar el mapa (calles, edificios, etc.)
     void dibujarMapa(botones& boton) {
         SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
-        //SDL_RenderClear(renderer);
-
-        // Dibujar el mapa cargado (imagen de fondo)
-        //cargarImg();
-        // Dibujar calles y edificios (si es necesario)
         calles();
-
-        // Dibujar el carro si está activo
         if (boton.startClickeado) {
             dibujarCarro();
             //grafo.dibujar();
         }
 
         boton.dibujarBotones(renderer);
-        //SDL_RenderPresent(renderer);
     }
 
 
@@ -242,20 +229,6 @@ void ponerCarro() {
 
         // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
         dibujarCalleRecta(770 - anchoCalleAncha / 2, 0, anchoCalleAncha, 1100, false);  // Calle doble carril vertical */
-      
-    // Dibujar la rotonda
-    /*SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    dibujarCirculo(renderer, 770, 500, 200);
-
-    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);//circulo negro mas peque
-    dibujarCirculo(renderer, 770, 500, 198);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    dibujarCirculo(renderer, 770, 500, 150);
-    SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);  //circulo verde de fondo
-    SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
-    dibujarCirculo(renderer, 770, 500, 148);
-    SDL_SetRenderDrawColor(renderer, 60, 179, 113, 255);
-    dibujarCirculo(renderer, 770, 500, 100);*/
  
     }
 
@@ -312,34 +285,6 @@ void detectarInterseccionYDecidir(Carro& carro, const Grafo& grafo) {
             break;
         }
     }
-}
-void agregarNodosRotonda(Grafo& grafo) {
-    SDL_Color colorNodo = {255, 255, 0, 255};  // Amarillo para los nodos de la rotonda
-    int centroX = 770;  // Coordenada X del centro de la rotonda
-    int centroY = 500;  // Coordenada Y del centro de la rotonda
-    int radio = 150;    // Radio de la rotonda
-
-    // Crear 8 nodos distribuidos uniformemente en la rotonda
-    for (int i = 0; i < 8; ++i) {
-        double angulo = i * (2 * M_PI / 8);  // Dividir el círculo en 8 partes
-        int x = static_cast<int>(centroX + radio * cos(angulo));  // Coordenada X
-        int y = static_cast<int>(centroY + radio * sin(angulo));  // Coordenada Y
-        grafo.agregarNodo(x, y, colorNodo);  // Agregar el nodo al grafo
-    }
-
-    // Conectar los nodos de la rotonda en un círculo
-    int inicioRotonda = grafo.getCantidadNodos() - 8;  // Índice del primer nodo de la rotonda
-    for (int i = 0; i < 8; ++i) {
-        grafo.agregarArista(inicioRotonda + i, inicioRotonda + (i + 1) % 8);
-    }
-}
-
-void conectarRotondaConCalles(Grafo& grafo) {
-    int inicioRotonda = grafo.getCantidadNodos() - 8;  // Índice del primer nodo de la rotonda
-
-    // Conectar entradas/salidas de la rotonda con las calles
-    grafo.agregarArista(54, inicioRotonda);  // Nodo B -> Entrada de la rotonda
-    grafo.agregarArista(inicioRotonda + 4, 3);  // Salida de la rotonda -> Nodo D
 }
 
 void inicializarCarros() {
