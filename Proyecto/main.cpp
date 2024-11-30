@@ -33,10 +33,10 @@ void generarCarros(int intervalo) {
     SDL_Color color = generarColorAleatorio();
     if (tiempoActual - ultimoCarro > intervalo) {
         // Crear un nuevo carro en una posición inicial predeterminada
-        carros.push_back(Carro(0, 5, 15, 10, 'H', 2,false,color));  // Carro nuevo
-        carros.push_back(Carro(1430, 910, 15, 10, 'V', 1,false,color));  // Carro nuevo
-        carros.push_back(Carro(1370, 5, 18, 10, 'V', 1,false,color));  // Carro nuevo
-        carros.push_back(Carro(0, 605, 18, 10, 'H', 3,true,color));  // Carro nuevo
+        carros.push_back(Carro(0, 5, 15, 10, 'H', 4,false,color));  // Carro nuevo
+        carros.push_back(Carro(1430, 910, 15, 10, 'V', 3,false,color));  // Carro nuevo
+        carros.push_back(Carro(1370, 5, 18, 10, 'V', 4,false,color));  // Carro nuevo
+        carros.push_back(Carro(0, 605, 18, 10, 'H', 5,true,color));  // Carro nuevo
         ultimoCarro = tiempoActual;
     }
 }
@@ -116,7 +116,37 @@ void crearPantalla()
         boton.dibujarBotones(renderer);
         
     }
+    void dibujarFlecha(SDL_Renderer* renderer, int x, int y, int longitud, int grosor, bool horizontal, bool direccionPositiva) {
+    // Línea principal
+    if (horizontal) {
+        SDL_RenderDrawLine(renderer, x, y, x + (direccionPositiva ? longitud : -longitud), y);
+        // Punta de la flecha
+        int puntaX = x + (direccionPositiva ? longitud : -longitud);
+        SDL_RenderDrawLine(renderer, puntaX, y, puntaX - (direccionPositiva ? grosor : -grosor), y - grosor);
+        SDL_RenderDrawLine(renderer, puntaX, y, puntaX - (direccionPositiva ? grosor : -grosor), y + grosor);
+    } else {
+        SDL_RenderDrawLine(renderer, x, y, x, y + (direccionPositiva ? longitud : -longitud));
+        // Punta de la flecha
+        int puntaY = y + (direccionPositiva ? longitud : -longitud);
+        SDL_RenderDrawLine(renderer, x, puntaY, x - grosor, puntaY - (direccionPositiva ? grosor : -grosor));
+        SDL_RenderDrawLine(renderer, x, puntaY, x + grosor, puntaY - (direccionPositiva ? grosor : -grosor));
+    }
+}
 
+    void colocarFlechas(){
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        int distancia=150,contar=30;
+        for (int i = 0; i < 5; i++)
+        {
+          dibujarFlecha(renderer, contar, 470, 40, 8, true, true);
+          dibujarFlecha(renderer, contar+30, 525, 40, 8, true, false);
+          dibujarFlecha(renderer, 790, contar+60, 40, 8, false, true);
+          dibujarFlecha(renderer, 745, contar+150, 40, 8, false, false);
+          contar+=distancia;
+        }
+        
+        
+    }
     void calles() {
         SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);  // Color gris oscuro
         int anchoCalleAncha = 100;   // Calle ancha
@@ -134,6 +164,7 @@ void crearPantalla()
             if (horizontal) {
                 for (int i = 1; i < grosorLinea; i++) {
                     SDL_RenderDrawLine(renderer, x, y + h / 2 - i, x + w, y + h / 2 - i);  // Línea amarilla
+                       
                 }
             } else {
                 for (int i = 1; i < grosorLinea; i++) {
@@ -177,14 +208,15 @@ void crearPantalla()
         // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
         dibujarCalleRecta(770 - anchoCalleAncha / 2, 0, anchoCalleAncha, 1100, false);  // Calle doble carril vertical */
         // Semáforos 
+        colocarFlechas();
        
 }
 
     
 void inicializarSemaforos(){
         semaforos.push_back(Semaforo(210, 270)); //no tocar
-        semaforos.push_back(Semaforo(690, 390));  // no tocra
-        semaforos.push_back(Semaforo(425, 120)); // Intersección Curacao y Rosi
+        semaforos.push_back(Semaforo(735, 500));  // no tocra
+        semaforos.push_back(Semaforo(357, 124)); // Intersección Curacao y Rosi
         semaforos.push_back(Semaforo(425, 320)); // Intersección Rosi y Principal 3
         semaforos.push_back(Semaforo(870, 445)); // Intersección Principal 3 y Sofia
         semaforos.push_back(Semaforo(875, 788)); // Intersección Alli y Roma
@@ -227,13 +259,13 @@ void inicializarSemaforos(){
     };
 }*/
 void inicializarCarros() {
-    carros.push_back(Carro(0, 5, 15, 10, 'H', 1));  // Carro normal
+    /*carros.push_back(Carro(0, 5, 15, 10, 'H', 1));  // Carro normal
     carros.push_back(Carro(30, 5, 15, 10, 'H', 1));  // Carro normal
     carros.push_back(Carro(60, 5, 15, 10, 'H', 1));  // Carro normal
     carros.push_back(Carro(120, 5, 20, 10, 'H',1));
     carros.push_back(Carro(0, 28, 20, 10, 'H', 3, true)); // Carro de emergencia
     carros.push_back(Carro(30, 28, 20, 10, 'H', 3, true)); // Carro de emergencia
-    carros.push_back(Carro(90, 28, 20, 10, 'H', 3, true)); // Carro de emergencia
+    carros.push_back(Carro(90, 28, 20, 10, 'H', 3, true)); // Carro de emergencia*/
 }
 
 void actualizarCarros(const Grafo& grafo, const std::vector<Semaforo>& semaforos) {
@@ -336,7 +368,8 @@ int main(int argc, char *args[]) {
     while (corriendo) {
     eventos(e, corriendo, boton, renderer);
 
-    SDL_SetRenderDrawColor(renderer, 100, 149, 237, 255); // Azul cornflower
+    //SDL_SetRenderDrawColor(renderer, 112, 128, 144, 255); // Gris azulado (Slate Gray) PARA LA LLUVIA O NEBLINA
+     SDL_SetRenderDrawColor(renderer, 100, 149, 237, 255); // Azul cornflower
     SDL_RenderClear(renderer);
 
     grafo.dibujar(renderer);  // Dibuja el grafo

@@ -5,6 +5,7 @@
 #include <random>  // Para la generación de números aleatorios
 #include "grafo.hpp"
 
+
 class Carro {
 public:
     SDL_Rect rect;

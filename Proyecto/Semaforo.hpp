@@ -13,7 +13,7 @@ public:
     Uint32 duracionVerde = 4000;
 
     Semaforo(int x, int y) {
-        semaforoRect = {x, y, 20, 60};
+        semaforoRect = {x, y, 20, 30};
         estadoActual = ROJO;
         tiempoInicio = SDL_GetTicks();
     }
