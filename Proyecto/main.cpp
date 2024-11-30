@@ -226,7 +226,12 @@ void ponerCarro() {
         // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
         dibujarCalleRecta(770 - anchoCalleAncha / 2, 0, anchoCalleAncha, 1100, false);  // Calle doble carril vertical */
         // Semáforos 
-        semaforos.push_back(Semaforo(425, 120)); // Intersección Curacao y Rosi
+       
+}
+
+    
+void inicializarSemaforos(){
+ semaforos.push_back(Semaforo(425, 120)); // Intersección Curacao y Rosi
         semaforos.push_back(Semaforo(425, 320)); // Intersección Rosi y Principal 3
         semaforos.push_back(Semaforo(870, 445)); // Intersección Principal 3 y Sofia
         semaforos.push_back(Semaforo(875, 788)); // Intersección Alli y Roma
@@ -242,9 +247,6 @@ void ponerCarro() {
         semaforos.push_back(Semaforo(330, 920)); // Intersección Real y Comercio
         semaforos.push_back(Semaforo(1200, 920)); // Intersección Roma y Principal 3*/
 }
-
-    
-
 
 
 
@@ -395,45 +397,6 @@ void inicializarGrafo(Grafo& grafo) {
     }
 }
 
-/*void cargarVariables(){
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        fprintf(stderr, "No se pudo inicializar SDL: %s\n", SDL_GetError());
-        exit(1);
-    }
-
-    screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE);
-    if (screen == NULL) {
-        fprintf(stderr, "No se pudo crear la ventana: %s\n", SDL_GetError());
-        exit(1);
-    }
-
-    imagen = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
-    if (imagen == NULL){
-        fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
-        exit(1);
-    }
-}
-
-void ponerImagen() {
-    float aspectRatio = (float)imagen->w / imagen->h;
-    int newWidth = screen->w;
-    int newHeight = screen->h;
-
-    if (aspectRatio > 1) {
-        newHeight = screen->w / aspectRatio;
-    } else {
-        newWidth = screen->h * aspectRatio;
-    }
-
-    SDL_Rect destRect = { (screen->w - newWidth) / 2, (screen->h - newHeight) / 2, newWidth, newHeight };
-
-    if (SDL_BlitScaled(imagen, NULL, screen, &destRect) < 0) {
-        fprintf(stderr, "Error al blitear la imagen: %s\n", SDL_GetError());
-    }
-
-    SDL_Flip(screen);  // Para actualizar la pantalla
-}
-*/
 
 
 int main(int argc, char *args[]) {
@@ -441,6 +404,7 @@ int main(int argc, char *args[]) {
     crearPantalla();
     Grafo grafo;
     inicializarGrafo(grafo);
+    inicializarSemaforos();
     inicializarCarros();  // Inicializa varios carros
     botones boton(renderer);
     bool corriendo = true;
@@ -449,7 +413,8 @@ int main(int argc, char *args[]) {
     while (corriendo) {
         eventos(e, corriendo, boton, renderer);
 
-        SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Color de fondo del mapa
+        SDL_SetRenderDrawColor(renderer, 100, 149, 237, 255); // Azul cornflower
+
         SDL_RenderClear(renderer);
         grafo.dibujar(renderer);
         
