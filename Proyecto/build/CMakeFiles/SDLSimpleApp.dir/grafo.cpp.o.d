@@ -1,7 +1,7 @@
 CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.cpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.cpp \
  /usr/include/stdc-predef.h \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
  /usr/include/c++/14/vector /usr/include/c++/14/bits/requires_hosted.h \
  /usr/include/c++/14/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \

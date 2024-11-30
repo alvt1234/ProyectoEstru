@@ -15,15 +15,17 @@ SDL_Texture* carTexture = NULL;  // Textura para el carro
 SDL_Rect carRect = {10, 100, 90, 70};  // Posición inicial y tamaño del carro
 std::vector<Carro> carros;
 Grafo grafo;  // Grafo que representa las intersecciones y las calles
+std::vector<Semaforo> semaforos;
 
 // Funciones auxiliares
 void calles();
 //void edificios();
 void dibujarMapa(botones& boton);
 
+
 void cargarImg() {
-    //imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
-    imagen = IMG_Load("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    imagen = IMG_Load("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
+    //imagen = IMG_Load("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/map.bmp");
     if (imagen == NULL) {
         fprintf(stderr, "No se pudo cargar la imagen: %s\n", SDL_GetError());
         exit(1);
@@ -44,22 +46,8 @@ void cargarImg() {
     SDL_DestroyTexture(texture);  // Liberar la textura después de usarla
 }
 
-//std::vector<Semaforo> semaforos;
 
-/*void inicializarSemaforos() { // hace las calles y despues pongo los semaforos 
-
-    std::vector<std::pair<int, int>> posicionesPrincipales = {
-        {100, 100}, {100, 300}, {100, 500},
-        {300, 100}, {300, 300}, {300, 500},
-        {500, 100}, {500, 300}, {500, 500}
-    };
-
-    for (const auto& pos : posicionesPrincipales) {
-        semaforos.emplace_back(pos.first, pos.second);
-    }
-}
-*/
-/*void actualizarSemaforos() {
+void actualizarSemaforos() {
     for (auto& semaforo : semaforos) {
         semaforo.actualizarEstado();
     }
@@ -70,7 +58,6 @@ void dibujarSemaforos(SDL_Renderer* renderer) {
         semaforo.dibujar(renderer);
     }
 }
-*/
 
 void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio)
  {
@@ -135,8 +122,8 @@ void crearPantalla()
 
 // Función para cargar la imagen del carro
 void ponerCarro() {
-    //SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
-    SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
+    SDL_Surface* carSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
+    //SDL_Surface* carSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
     if (!carSurface) {
         fprintf(stderr, "Error al cargar la imagen del carro: %s\n", SDL_GetError());
         exit(1);
@@ -160,12 +147,15 @@ void ponerCarro() {
     void dibujarMapa(botones& boton) {
         SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
         calles();
+        actualizarSemaforos();  // Actualiza el estado de los semáforos
+        dibujarSemaforos(renderer);  // Dibuja los semáforos
         if (boton.startClickeado) {
             dibujarCarro();
             //grafo.dibujar();
         }
 
         boton.dibujarBotones(renderer);
+        
     }
 
 
@@ -177,6 +167,7 @@ void ponerCarro() {
         int grosorLinea = 4;         // Grosor de la línea amarilla
         int radioRotonda = 200;      // Radio de la rotonda
         int centroRotondaX = 770, centroRotondaY = 500;  // Centro de la rotonda
+        
 
         // Dibujar calles rectas
         auto dibujarCalleRecta = [&](int x, int y, int w, int h, bool horizontal) {
@@ -201,8 +192,13 @@ void ponerCarro() {
         //primer cuadrante
         dibujarCalleRecta(200, 250 - anchoCalleEstrecha / 2, 550, anchoCalleEstrecha, true); // calle acamparito Horizontal
         dibujarCalleRecta(175 - anchoCalleEstrecha / 5, 230, anchoCalleEstrecha, 220, false);//calle #1 vertical Villa
+        
+        semaforos.push_back(Semaforo(210, 270)); //no tocar
+
         dibujarCalleRecta(0, 400 - anchoCalleEstrecha / 2, 670, anchoCalleEstrecha, true); //horizonta pedro
         dibujarCalleRecta(650 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 400, false); //calle #3 vertical arriba bajada
+        semaforos.push_back(Semaforo(690, 390));  // no tocra
+
         dibujarCalleRecta(0, 100 - anchoCalleEstrecha / 2, 647, anchoCalleEstrecha, true);//calle #2 horizontal curacao
         dibujarCalleRecta(400 - anchoCalleEstrecha / 2, 0, anchoCalleEstrecha, 450, false); //calle #2 vertical Rosi
         //----
@@ -229,8 +225,25 @@ void ponerCarro() {
 
         // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
         dibujarCalleRecta(770 - anchoCalleAncha / 2, 0, anchoCalleAncha, 1100, false);  // Calle doble carril vertical */
- 
-    }
+        // Semáforos 
+        semaforos.push_back(Semaforo(425, 120)); // Intersección Curacao y Rosi
+        semaforos.push_back(Semaforo(425, 320)); // Intersección Rosi y Principal 3
+        semaforos.push_back(Semaforo(870, 445)); // Intersección Principal 3 y Sofia
+        semaforos.push_back(Semaforo(875, 788)); // Intersección Alli y Roma
+        //semaforos.push_back(Semaforo(1350, 620)); // Intersección Doble carril segunda y San Marcos
+        semaforos.push_back(Semaforo(945, 43)); // Intersección Horizontal arriba principal y Principal 3
+        semaforos.push_back(Semaforo(1120, 545)); // Intersección Barrial y Guamilito
+        semaforos.push_back(Semaforo(1330, 445)); //no se cual era :()
+        semaforos.push_back(Semaforo(605, 640)); // Intersección Comercio y San Marcos
+        //semaforos.push_back(Semaforo(0, 620)); // Intersección Comercio y San Marcos
+        semaforos.push_back(Semaforo(325, 740)); // Intersección Morazan y San Marcos
+        semaforos.push_back(Semaforo(120, 840)); // Intersección Constantinopla y Rosario
+        //semaforos.push_back(Semaforo(170, 820)); // Intersección Rosario y Real
+        semaforos.push_back(Semaforo(330, 920)); // Intersección Real y Comercio
+        semaforos.push_back(Semaforo(1200, 920)); // Intersección Roma y Principal 3*/
+}
+
+    
 
 
 
@@ -438,10 +451,13 @@ int main(int argc, char *args[]) {
 
         SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Color de fondo del mapa
         SDL_RenderClear(renderer);
-    grafo.dibujar(renderer);
+        grafo.dibujar(renderer);
+        
 
         dibujarMapa(boton);  // Dibuja el mapa
+       
         actualizarCarros(grafo);  // Mueve y dibuja todos los carros
+
 
         SDL_RenderPresent(renderer);
         SDL_Delay(16);  // Aproximadamente 60 FPS
