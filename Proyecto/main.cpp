@@ -213,7 +213,7 @@ void crearPantalla()
         dibujarCalleRecta(170 - anchoCalleEstrecha / 2, 820, anchoCalleEstrecha, 300, false);//calle vertical rosario
         dibujarCalleRecta(300, 900- anchoCalleEstrecha / 2, 450, anchoCalleEstrecha, true); //calle horizontal real
 
-        // Dibujar calles verticales (una ancha, una estrecha) PRINCIPALES tmb
+        // Dibujar calles verticales (una ancha, una estrecha) ESTA CALLE ES LA PRINCIPAL DONDE SE VA A PONER EL CARRO 
         dibujarCalleRecta(770 - anchoCalleAncha / 2, 0, anchoCalleAncha, 1100, false);  // Calle doble carril vertical */
         // Semáforos 
         colocarFlechas();

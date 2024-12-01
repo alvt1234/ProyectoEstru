@@ -17,7 +17,7 @@ public:
     Grafo grafo;
     SDL_Color color;
     
-    Carro(int x, int y, int ancho, int alto, char dir = 'H', int vel = 5, bool emergencia = false, SDL_Color c = {169, 169, 169, 255})
+    Carro(int x, int y, int ancho, int alto, char dir = 'H', int vel = 6, bool emergencia = false, SDL_Color c = {169, 169, 169, 255})
         : velocidad(vel), direccion(dir), esEmergencia(emergencia), color(c) {
         rect = {x, y, ancho, alto};
     }

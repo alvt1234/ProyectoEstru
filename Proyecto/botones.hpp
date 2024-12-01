@@ -11,6 +11,9 @@ public:
     SDL_Texture * lluvia;
     SDL_Rect nieblaRect;
     SDL_Texture * niebla;
+    SDL_Texture * agregar;
+    SDL_Rect agregarRect;
+    bool agregarClickeado = false;
     bool lluviaClickeado = false;
     bool nieblaClickeado = false;
     bool startClickeado = false;
@@ -30,8 +33,9 @@ public:
 
 botones::botones(SDL_Renderer* renderer) {
     startRect = {1700, 300, 200, 300}; // Posición y tamaño del botón
-    lluviaRect = {1730, 50, 70, 100}; // Posición y tamaño del botón
-    nieblaRect = {1550, 120, 70, 100}; // Posición y tamaño del botón
+    lluviaRect = {1730, 120, 70, 100}; // Posición y tamaño del botón
+    nieblaRect = {1530, 120, 70, 100}; // Posición y tamaño del botón
+    agregarRect = {1800, 800, 80, 80}; // Posición y tamaño del botón
 
     // Cargar imagen BMP del botón
    //SDL_Surface* tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/start.bmp");
@@ -78,6 +82,22 @@ botones::botones(SDL_Renderer* renderer) {
         fprintf(stderr, "Error al crear la textura del botón Niebla: %s\n", SDL_GetError());
         exit(1);
     }
+
+    //AGREGAR
+    SDL_Surface* tempSurfaceAgregar = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/agregar.bmp");
+    if (!tempSurfaceAgregar) {
+        fprintf(stderr, "Error al cargar la imagen del botón agregar: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    //AGREGAR
+    agregar = SDL_CreateTextureFromSurface(renderer, tempSurfaceAgregar);
+    SDL_FreeSurface(tempSurfaceAgregar);
+    if (!agregar) {
+        fprintf(stderr, "Error al crear la textura del botón agregar: %s\n", SDL_GetError());
+        exit(1);
+    }
+     
     // Inicializar la textura del carro (primer carro)
     carro = NULL;
     carroRect = {200, 200, 100, 100};  // Posición inicial del carro
@@ -125,6 +145,7 @@ void botones::dibujarBotones(SDL_Renderer* renderer) {
     SDL_RenderCopy(renderer, start, NULL, &startRect);
     SDL_RenderCopy(renderer, lluvia, NULL, &lluviaRect);
     SDL_RenderCopy(renderer, niebla, NULL, &nieblaRect);
+    SDL_RenderCopy(renderer, agregar, NULL, &agregarRect);
 
     if (carro) {
         SDL_RenderCopy(renderer, carro, NULL, &carroRect);
@@ -180,5 +201,17 @@ void botones::actualizarBotones(int mouseX, int mouseY, bool clicIzquierdo, SDL_
     } else {
         nieblaClickeado = false;
     }
-}
+    }
+    // Botón de agregar
+    if (mouseX > agregarRect.x && mouseX < (agregarRect.x + agregarRect.w) &&
+    mouseY > agregarRect.y && mouseY < (agregarRect.y + agregarRect.h)) {
+        if (clicIzquierdo) {
+        agregarClickeado = true;
+        std::cout << "Botón de agregar clickeado" << std::endl;
+        SDL_Color color = {255, 165, 0, 255}; 
+        carros.push_back(Carro(770 - 100 / 2, 0, 30, 50, 'V', 2, false, color));
+        }
+    } else {
+    agregarClickeado = false;
+    }
 }
