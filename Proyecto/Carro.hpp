@@ -4,6 +4,8 @@
 #include <SDL2/SDL_image.h> // Para las imágenes PNG
 #include <random>  // Para la generación de números aleatorios
 #include "grafo.hpp"
+#include "Semaforo.hpp"
+
 
 
 class Carro {
@@ -20,7 +22,22 @@ public:
         rect = {x, y, ancho, alto};
     }
 
-    void mover(const std::vector<Semaforo>& semaforos, const std::vector<Carro>& carros) {
+    void reducirVelocidadPorLluvia(bool lloviendo) {
+    if (lloviendo) {
+        velocidad = std::max(1, velocidad - 5);  
+    } else {
+        velocidad += 2; 
+    }
+    }
+    void aumetarVelocidadPorNiebla(bool neblina) {
+        if(neblina){
+            velocidad += 10;
+        }else{
+            velocidad = std::max(1, velocidad - 5);
+        }
+    }
+
+     void mover(const std::vector<Semaforo>& semaforos, const std::vector<Carro>& carros) {
         if (verificarSemaforo(semaforos)) {
             return; // Detener si el semáforo está en rojo
         }

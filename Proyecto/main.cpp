@@ -18,6 +18,7 @@ std::vector<Semaforo> semaforos;
 Uint32 ultimoCarro = 0;  // Temporizador para la generación de carros
 int intervaloGeneracion = 3000;  // Intervalo en milisegundos para generar carros
 int screenWidth = 1920;  // Ancho de la pantalla
+Uint8 fondoR = 100, fondoG = 149, fondoB = 237;  // Azul del fondo
 
 SDL_Color generarColorAleatorio() {
     SDL_Color color;
@@ -47,18 +48,25 @@ void dibujarMapa(botones& boton);
 
 
 // Función para manejar los eventos
-void eventos(SDL_Event& e, bool& corriendo, botones& boton, SDL_Renderer* renderer) 
-{
-    while (SDL_PollEvent(&e) != 0) {
+void eventos(SDL_Event &e, bool &corriendo, botones &boton, SDL_Renderer *renderer) {
+    int mouseX, mouseY;
+    bool clicIzquierdo = false;
+
+    while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {
             corriendo = false;
-        } else if (e.type == SDL_MOUSEBUTTONDOWN) {
-            int mouseX, mouseY;
-            SDL_GetMouseState(&mouseX, &mouseY);
-            boton.actualizarBotones(mouseX, mouseY, e.button.button == SDL_BUTTON_LEFT, renderer);
+        } else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT) {
+            // Registrar las coordenadas del clic y que el clic es del botón izquierdo
+            mouseX = e.button.x;
+            mouseY = e.button.y;
+            clicIzquierdo = true;
         }
     }
+
+    // Actualizar botones (esto manejará el cambio de color del fondo)
+   boton.actualizarBotones(mouseX, mouseY, clicIzquierdo, renderer, carros);
 }
+
 
 // Función para iniciar SDL
 void iniciar()
@@ -369,7 +377,8 @@ int main(int argc, char *args[]) {
     eventos(e, corriendo, boton, renderer);
 
     //SDL_SetRenderDrawColor(renderer, 112, 128, 144, 255); // Gris azulado (Slate Gray) PARA LA LLUVIA O NEBLINA
-     SDL_SetRenderDrawColor(renderer, 100, 149, 237, 255); // Azul cornflower
+   
+    SDL_SetRenderDrawColor(renderer, boton.fondoR, boton.fondoG, boton.fondoB, 255); // Color de fondo
     SDL_RenderClear(renderer);
 
     grafo.dibujar(renderer);  // Dibuja el grafo
