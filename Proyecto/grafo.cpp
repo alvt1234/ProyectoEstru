@@ -111,11 +111,15 @@ std::vector<int> Grafo::dijkstra(int inicio, int fin) const {
 
 void configurarRuta(Carro& carro, Grafo& grafo, int nodoInicioID, int nodoDestinoID) 
 {
-    // Calcular la ruta más corta con Dijkstra
+    if (nodoInicioID < 0 || nodoInicioID >= grafo.getCantidadNodos() || 
+    nodoDestinoID < 0 || nodoDestinoID >= grafo.getCantidadNodos()) {
+    std::cerr << "Índices de nodo inválidos.\n";
+    return;
+            }
     std::vector<int> ruta = grafo.dijkstra(nodoInicioID, nodoDestinoID);
 
-    if (ruta.empty()) {
-        std::cerr << "No se encontró una ruta válida.\n";
+    if (ruta.size() < 2 || ruta.front() != nodoInicioID || ruta.back() != nodoDestinoID) {
+        std::cerr << "La ruta calculada es inválida.\n";
         return;
     }
 

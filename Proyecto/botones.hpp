@@ -42,6 +42,9 @@ public:
     bool startClickeado = false;
     bool rutaClickeado = false;
     bool mostrarBotonesRuta = false; 
+    bool carroCreado = false; 
+    bool puntoInicioSeleccionado = false;
+    bool puntoDestinoSeleccionado = false;
 
     int estadoCarro = 0;  // 0 para primer carro, 1 para segundo carro
     SDL_Texture* carro = NULL;  // Textura del carro
@@ -362,7 +365,7 @@ void botones::actualizarBotones(int mouseX, int mouseY, bool clicIzquierdo, SDL_
    if (mouseX > botonRuta1Rect.x && mouseX < (botonRuta1Rect.x + botonRuta1Rect.w) &&
     mouseY > botonRuta1Rect.y && mouseY < (botonRuta1Rect.y + botonRuta1Rect.h)) {
     if (clicIzquierdo) {
-        if (puntoInicio == -1) {
+        if (!carroCreado) {
             puntoInicio = 26; // Nodo correspondiente a {0, 455}
             std::cout << "Punto de inicio seleccionado: Nodo {0, 455}" << std::endl;
 
@@ -370,8 +373,10 @@ void botones::actualizarBotones(int mouseX, int mouseY, bool clicIzquierdo, SDL_
             SDL_Color color = {255, 0, 255}; // Color del carro
             carros.push_back(Carro(0, 455, 30, 50, 'V', 2, false, color));  // Coordenadas de inicio
             std::cout << "Carro agregado en el Nodo {0, 455}" << std::endl;
-        } else if (puntoDestino == -1) {
+            carroCreado = true;  // Marcar que el carro ha sido creado
+        } else if (!puntoDestinoSeleccionado) {
             puntoDestino = 32; // Nodo correspondiente a {725, 5}
+            puntoDestinoSeleccionado = true;
             std::cout << "Punto de destino seleccionado: Nodo {725, 5}" << std::endl;
         }
     }
@@ -381,56 +386,88 @@ void botones::actualizarBotones(int mouseX, int mouseY, bool clicIzquierdo, SDL_
 if (mouseX > botonRuta2Rect.x && mouseX < (botonRuta2Rect.x + botonRuta2Rect.w) &&
     mouseY > botonRuta2Rect.y && mouseY < (botonRuta2Rect.y + botonRuta2Rect.h)) {
     if (clicIzquierdo) {
-        if (puntoInicio == -1) {
+        if (!carroCreado) {
             puntoInicio = 32; // Nodo correspondiente a {725, 5}
             std::cout << "Punto de inicio seleccionado: Nodo {725, 5}" << std::endl;
-        } else if (puntoDestino == -1) {
+
+            // Crear y agregar un nuevo carro en el punto de inicio
+            SDL_Color color = {0, 255, 0}; // Color del carro
+            carros.push_back(Carro(725, 5, 30, 50, 'V', 2, false, color));  // Coordenadas de inicio
+            std::cout << "Carro agregado en el Nodo {725, 5}" << std::endl;
+            carroCreado = true;  // Marcar que el carro ha sido creado
+        } else if (!puntoDestinoSeleccionado) {
             puntoDestino = 26; // Nodo correspondiente a {0, 455}
+            puntoDestinoSeleccionado = true;
             std::cout << "Punto de destino seleccionado: Nodo {0, 455}" << std::endl;
         }
     }
 }
 
-    //botonruta3
-    if (mouseX > botonRuta3Rect.x && mouseX < (botonRuta3Rect.x + botonRuta3Rect.w) &&
-        mouseY > botonRuta3Rect.y && mouseY < (botonRuta3Rect.y + botonRuta3Rect.h)) {
-        if (clicIzquierdo) {
-            if (puntoInicio == -1) {
-                puntoInicio = 1; 
-                std::cout << "Punto de inicio seleccionado: Ruta 3" << std::endl;
-            } else if (puntoDestino == -1) {
-                puntoDestino = 1;
-                std::cout << "Punto de destino seleccionado: Ruta 3" << std::endl;
-            }
+// Botón Ruta 3
+if (mouseX > botonRuta3Rect.x && mouseX < (botonRuta3Rect.x + botonRuta3Rect.w) &&
+    mouseY > botonRuta3Rect.y && mouseY < (botonRuta3Rect.y + botonRuta3Rect.h)) {
+    if (clicIzquierdo) {
+        if (!carroCreado) {
+            puntoInicio = 1; 
+            std::cout << "Punto de inicio seleccionado: Ruta 3" << std::endl;
+
+            // Crear y agregar un nuevo carro en el punto de inicio
+            SDL_Color color = {0, 0, 255}; // Color del carro
+            carros.push_back(Carro(725, 890, 30, 50, 'V', 2, false, color));  // Coordenadas de inicio
+            std::cout << "Carro agregado en Ruta 3" << std::endl;
+            carroCreado = true;  // Marcar que el carro ha sido creado
+        } else if (!puntoDestinoSeleccionado) {
+            puntoDestino = 1;
+            puntoDestinoSeleccionado = true;
+            std::cout << "Punto de destino seleccionado: Ruta 3" << std::endl;
         }
     }
-    //botonruta4
-    if (mouseX > botonRuta4Rect.x && mouseX < (botonRuta4Rect.x + botonRuta4Rect.w) &&
-        mouseY > botonRuta4Rect.y && mouseY < (botonRuta4Rect.y + botonRuta4Rect.h)) {
-        if (clicIzquierdo) {
-            if (puntoInicio == -1) {
-                puntoInicio = 1;
-                std::cout << "Punto de inicio seleccionado: Ruta 4" << std::endl;
-            } else if (puntoDestino == -1) {
-                puntoDestino = 1; 
-                std::cout << "Punto de destino seleccionado: Ruta 4 " << std::endl;
-            }
+}
+
+// Botón Ruta 4
+if (mouseX > botonRuta4Rect.x && mouseX < (botonRuta4Rect.x + botonRuta4Rect.w) &&
+    mouseY > botonRuta4Rect.y && mouseY < (botonRuta4Rect.y + botonRuta4Rect.h)) {
+    if (clicIzquierdo) {
+        if (!carroCreado) {
+            puntoInicio = 1;
+            std::cout << "Punto de inicio seleccionado: Ruta 4" << std::endl;
+
+            // Crear y agregar un nuevo carro en el punto de inicio
+            SDL_Color color = {255, 255, 0}; // Color del carro
+            carros.push_back(Carro(900, 5, 30, 50, 'V', 2, false, color));  // Coordenadas de inicio
+            std::cout << "Carro agregado en Ruta 4" << std::endl;
+            carroCreado = true;  // Marcar que el carro ha sido creado
+        } else if (!puntoDestinoSeleccionado) {
+            puntoDestino = 1; 
+            puntoDestinoSeleccionado = true;
+            std::cout << "Punto de destino seleccionado: Ruta 4" << std::endl;
         }
     }
-    //botonruta5
-    if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) &&
-        mouseY > botonRuta5Rect.y && mouseY < (botonRuta5Rect.y + botonRuta5Rect.h)) {
-        if (clicIzquierdo) {
-            if (puntoInicio == -1) {
-                puntoInicio = 1; // Ruta 2 como punto de inicio
-                std::cout << "Punto de inicio seleccionado: Ruta 5" << std::endl;
-            } else if (puntoDestino == -1) {
-                puntoDestino = 1; // Ruta 2 como punto de destino
-                std::cout << "Punto de destino seleccionado: Ruta 5" << std::endl;
-            }
+}
+
+// Botón Ruta 5
+if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) &&
+    mouseY > botonRuta5Rect.y && mouseY < (botonRuta5Rect.y + botonRuta5Rect.h)) {
+    if (clicIzquierdo) {
+        if (!carroCreado) {
+            puntoInicio = 1; // Ruta 2 como punto de inicio
+            std::cout << "Punto de inicio seleccionado: Ruta 5" << std::endl;
+
+            // Crear y agregar un nuevo carro en el punto de inicio
+            SDL_Color color = {255, 165, 0}; // Color del carro
+            carros.push_back(Carro(1430, 90, 30, 50, 'V', 2, false, color));  // Coordenadas de inicio
+            std::cout << "Carro agregado en Ruta 5" << std::endl;
+            carroCreado = true;  // Marcar que el carro ha sido creado
+        } else if (!puntoDestinoSeleccionado) {
+            puntoDestino = 1; // Ruta 2 como punto de destino
+            puntoDestinoSeleccionado = true;
+            std::cout << "Punto de destino seleccionado: Ruta 5" << std::endl;
         }
     }
-    if (puntoInicio != -1 && puntoDestino != -1) {
+}
+
+// Ejecutar el movimiento solo si ambos puntos (inicio y destino) han sido seleccionados
+if (puntoInicioSeleccionado && puntoDestinoSeleccionado) {
     // Ejecutar Dijkstra para encontrar la ruta
     std::vector<int> ruta = grafo.dijkstra(puntoInicio, puntoDestino);
 
@@ -456,7 +493,8 @@ if (mouseX > botonRuta2Rect.x && mouseX < (botonRuta2Rect.x + botonRuta2Rect.w) 
     // Resetear los puntos de inicio y destino después de calcular la ruta
     puntoInicio = -1;
     puntoDestino = -1;
-
-    }
+    puntoInicioSeleccionado = false;
+    puntoDestinoSeleccionado = false;
+}
 }
 
