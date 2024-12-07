@@ -10,6 +10,8 @@
 
 class Carro {
 public:
+    std::vector<int> rutaActual; // IDs de nodos en la ruta
+    size_t indiceRuta = 0; // Índice del nodo actual en la ruta
     SDL_Rect rect;
     int velocidad;
     char direccion; 
@@ -24,16 +26,16 @@ public:
 
     void reducirVelocidadPorLluvia(bool lloviendo) {
     if (lloviendo) {
-        velocidad = std::max(1, velocidad - 5);  
+        velocidad = 2;
     } else {
-        velocidad += 2; 
+        velocidad =6; 
     }
     }
     void aumetarVelocidadPorNiebla(bool neblina) {
         if(neblina){
-            velocidad += 10;
+            velocidad = 1;
         }else{
-            velocidad = std::max(1, velocidad - 5);
+            velocidad = 6;
         }
     }
 
@@ -78,10 +80,17 @@ public:
                 // Encontrar todas las aristas conectadas a este nodo
                 std::vector<std::pair<Nodo, Nodo>> conexiones;
                 for (const auto& arista : grafo.getAristas()) {
-                    if (arista.first.x == nodo.x && arista.first.y == nodo.y) {
-                        conexiones.push_back(arista);
-                    }
+                   if (grafo.getNodo(arista.nodo1).x == nodo.x && grafo.getNodo(arista.nodo1).y == nodo.y) {
+                    // Nodo 1 coincide con el nodo actual
+                    Nodo nodo2 = grafo.getNodo(arista.nodo2);
+                    conexiones.push_back({nodo, nodo2});
+                } else if (grafo.getNodo(arista.nodo2).x == nodo.x && grafo.getNodo(arista.nodo2).y == nodo.y) {
+                    // Nodo 2 coincide con el nodo actual
+                    Nodo nodo1 = grafo.getNodo(arista.nodo1);
+                    conexiones.push_back({nodo1, nodo});
                 }
+                    }
+                
 
                 // Seleccionar una arista aleatoria para continuar
                 if (!conexiones.empty()) {
@@ -156,6 +165,44 @@ public:
         // Verificar si los rectángulos del carro actual y el otro carro se cruzan
         return SDL_HasIntersection(&rect, &otroCarro.rect);
     }
+
+    
+    void establecerRuta(const std::vector<int>& ruta) {
+        rutaActual = ruta;
+        indiceRuta = 0; // Empezar desde el primer nodo
+    }
+
+    void moverEnRuta(const Grafo& grafo) {
+        if (indiceRuta >= rutaActual.size()) return; // Ruta completada
+
+        // Obtener la posición del nodo actual y el siguiente nodo
+        Nodo nodoActual = grafo.getNodo(rutaActual[indiceRuta]);
+        Nodo nodoDestino = grafo.getNodo(rutaActual[indiceRuta + 1]);
+
+        // Mover hacia el nodo destino
+        moverHaciaDestino(nodoDestino.x, nodoDestino.y);
+
+        // Si llegamos al nodo destino, avanzar al siguiente nodo
+        if (rect.x == nodoDestino.x && rect.y == nodoDestino.y) {
+            indiceRuta++;
+        }
+    }
+
+    void moverHaciaDestino(int destinoX, int destinoY) {
+   
+    if (rect.x < destinoX) {
+        rect.x += velocidad; 
+    } else if (rect.x > destinoX) {
+        rect.x -= velocidad; 
+    }
+    
+    if (rect.y < destinoY) {
+        rect.y += velocidad; 
+    } else if (rect.y > destinoY) {
+        rect.y -= velocidad;  
+    }
+            }
+
 };
 
 #endif /* BCD25E07_30ED_4976_B6F1_C318CD369A0A */

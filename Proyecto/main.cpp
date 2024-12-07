@@ -325,7 +325,7 @@ void inicializarGrafo(Grafo& grafo) {
     }
 
     // Lista de aristas (pares de nodos conectados)
-    std::vector<std::pair<int, int>> aristas = {
+    std::vector<std::pair<int, int>> aristas  = {
        {124, 126}, {125, 127}, {122, 124}, {123, 125}, {124, 96}, {125, 97},
         {104, 122}, {105, 123}, {120, 122}, {121, 123}, {120, 110}, {121, 111},
         {118, 120}, {119, 121}, {116, 118}, {117, 119}, {110, 117}, 

@@ -3,27 +3,55 @@
 #include <iostream>
 #include "Carro.hpp"
 #include "Semaforo.hpp"
+#include "grafo.hpp"
+
 class botones {
 public:
+    //botones de calles para ruta
+    SDL_Texture * botonRuta1;
+    SDL_Texture * botonRuta2;
+    SDL_Texture * botonRuta3;
+    SDL_Texture * botonRuta4;
+    SDL_Texture * botonRuta5;
+    SDL_Rect botonRuta1Rect;
+    SDL_Rect botonRuta2Rect;
+    SDL_Rect botonRuta3Rect;
+    SDL_Rect botonRuta4Rect;
+    SDL_Rect botonRuta5Rect;
+    bool botonRutaClickead = false;
+    bool botonRuta2Clickeado = false;
+    bool botonRuta3Clickeado = false;
+    bool botonRuta4Clickeado = false;
+    bool botonRuta5Clickeado = false;
+// demas botones
     SDL_Texture * start;
     SDL_Rect startRect;
     SDL_Rect lluviaRect;
+    SDL_Rect rutaRect;
     SDL_Texture * lluvia;
     SDL_Rect nieblaRect;
     SDL_Texture * niebla;
     SDL_Texture * agregar;
+    SDL_Texture * ruta;
+   
+    
     SDL_Rect agregarRect;
     bool agregarClickeado = false;
     bool lluviaClickeado = false;
     bool nieblaClickeado = false;
     bool startClickeado = false;
+    bool rutaClickeado = false;
+    bool mostrarBotonesRuta = false; 
+
     int estadoCarro = 0;  // 0 para primer carro, 1 para segundo carro
     SDL_Texture* carro = NULL;  // Textura del carro
     SDL_Rect carroRect;  // Rectángulo para el carro
     Uint8 fondoR = 100, fondoG = 149, fondoB = 237; 
     bool lloviendo = false;
     bool neblina = false;
-
+    int puntoInicio = -1;  
+    int puntoDestino = -1; 
+    Grafo grafo;
 
     botones(SDL_Renderer* renderer);
     void dibujarBotones(SDL_Renderer* renderer);
@@ -36,6 +64,12 @@ botones::botones(SDL_Renderer* renderer) {
     lluviaRect = {1730, 120, 70, 100}; // Posición y tamaño del botón
     nieblaRect = {1530, 120, 70, 100}; // Posición y tamaño del botón
     agregarRect = {1800, 800, 80, 80}; // Posición y tamaño del botón
+    rutaRect = {1800, 700, 80,80}; // posicion y tamaño 
+    botonRuta1Rect = {0, 450 , 40 , 40}; 
+    botonRuta2Rect = {770, 0 , 40 , 40}; 
+    botonRuta3Rect = {720, 980 , 40 , 40}; 
+    botonRuta4Rect = {900, 0 , 40 , 40}; 
+    botonRuta5Rect = {1400, 980 , 40 , 40}; 
 
     // Cargar imagen BMP del botón
    //SDL_Surface* tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/start.bmp");
@@ -97,6 +131,89 @@ botones::botones(SDL_Renderer* renderer) {
         fprintf(stderr, "Error al crear la textura del botón agregar: %s\n", SDL_GetError());
         exit(1);
     }
+
+    //RUTA
+    SDL_Surface* tempSurfaceRuta = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/ruta.bmp");
+    if(!tempSurfaceRuta){
+        fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
+        exit(1);    
+    }
+
+    //RUTA
+
+    ruta = SDL_CreateTextureFromSurface(renderer, tempSurfaceRuta);
+    SDL_FreeSurface(tempSurfaceRuta);
+    if(!ruta){
+        fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    //BOTONES PARA LA RUTA
+    //boton1
+    SDL_Surface * tempSurfaceBotonRuta1 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero1.bmp");
+    if(!tempSurfaceBotonRuta1){
+        fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
+        exit(1);    
+    }
+
+    botonRuta1 = SDL_CreateTextureFromSurface(renderer, tempSurfaceBotonRuta1);
+    SDL_FreeSurface(tempSurfaceBotonRuta1);
+    if(!botonRuta1){
+        fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
+        exit(1);
+    }
+    //boton2
+
+     SDL_Surface * tempSurfaceBotonRuta2 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero2.bmp");
+    if(!tempSurfaceBotonRuta2){
+        fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
+        exit(1);    
+    }
+    botonRuta2 = SDL_CreateTextureFromSurface(renderer, tempSurfaceBotonRuta2);
+    SDL_FreeSurface(tempSurfaceBotonRuta2);
+    if(!botonRuta2){
+        fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    //boton3
+     SDL_Surface * tempSurfaceBotonRuta3 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero3.bmp");
+    if(!tempSurfaceBotonRuta3){
+        fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
+        exit(1);    
+    }
+    botonRuta3 = SDL_CreateTextureFromSurface(renderer, tempSurfaceBotonRuta3);
+    SDL_FreeSurface(tempSurfaceBotonRuta3);
+    if(!botonRuta3){
+        fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    //boton4
+    SDL_Surface * tempSurfaceBotonRuta4 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero4.bmp");
+    if(!tempSurfaceBotonRuta4){
+        fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
+        exit(1);    
+    }
+    botonRuta4 = SDL_CreateTextureFromSurface(renderer, tempSurfaceBotonRuta4);
+    SDL_FreeSurface(tempSurfaceBotonRuta4);
+    if(!botonRuta4){
+        fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+    //boton5
+      SDL_Surface * tempSurfaceBotonRuta5 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero5.bmp");
+    if(!tempSurfaceBotonRuta5){
+        fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
+        exit(1);    
+    }
+    botonRuta5 = SDL_CreateTextureFromSurface(renderer, tempSurfaceBotonRuta5);
+    SDL_FreeSurface(tempSurfaceBotonRuta5);
+    if(!botonRuta5){
+        fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
+        exit(1);
+    }
      
     // Inicializar la textura del carro (primer carro)
     carro = NULL;
@@ -140,12 +257,24 @@ void botones::cambiarCarro(SDL_Renderer* renderer) {
     carroRect = {400, 0, 50, 70};
 }
 
-
-void botones::dibujarBotones(SDL_Renderer* renderer) {
-    SDL_RenderCopy(renderer, start, NULL, &startRect);
-    SDL_RenderCopy(renderer, lluvia, NULL, &lluviaRect);
-    SDL_RenderCopy(renderer, niebla, NULL, &nieblaRect);
-    SDL_RenderCopy(renderer, agregar, NULL, &agregarRect);
+//HACERLO SIEMPRE PARA QUE SE MIREN
+void botones::dibujarBotones(SDL_Renderer* renderer) 
+{
+    if (mostrarBotonesRuta) {
+        // Dibujar botones de ruta
+        SDL_RenderCopy(renderer, botonRuta1, NULL, &botonRuta1Rect);
+        SDL_RenderCopy(renderer, botonRuta2, NULL, &botonRuta2Rect);
+        SDL_RenderCopy(renderer, botonRuta3, NULL, &botonRuta3Rect);
+        SDL_RenderCopy(renderer, botonRuta4, NULL, &botonRuta4Rect);
+        SDL_RenderCopy(renderer, botonRuta5, NULL, &botonRuta5Rect);
+    } else {
+        // Dibujar los demás botones
+        SDL_RenderCopy(renderer, start, NULL, &startRect);
+        SDL_RenderCopy(renderer, lluvia, NULL, &lluviaRect);
+        SDL_RenderCopy(renderer, niebla, NULL, &nieblaRect);
+        SDL_RenderCopy(renderer, agregar, NULL, &agregarRect);
+        SDL_RenderCopy(renderer, ruta, NULL, &rutaRect);
+    }
 
     if (carro) {
         SDL_RenderCopy(renderer, carro, NULL, &carroRect);
@@ -214,4 +343,120 @@ void botones::actualizarBotones(int mouseX, int mouseY, bool clicIzquierdo, SDL_
     } else {
     agregarClickeado = false;
     }
+
+    //BOTON RUTA
+
+    if (mouseX > rutaRect.x && mouseX < (rutaRect.x + rutaRect.w) &&
+    mouseY > rutaRect.y && mouseY < (rutaRect.y + rutaRect.h)) {
+    if (clicIzquierdo) {
+        rutaClickeado = true;
+        mostrarBotonesRuta = !mostrarBotonesRuta; // Alternar visibilidad de los botones de ruta
+        std::cout << "Botón de ruta clickeado" << std::endl;
+    }
+    } else 
+    {
+    rutaClickeado = false;
+    }
+
+    //botones de ruta1,2,...
+   if (mouseX > botonRuta1Rect.x && mouseX < (botonRuta1Rect.x + botonRuta1Rect.w) &&
+    mouseY > botonRuta1Rect.y && mouseY < (botonRuta1Rect.y + botonRuta1Rect.h)) {
+    if (clicIzquierdo) {
+        if (puntoInicio == -1) {
+            puntoInicio = 26; // Nodo correspondiente a {0, 455}
+            std::cout << "Punto de inicio seleccionado: Nodo {0, 455}" << std::endl;
+
+            // Crear y agregar un nuevo carro en el punto de inicio
+            SDL_Color color = {255, 0, 255}; // Color del carro
+            carros.push_back(Carro(0, 455, 30, 50, 'V', 2, false, color));  // Coordenadas de inicio
+            std::cout << "Carro agregado en el Nodo {0, 455}" << std::endl;
+        } else if (puntoDestino == -1) {
+            puntoDestino = 32; // Nodo correspondiente a {725, 5}
+            std::cout << "Punto de destino seleccionado: Nodo {725, 5}" << std::endl;
+        }
+    }
 }
+
+// Botón Ruta 2
+if (mouseX > botonRuta2Rect.x && mouseX < (botonRuta2Rect.x + botonRuta2Rect.w) &&
+    mouseY > botonRuta2Rect.y && mouseY < (botonRuta2Rect.y + botonRuta2Rect.h)) {
+    if (clicIzquierdo) {
+        if (puntoInicio == -1) {
+            puntoInicio = 32; // Nodo correspondiente a {725, 5}
+            std::cout << "Punto de inicio seleccionado: Nodo {725, 5}" << std::endl;
+        } else if (puntoDestino == -1) {
+            puntoDestino = 26; // Nodo correspondiente a {0, 455}
+            std::cout << "Punto de destino seleccionado: Nodo {0, 455}" << std::endl;
+        }
+    }
+}
+
+    //botonruta3
+    if (mouseX > botonRuta3Rect.x && mouseX < (botonRuta3Rect.x + botonRuta3Rect.w) &&
+        mouseY > botonRuta3Rect.y && mouseY < (botonRuta3Rect.y + botonRuta3Rect.h)) {
+        if (clicIzquierdo) {
+            if (puntoInicio == -1) {
+                puntoInicio = 1; 
+                std::cout << "Punto de inicio seleccionado: Ruta 3" << std::endl;
+            } else if (puntoDestino == -1) {
+                puntoDestino = 1;
+                std::cout << "Punto de destino seleccionado: Ruta 3" << std::endl;
+            }
+        }
+    }
+    //botonruta4
+    if (mouseX > botonRuta4Rect.x && mouseX < (botonRuta4Rect.x + botonRuta4Rect.w) &&
+        mouseY > botonRuta4Rect.y && mouseY < (botonRuta4Rect.y + botonRuta4Rect.h)) {
+        if (clicIzquierdo) {
+            if (puntoInicio == -1) {
+                puntoInicio = 1;
+                std::cout << "Punto de inicio seleccionado: Ruta 4" << std::endl;
+            } else if (puntoDestino == -1) {
+                puntoDestino = 1; 
+                std::cout << "Punto de destino seleccionado: Ruta 4 " << std::endl;
+            }
+        }
+    }
+    //botonruta5
+    if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) &&
+        mouseY > botonRuta5Rect.y && mouseY < (botonRuta5Rect.y + botonRuta5Rect.h)) {
+        if (clicIzquierdo) {
+            if (puntoInicio == -1) {
+                puntoInicio = 1; // Ruta 2 como punto de inicio
+                std::cout << "Punto de inicio seleccionado: Ruta 5" << std::endl;
+            } else if (puntoDestino == -1) {
+                puntoDestino = 1; // Ruta 2 como punto de destino
+                std::cout << "Punto de destino seleccionado: Ruta 5" << std::endl;
+            }
+        }
+    }
+    if (puntoInicio != -1 && puntoDestino != -1) {
+    // Ejecutar Dijkstra para encontrar la ruta
+    std::vector<int> ruta = grafo.dijkstra(puntoInicio, puntoDestino);
+
+    if (!ruta.empty()) {
+        std::cout << "Ruta encontrada: ";
+        for (int nodo : ruta) {
+            std::cout << nodo << " ";
+        }
+        std::cout << std::endl;
+
+        // Mover el carro a través de la ruta
+        for (auto& carro : carros) {
+            for (int nodo : ruta) {
+                Nodo nodoDestino = grafo.getNodo(nodo);
+                carro.moverHaciaDestino(nodoDestino.x, nodoDestino.y); // Implementa la animación aquí
+                SDL_Delay(200); // Simular el movimiento con una pausa
+            }
+        }
+    } else {
+        std::cout << "No se encontró una ruta válida." << std::endl;
+    }
+
+    // Resetear los puntos de inicio y destino después de calcular la ruta
+    puntoInicio = -1;
+    puntoDestino = -1;
+
+    }
+}
+

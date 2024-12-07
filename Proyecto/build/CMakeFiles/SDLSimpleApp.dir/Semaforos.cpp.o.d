@@ -270,4 +270,8 @@ CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o: \
  /usr/include/c++/14/x86_64-redhat-linux/bits/opt_random.h \
  /usr/include/c++/14/bits/random.tcc /usr/include/c++/14/numeric \
  /usr/include/c++/14/bits/stl_numeric.h \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
+ /usr/include/c++/14/algorithm /usr/include/c++/14/bits/stl_algo.h \
+ /usr/include/c++/14/bits/algorithmfwd.h \
+ /usr/include/c++/14/bits/stl_heap.h \
+ /usr/include/c++/14/bits/stl_tempbuf.h

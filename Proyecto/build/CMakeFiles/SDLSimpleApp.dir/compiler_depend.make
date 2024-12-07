@@ -131,7 +131,9 @@ CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o: /home/anareyes/Documentos/GitHub/Pr
   /usr/include/bits/wchar.h \
   /usr/include/bits/wctype-wchar.h \
   /usr/include/bits/wordsize.h \
+  /usr/include/c++/14/algorithm \
   /usr/include/c++/14/backward/binders.h \
+  /usr/include/c++/14/bits/algorithmfwd.h \
   /usr/include/c++/14/bits/alloc_traits.h \
   /usr/include/c++/14/bits/allocator.h \
   /usr/include/c++/14/bits/basic_ios.h \
@@ -173,15 +175,18 @@ CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o: /home/anareyes/Documentos/GitHub/Pr
   /usr/include/c++/14/bits/refwrap.h \
   /usr/include/c++/14/bits/requires_hosted.h \
   /usr/include/c++/14/bits/std_abs.h \
+  /usr/include/c++/14/bits/stl_algo.h \
   /usr/include/c++/14/bits/stl_algobase.h \
   /usr/include/c++/14/bits/stl_bvector.h \
   /usr/include/c++/14/bits/stl_construct.h \
   /usr/include/c++/14/bits/stl_function.h \
+  /usr/include/c++/14/bits/stl_heap.h \
   /usr/include/c++/14/bits/stl_iterator.h \
   /usr/include/c++/14/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/14/bits/stl_iterator_base_types.h \
   /usr/include/c++/14/bits/stl_numeric.h \
   /usr/include/c++/14/bits/stl_pair.h \
+  /usr/include/c++/14/bits/stl_tempbuf.h \
   /usr/include/c++/14/bits/stl_uninitialized.h \
   /usr/include/c++/14/bits/stl_vector.h \
   /usr/include/c++/14/bits/streambuf.tcc \
@@ -371,6 +376,8 @@ CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o: /home/anareyes/Documentos/GitHub/Pr
   /usr/lib/gcc/x86_64-redhat-linux/14/include/xtestintrin.h
 
 CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.cpp \
+  /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Carro.hpp \
+  /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp \
   /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
   /usr/include/SDL2/SDL.h \
   /usr/include/SDL2/SDL_assert.h \
@@ -391,6 +398,7 @@ CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/GitHub/Proyec
   /usr/include/SDL2/SDL_haptic.h \
   /usr/include/SDL2/SDL_hidapi.h \
   /usr/include/SDL2/SDL_hints.h \
+  /usr/include/SDL2/SDL_image.h \
   /usr/include/SDL2/SDL_joystick.h \
   /usr/include/SDL2/SDL_keyboard.h \
   /usr/include/SDL2/SDL_keycode.h \
@@ -497,7 +505,9 @@ CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/GitHub/Proyec
   /usr/include/bits/wchar.h \
   /usr/include/bits/wctype-wchar.h \
   /usr/include/bits/wordsize.h \
+  /usr/include/c++/14/algorithm \
   /usr/include/c++/14/backward/binders.h \
+  /usr/include/c++/14/bits/algorithmfwd.h \
   /usr/include/c++/14/bits/alloc_traits.h \
   /usr/include/c++/14/bits/allocator.h \
   /usr/include/c++/14/bits/basic_ios.h \
@@ -533,23 +543,30 @@ CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/GitHub/Proyec
   /usr/include/c++/14/bits/postypes.h \
   /usr/include/c++/14/bits/predefined_ops.h \
   /usr/include/c++/14/bits/ptr_traits.h \
+  /usr/include/c++/14/bits/random.h \
+  /usr/include/c++/14/bits/random.tcc \
   /usr/include/c++/14/bits/range_access.h \
   /usr/include/c++/14/bits/refwrap.h \
   /usr/include/c++/14/bits/requires_hosted.h \
   /usr/include/c++/14/bits/std_abs.h \
+  /usr/include/c++/14/bits/stl_algo.h \
   /usr/include/c++/14/bits/stl_algobase.h \
   /usr/include/c++/14/bits/stl_bvector.h \
   /usr/include/c++/14/bits/stl_construct.h \
   /usr/include/c++/14/bits/stl_function.h \
+  /usr/include/c++/14/bits/stl_heap.h \
   /usr/include/c++/14/bits/stl_iterator.h \
   /usr/include/c++/14/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/14/bits/stl_iterator_base_types.h \
+  /usr/include/c++/14/bits/stl_numeric.h \
   /usr/include/c++/14/bits/stl_pair.h \
+  /usr/include/c++/14/bits/stl_tempbuf.h \
   /usr/include/c++/14/bits/stl_uninitialized.h \
   /usr/include/c++/14/bits/stl_vector.h \
   /usr/include/c++/14/bits/streambuf.tcc \
   /usr/include/c++/14/bits/streambuf_iterator.h \
   /usr/include/c++/14/bits/stringfwd.h \
+  /usr/include/c++/14/bits/uniform_int_dist.h \
   /usr/include/c++/14/bits/utility.h \
   /usr/include/c++/14/bits/vector.tcc \
   /usr/include/c++/14/bits/version.h \
@@ -557,6 +574,7 @@ CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/GitHub/Proyec
   /usr/include/c++/14/cerrno \
   /usr/include/c++/14/clocale \
   /usr/include/c++/14/cmath \
+  /usr/include/c++/14/cstdint \
   /usr/include/c++/14/cstdio \
   /usr/include/c++/14/cstdlib \
   /usr/include/c++/14/cwchar \
@@ -574,9 +592,12 @@ CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/GitHub/Proyec
   /usr/include/c++/14/iosfwd \
   /usr/include/c++/14/iostream \
   /usr/include/c++/14/istream \
+  /usr/include/c++/14/limits \
   /usr/include/c++/14/math.h \
   /usr/include/c++/14/new \
+  /usr/include/c++/14/numeric \
   /usr/include/c++/14/ostream \
+  /usr/include/c++/14/random \
   /usr/include/c++/14/stdexcept \
   /usr/include/c++/14/stdlib.h \
   /usr/include/c++/14/streambuf \
@@ -595,6 +616,7 @@ CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: /home/anareyes/Documentos/GitHub/Proyec
   /usr/include/c++/14/x86_64-redhat-linux/bits/error_constants.h \
   /usr/include/c++/14/x86_64-redhat-linux/bits/gthr-default.h \
   /usr/include/c++/14/x86_64-redhat-linux/bits/gthr.h \
+  /usr/include/c++/14/x86_64-redhat-linux/bits/opt_random.h \
   /usr/include/c++/14/x86_64-redhat-linux/bits/os_defines.h \
   /usr/include/ctype.h \
   /usr/include/endian.h \
@@ -858,7 +880,9 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
   /usr/include/bits/wchar.h \
   /usr/include/bits/wctype-wchar.h \
   /usr/include/bits/wordsize.h \
+  /usr/include/c++/14/algorithm \
   /usr/include/c++/14/backward/binders.h \
+  /usr/include/c++/14/bits/algorithmfwd.h \
   /usr/include/c++/14/bits/alloc_traits.h \
   /usr/include/c++/14/bits/allocator.h \
   /usr/include/c++/14/bits/basic_ios.h \
@@ -900,15 +924,18 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
   /usr/include/c++/14/bits/refwrap.h \
   /usr/include/c++/14/bits/requires_hosted.h \
   /usr/include/c++/14/bits/std_abs.h \
+  /usr/include/c++/14/bits/stl_algo.h \
   /usr/include/c++/14/bits/stl_algobase.h \
   /usr/include/c++/14/bits/stl_bvector.h \
   /usr/include/c++/14/bits/stl_construct.h \
   /usr/include/c++/14/bits/stl_function.h \
+  /usr/include/c++/14/bits/stl_heap.h \
   /usr/include/c++/14/bits/stl_iterator.h \
   /usr/include/c++/14/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/14/bits/stl_iterator_base_types.h \
   /usr/include/c++/14/bits/stl_numeric.h \
   /usr/include/c++/14/bits/stl_pair.h \
+  /usr/include/c++/14/bits/stl_tempbuf.h \
   /usr/include/c++/14/bits/stl_uninitialized.h \
   /usr/include/c++/14/bits/stl_vector.h \
   /usr/include/c++/14/bits/streambuf.tcc \
@@ -1168,12 +1195,6 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 
 /usr/lib/gcc/x86_64-redhat-linux/14/include/emmintrin.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/14/include/cldemoteintrin.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/14/include/rtmintrin.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/14/include/cetintrin.h:
-
 /usr/lib/gcc/x86_64-redhat-linux/14/include/avxvnniintrin.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/14/include/avxvnniint8intrin.h:
@@ -1249,6 +1270,10 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 /usr/include/sys/single_threaded.h:
 
 /usr/include/sys/select.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/14/include/stdint.h:
+
+/usr/include/stdlib.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/14/include/xmmintrin.h:
 
@@ -1333,6 +1358,10 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 /usr/include/bits/types/FILE.h:
 
 /usr/include/bits/floatn.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/14/include/cldemoteintrin.h:
+
+/usr/include/c++/14/bits/stl_heap.h:
 
 /usr/include/bits/types/__FILE.h:
 
@@ -1468,13 +1497,15 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 
 /usr/include/SDL2/SDL_assert.h:
 
+/usr/lib/gcc/x86_64-redhat-linux/14/include/rtmintrin.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/14/include/cetintrin.h:
+
+/usr/include/c++/14/algorithm:
+
 /usr/lib/gcc/x86_64-redhat-linux/14/include/mmintrin.h:
 
 /usr/include/c++/14/istream:
-
-/usr/lib/gcc/x86_64-redhat-linux/14/include/stdint.h:
-
-/usr/include/stdlib.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/14/include/gfniintrin.h:
 
@@ -1568,7 +1599,13 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 
 /usr/include/SDL2/SDL_keycode.h:
 
+/usr/include/stdio.h:
+
+/usr/include/bits/wordsize.h:
+
 /usr/include/SDL2/SDL_blendmode.h:
+
+/usr/include/c++/14/bits/stl_tempbuf.h:
 
 /usr/include/SDL2/SDL_render.h:
 
@@ -1680,11 +1717,11 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 
 /usr/include/pthread.h:
 
+/usr/include/c++/14/bits/algorithmfwd.h:
+
 /usr/include/c++/14/bits/istream.tcc:
 
 /usr/include/c++/14/bits/locale_classes.h:
-
-/usr/include/c++/14/cmath:
 
 /usr/include/c++/14/bits/basic_string.h:
 
@@ -1695,10 +1732,6 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 /usr/include/c++/14/ios:
 
 /usr/include/c++/14/bits/locale_facets.tcc:
-
-/usr/include/bits/wordsize.h:
-
-/usr/include/stdio.h:
 
 /usr/include/c++/14/bits/localefwd.h:
 
@@ -1714,6 +1747,10 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 
 /usr/include/c++/14/bits/ostream_insert.h:
 
+/usr/include/strings.h:
+
+/usr/include/c++/14/random:
+
 /usr/include/SDL2/SDL_thread.h:
 
 /usr/include/c++/14/bits/random.h:
@@ -1724,11 +1761,11 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: /home/anareyes/Documentos/GitHub/Proyect
 
 /usr/include/c++/14/iostream:
 
-/usr/include/c++/14/random:
-
-/usr/include/strings.h:
-
 /usr/include/c++/14/bits/std_abs.h:
+
+/usr/include/c++/14/cmath:
+
+/usr/include/c++/14/bits/stl_algo.h:
 
 /usr/include/c++/14/bits/new_allocator.h:
 
