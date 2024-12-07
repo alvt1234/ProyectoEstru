@@ -122,7 +122,5 @@ void configurarRuta(Carro& carro, Grafo& grafo, int nodoInicioID, int nodoDestin
         std::cerr << "La ruta calculada es inválida.\n";
         return;
     }
-
-    // Pasar la ruta calculada al carro
     carro.establecerRuta(ruta);
 }

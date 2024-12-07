@@ -173,30 +173,35 @@ public:
     }
 
     void moverEnRuta(const Grafo& grafo) {
-    if (indiceRuta >= rutaActual.size()) return; // Si la ruta está completa, no hacer nada
+    if (indiceRuta >= rutaActual.size()) 
+    return;
 
     Nodo nodoActual = grafo.getNodo(rutaActual[indiceRuta]);
     Nodo nodoDestino = grafo.getNodo(rutaActual[indiceRuta + 1]);
-
-    // Mover hacia el nodo destino
+   
     moverHaciaDestino(nodoDestino.x, nodoDestino.y);
 
-    // Si el carro llega al nodo destino, avanzar al siguiente nodo
-    if (detectarNodo(nodoDestino)) {
+    
+    if (detectarNodo(nodoDestino))
+     {
         indiceRuta++;
     }
 }
     void moverHaciaDestino(int destinoX, int destinoY) {
    
-    if (rect.x < destinoX) {
+    if (rect.x < destinoX) 
+    {
         rect.x += velocidad; 
-    } else if (rect.x > destinoX) {
+    } else if (rect.x > destinoX) 
+    {
         rect.x -= velocidad; 
     }
     
-    if (rect.y < destinoY) {
+    if (rect.y < destinoY) 
+    {
         rect.y += velocidad; 
-    } else if (rect.y > destinoY) {
+    } else if (rect.y > destinoY) 
+    {
         rect.y -= velocidad;  
     }
             }

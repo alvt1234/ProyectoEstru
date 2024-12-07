@@ -24,18 +24,22 @@ public:
     bool botonRuta4Clickeado = false;
     bool botonRuta5Clickeado = false;
 // demas botones
+//texturas
     SDL_Texture * start;
-    SDL_Rect startRect;
-    SDL_Rect lluviaRect;
-    SDL_Rect rutaRect;
     SDL_Texture * lluvia;
-    SDL_Rect nieblaRect;
     SDL_Texture * niebla;
     SDL_Texture * agregar;
     SDL_Texture * ruta;
-   
-    
+    SDL_Texture * atras;
+    //rectangulos
+    SDL_Rect nieblaRect;
+    SDL_Rect startRect;
+    SDL_Rect lluviaRect;
+    SDL_Rect rutaRect;
     SDL_Rect agregarRect;
+    SDL_Rect atrasRect;
+
+    bool atrasClickeado = false;
     bool agregarClickeado = false;
     bool lluviaClickeado = false;
     bool nieblaClickeado = false;
@@ -66,8 +70,8 @@ public:
 
 botones::botones(SDL_Renderer* renderer) {
     startRect = {1700, 300, 200, 300}; // Posición y tamaño del botón
-    lluviaRect = {1730, 120, 70, 100}; // Posición y tamaño del botón
-    nieblaRect = {1530, 120, 70, 100}; // Posición y tamaño del botón
+    lluviaRect = {1800, 120, 70, 100}; // Posición y tamaño del botón
+    nieblaRect = {1800, 220, 70, 100}; // Posición y tamaño del botón
     agregarRect = {1800, 800, 80, 80}; // Posición y tamaño del botón
     rutaRect = {1800, 700, 80,80}; // posicion y tamaño 
     botonRuta1Rect = {0, 450 , 40 , 40}; 
@@ -75,6 +79,7 @@ botones::botones(SDL_Renderer* renderer) {
     botonRuta3Rect = {720, 980 , 40 , 40}; 
     botonRuta4Rect = {900, 0 , 40 , 40}; 
     botonRuta5Rect = {1400, 980 , 40 , 40}; 
+    atrasRect = {1800, 900, 80, 80}; 
 
     // Cargar imagen BMP del botón
    //SDL_Surface* tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/start.bmp");
@@ -219,6 +224,20 @@ botones::botones(SDL_Renderer* renderer) {
         fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
         exit(1);
     }
+
+    //atras cargar
+    SDL_Surface * tempSurfaceAtras = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/atras.bmp");
+    if(!tempSurfaceAtras){
+        fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
+        exit(1);    
+    }
+    //atras textura
+    atras = SDL_CreateTextureFromSurface(renderer, tempSurfaceAtras);
+    SDL_FreeSurface(tempSurfaceAtras);
+    if(!atras){
+        fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
+        exit(1);
+    }
      
     // Inicializar la textura del carro (primer carro)
     carro = NULL;
@@ -272,6 +291,7 @@ void botones::dibujarBotones(SDL_Renderer* renderer)
         SDL_RenderCopy(renderer, botonRuta3, NULL, &botonRuta3Rect);
         SDL_RenderCopy(renderer, botonRuta4, NULL, &botonRuta4Rect);
         SDL_RenderCopy(renderer, botonRuta5, NULL, &botonRuta5Rect);
+        SDL_RenderCopy(renderer, atras, NULL, &atrasRect);
     } else {
         // Dibujar los demás botones
         SDL_RenderCopy(renderer, start, NULL, &startRect);
@@ -279,6 +299,7 @@ void botones::dibujarBotones(SDL_Renderer* renderer)
         SDL_RenderCopy(renderer, niebla, NULL, &nieblaRect);
         SDL_RenderCopy(renderer, agregar, NULL, &agregarRect);
         SDL_RenderCopy(renderer, ruta, NULL, &rutaRect);
+        SDL_RenderCopy(renderer, atras, NULL, &atrasRect);
     }
 
     if (carro) {
@@ -503,7 +524,7 @@ if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) 
 }
 
 
-if (puntoInicioSeleccionado && puntoDestinoSeleccionado) {
+        if (puntoInicioSeleccionado && puntoDestinoSeleccionado) {
     std::vector<int> ruta = grafo.dijkstra(puntoInicio, puntoDestino);
 
     if (!ruta.empty()) {
@@ -526,6 +547,23 @@ if (puntoInicioSeleccionado && puntoDestinoSeleccionado) {
     puntoDestino = -1;
     puntoInicioSeleccionado = false;
     puntoDestinoSeleccionado = false;
+                                        }
+} 
+
+
+
+//boton atras
+if (mouseX > atrasRect.x && mouseX < (atrasRect.x + atrasRect.w) &&
+    mouseY > atrasRect.y && mouseY < (atrasRect.y + atrasRect.h)) {
+    if (clicIzquierdo) {
+        atrasClickeado = true;
+        mostrarBotonesRuta = !mostrarBotonesRuta; 
+        std::cout << "Botón de atras clickeado" << std::endl;
+    }
+} else {
+    atrasClickeado = false;
 }
-} }
+
+
+}
 
