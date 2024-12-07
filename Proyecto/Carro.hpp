@@ -173,21 +173,19 @@ public:
     }
 
     void moverEnRuta(const Grafo& grafo) {
-        if (indiceRuta >= rutaActual.size()) return; // Ruta completada
+    if (indiceRuta >= rutaActual.size()) return; // Si la ruta está completa, no hacer nada
 
-        // Obtener la posición del nodo actual y el siguiente nodo
-        Nodo nodoActual = grafo.getNodo(rutaActual[indiceRuta]);
-        Nodo nodoDestino = grafo.getNodo(rutaActual[indiceRuta + 1]);
+    Nodo nodoActual = grafo.getNodo(rutaActual[indiceRuta]);
+    Nodo nodoDestino = grafo.getNodo(rutaActual[indiceRuta + 1]);
 
-        // Mover hacia el nodo destino
-        moverHaciaDestino(nodoDestino.x, nodoDestino.y);
+    // Mover hacia el nodo destino
+    moverHaciaDestino(nodoDestino.x, nodoDestino.y);
 
-        // Si llegamos al nodo destino, avanzar al siguiente nodo
-        if (rect.x == nodoDestino.x && rect.y == nodoDestino.y) {
-            indiceRuta++;
-        }
+    // Si el carro llega al nodo destino, avanzar al siguiente nodo
+    if (detectarNodo(nodoDestino)) {
+        indiceRuta++;
     }
-
+}
     void moverHaciaDestino(int destinoX, int destinoY) {
    
     if (rect.x < destinoX) {
