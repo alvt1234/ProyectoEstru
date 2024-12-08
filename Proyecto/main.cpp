@@ -29,16 +29,24 @@ SDL_Color generarColorAleatorio() {
     color.a = 255; // Opacidad total
     return color;
 }
+/*void dibujarRectangulo(int x, int y, int ancho, int alto, SDL_Renderer* renderer) {
+    SDL_SetRenderDrawColor(renderer, 105, 0, 0, 255); // Rojo
+    SDL_Rect rect = { x, y, ancho, alto };  // Rectángulo con las coordenadas (x, y), y las dimensiones (ancho, alto)
+    SDL_RenderFillRect(renderer, &rect);    // Dibuja el rectángulo
+}*/
 
+void registrarMovimientos(const Carro& carro) {
+    std::cerr << "Carro posición: (" << carro.rect.x << ", " << carro.rect.y << ")\n";
+}
 void generarCarros(int intervalo) {
     Uint32 tiempoActual = SDL_GetTicks();
     SDL_Color color = generarColorAleatorio();
     if (tiempoActual - ultimoCarro > intervalo) {
         // Crear un nuevo carro en una posición inicial predeterminada
         carros.push_back(Carro(0, 5, 15, 10, 'H', 4,false,color));  // Carro nuevo
-        carros.push_back(Carro(1430, 910, 15, 10, 'V', 3,false,color));  // Carro nuevo
-        carros.push_back(Carro(1370, 5, 18, 10, 'V', 4,false,color));  // Carro nuevo
-        carros.push_back(Carro(0, 605, 18, 10, 'H', 5,true,color));  // Carro nuevo
+        //carros.push_back(Carro(1430, 910, 15, 10, 'V', 3,false,color));  // Carro nuevo
+       // carros.push_back(Carro(1370, 5, 18, 10, 'V', 4,false,color));  // Carro nuevo
+        //carros.push_back(Carro(0, 605, 18, 10, 'H', 5,true,color));  // Carro nuevo
         ultimoCarro = tiempoActual;
     }
 }
@@ -115,7 +123,8 @@ void crearPantalla()
     // Función para dibujar el mapa (calles, edificios, etc.)
     void dibujarMapa(botones& boton) {
         SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
-        calles();
+       //calles();
+     //   dibujarRectangulo(1500, 5, 50, 1080, renderer);
         actualizarSemaforos();  // Actualiza el estado de los semáforos
         dibujarSemaforos(renderer);  // Dibuja los semáforos
         if (boton.startClickeado) {
@@ -279,18 +288,21 @@ void inicializarCarros() {
 
 void actualizarCarros(const Grafo& grafo, const std::vector<Semaforo>& semaforos) {
     for (size_t i = 0; i < carros.size(); ++i) {
-        detectarInterseccionYDecidir(carros[i], grafo);  // Verificar si necesita girar
-        carros[i].mover(semaforos,carros);  // Pasar los semáforos para detenerse si es necesario
-        carros[i].dibujar(renderer);  // Dibujar el carro
+        detectarInterseccionYDecidir(carros[i], grafo);  
+        carros[i].mover(semaforos, carros); 
 
-        // Si el carro sale de la pantalla, eliminarlo del vector
-        if (carros[i].rect.x > screenWidth) {  // getX() debe devolver la posición X del carro
-            carros.erase(carros.begin() + i);
-            --i;  // Ajustar índice tras borrar
+        if (carros[i].rect.x < 0 || carros[i].rect.x > 1500 || carros[i].rect.y < 0 || carros[i].rect.y > 1300) {
+            carros[i].activo = false; 
         }
-    }
-}
 
+        carros[i].dibujar(renderer);  // Dibujar el carro
+    }
+
+   
+    carros.erase(std::remove_if(carros.begin(), carros.end(), [](Carro& carro) {
+        return !carro.activo;  
+    }), carros.end());
+}
 void inicializarGrafo(Grafo& grafo) {
     SDL_Color colorNodo = {255, 0, 0, 255};  // Rojo para las intersecciones
 
@@ -373,7 +385,7 @@ int main(int argc, char *args[]) {
     botones boton(renderer);
     bool corriendo = true;
     SDL_Event e;
-
+  
     while (corriendo) {
     eventos(e, corriendo, boton, renderer);
 
@@ -387,6 +399,7 @@ int main(int argc, char *args[]) {
 
     generarCarros(intervaloGeneracion);  // Generar nuevos carros según el intervalo
     actualizarCarros(grafo, semaforos);  // Actualizar y dibujar los carros
+    
 
     SDL_RenderPresent(renderer);
     SDL_Delay(16);  // Aproximadamente 60 FPS

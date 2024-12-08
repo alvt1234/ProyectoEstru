@@ -55,7 +55,7 @@ public:
     bool puntoDestinoSeleccionado = false;
     
     
-
+    int idCarroRuta = -1;
     int estadoCarro = 0;  // 0 para primer carro, 1 para segundo carro
     SDL_Texture* carro = NULL;  // Textura del carro
     SDL_Rect carroRect;  // Rectángulo para el carro
@@ -517,7 +517,7 @@ if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) 
             puntoInicio = 1; // Ruta 2 como punto de inicio
             std::cout << "Punto de inicio seleccionado: Ruta 5" << std::endl;
             SDL_Color color = {255, 0, 255}; // Color del carro
-            carros.push_back(Carro(1430, 90, 30, 50, 'V', 2, false, color));  // Coordenadas de inicio
+            carros.push_back(Carro(1430, 90, 30, 50,'V', 2, false, color));  // Coordenadas de inicio
             std::cout << "Carro agregado en Ruta 5" << std::endl;
             carroCreado = true;  // Marcar que el carro ha sido creado
         } else if (!puntoDestinoSeleccionado) {
@@ -527,7 +527,7 @@ if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) 
 }
 
 
-        if (puntoInicioSeleccionado && puntoDestinoSeleccionado) {
+    if (puntoInicioSeleccionado && puntoDestinoSeleccionado) {
     std::vector<int> ruta = grafo.dijkstra(puntoInicio, puntoDestino);
 
     if (!ruta.empty()) {
@@ -539,7 +539,7 @@ if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) 
 
         // Asignar ruta al carro
         for (auto& carro : carros) {
-            carro.establecerRuta(ruta);  // Establecer la ruta para el carro
+          //  carro.establecerRuta(ruta);  // Establecer la ruta para el carro
         }
     } else {
         std::cout << "No se encontró una ruta válida." << std::endl;

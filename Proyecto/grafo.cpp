@@ -62,6 +62,12 @@ void Grafo::dibujar(SDL_Renderer* renderer) const {
 }
 
 std::vector<int> Grafo::dijkstra(int inicio, int fin) const {
+    // Validar índices inicial y final
+    if (inicio < 0 || inicio >= nodos.size() || fin < 0 || fin >= nodos.size()) {
+        std::cerr << "Error: Nodos de inicio o fin inválidos.\n";
+        return {};
+    }
+
     size_t n = nodos.size();
     std::vector<float> dist(n, std::numeric_limits<float>::infinity());
     std::vector<int> prev(n, -1);
@@ -78,8 +84,11 @@ std::vector<int> Grafo::dijkstra(int inicio, int fin) const {
             }
         }
 
-        if (dist[u] == std::numeric_limits<float>::infinity())
+        // Si no se encontró un nodo válido, detener el bucle
+        if (u == -1 || dist[u] == std::numeric_limits<float>::infinity()) {
+            std::cerr << "Error: Nodo desconectado o sin ruta.\n";
             break;
+        }
 
         visitado[u] = true;
 
@@ -88,6 +97,7 @@ std::vector<int> Grafo::dijkstra(int inicio, int fin) const {
             if (arista.nodo1 == u || arista.nodo2 == u) {
                 int vecino = (arista.nodo1 == u) ? arista.nodo2 : arista.nodo1;
                 float nuevaDist = dist[u] + arista.peso;
+
                 if (nuevaDist < dist[vecino]) {
                     dist[vecino] = nuevaDist;
                     prev[vecino] = u;
@@ -103,24 +113,55 @@ std::vector<int> Grafo::dijkstra(int inicio, int fin) const {
     }
     std::reverse(ruta.begin(), ruta.end());
 
-    if (ruta.size() > 1 && ruta.front() == inicio)
-        return ruta;
-    return {}; // No hay ruta
-                } //aqui termina dijikstra
+    // Validar que la ruta es completa
+    if (ruta.size() < 2 || ruta.front() != inicio || ruta.back() != fin) {
+        std::cerr << "Error: No se pudo calcular una ruta válida entre " << inicio << " y " << fin << ".\n";
+        return {};
+    }
 
-
-void configurarRuta(Carro& carro, Grafo& grafo, int nodoInicioID, int nodoDestinoID) 
-{
-    if (nodoInicioID < 0 || nodoInicioID >= grafo.getCantidadNodos() || 
-    nodoDestinoID < 0 || nodoDestinoID >= grafo.getCantidadNodos()) {
-    std::cerr << "Índices de nodo inválidos.\n";
-    return;
+    // Validar que todos los nodos en la ruta están conectados
+    for (size_t i = 1; i < ruta.size(); ++i) {
+        bool conectados = false;
+        for (const auto& arista : aristas) {
+            if ((arista.nodo1 == ruta[i - 1] && arista.nodo2 == ruta[i]) ||
+                (arista.nodo2 == ruta[i - 1] && arista.nodo1 == ruta[i])) {
+                conectados = true;
+                break;
             }
-    std::vector<int> ruta = grafo.dijkstra(nodoInicioID, nodoDestinoID);
+        }
+        if (!conectados) {
+            std::cerr << "Error: Ruta contiene nodos no conectados (" << ruta[i - 1] << " -> " << ruta[i] << ").\n";
+            return {};
+        }
+    }
 
-    if (ruta.size() < 2 || ruta.front() != nodoInicioID || ruta.back() != nodoDestinoID) {
-        std::cerr << "La ruta calculada es inválida.\n";
+    return ruta; // Ruta válida
+} //aqui termina dijikstra
+
+void configurarRuta(Carro& carro, Grafo& grafo, int nodoInicioID, int nodoDestinoID) {
+    if (nodoInicioID < 0 || nodoInicioID >= grafo.getCantidadNodos() || 
+        nodoDestinoID < 0 || nodoDestinoID >= grafo.getCantidadNodos()) {
+        std::cerr << "Índices de nodo inválidos.\n";
         return;
     }
+
+    std::vector<int> ruta = grafo.dijkstra(nodoInicioID, nodoDestinoID);
+
+    // Validar que la ruta conecta todos los nodos correctamente
+    for (size_t i = 1; i < ruta.size(); ++i) {
+        bool conectados = false;
+        for (const auto& arista : grafo.getAristas()) {
+            if ((arista.nodo1 == ruta[i - 1] && arista.nodo2 == ruta[i]) ||
+                (arista.nodo2 == ruta[i - 1] && arista.nodo1 == ruta[i])) {
+                conectados = true;
+                break;
+            }
+        }
+        if (!conectados) {
+            std::cerr << "Ruta contiene nodos no conectados (" << ruta[i - 1] << " -> " << ruta[i] << ").\n";
+            return;
+        }
+    }
+
     carro.establecerRuta(ruta);
 }

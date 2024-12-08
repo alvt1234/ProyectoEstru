@@ -8,7 +8,6 @@
  extern bool enPausALosCARROS;
 
 
-
 class Carro {
 public:
     std::vector<int> rutaActual; // IDs de nodos en la ruta
@@ -18,11 +17,11 @@ public:
     char direccion; 
     bool esEmergencia; // 'H' para horizontal, 'V' para vertical
     Grafo grafo;
+    bool activo;
     SDL_Color color;
-   
     
-    Carro(int x, int y, int ancho, int alto, char dir = 'H', int vel = 6, bool emergencia = false, SDL_Color c = {169, 169, 169, 255})
-        : velocidad(vel), direccion(dir), esEmergencia(emergencia), color(c) {
+     Carro(int x, int y, int ancho, int alto, char dir = 'H', int vel = 6, bool emergencia = false, SDL_Color c = {169, 169, 169, 255})
+        : velocidad(vel), direccion(dir), esEmergencia(emergencia), color(c), activo(true) { 
         rect = {x, y, ancho, alto};
     }
 
@@ -42,10 +41,16 @@ public:
     }
 
      void mover(const std::vector<Semaforo>& semaforos, const std::vector<Carro>& carros) {
-        
-        if (enPausALosCARROS) {
+
+         if (enPausALosCARROS) {
         return; 
-            }
+         }
+        if (rect.x < 0 || rect.x > 1500 || rect.y < 0 || rect.y > 1300) {
+            activo = false;  
+        }
+    
+
+
         if (verificarSemaforo(semaforos)) {
             return; // Detener si el semáforo está en rojo
         }
@@ -79,7 +84,7 @@ public:
         }
     }
 
-    void girarHaciaArista(const Grafo& grafo) {
+      void girarHaciaArista(const Grafo& grafo) {
         // Buscar el nodo más cercano
         for (const auto& nodo : grafo.getNodos()) {
             if (std::abs(rect.x - nodo.x) < 10 && std::abs(rect.y - nodo.y) < 10) {
@@ -129,6 +134,7 @@ public:
         }
     }
 
+
     void ajustarPosicionAlNodo(Nodo nodo) {
         if (std::abs(rect.x - nodo.x) <= 5 && std::abs(rect.y - nodo.y) <= 5) {
             rect.x = nodo.x;
@@ -142,6 +148,9 @@ public:
     }
 
     void dibujar(SDL_Renderer* renderer) {
+        if (!activo) {
+            return;  // No dibujar si el carro no está activo
+        }
         if(esEmergencia){
             
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Color rojo puro
