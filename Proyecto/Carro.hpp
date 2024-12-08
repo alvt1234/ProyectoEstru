@@ -5,6 +5,7 @@
 #include <random>  // Para la generación de números aleatorios
 #include "grafo.hpp"
 #include "Semaforo.hpp"
+ extern bool enPausALosCARROS;
 
 
 
@@ -18,6 +19,7 @@ public:
     bool esEmergencia; // 'H' para horizontal, 'V' para vertical
     Grafo grafo;
     SDL_Color color;
+   
     
     Carro(int x, int y, int ancho, int alto, char dir = 'H', int vel = 6, bool emergencia = false, SDL_Color c = {169, 169, 169, 255})
         : velocidad(vel), direccion(dir), esEmergencia(emergencia), color(c) {
@@ -40,6 +42,10 @@ public:
     }
 
      void mover(const std::vector<Semaforo>& semaforos, const std::vector<Carro>& carros) {
+        
+        if (enPausALosCARROS) {
+        return; 
+            }
         if (verificarSemaforo(semaforos)) {
             return; // Detener si el semáforo está en rojo
         }

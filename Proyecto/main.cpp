@@ -19,6 +19,7 @@ Uint32 ultimoCarro = 0;  // Temporizador para la generación de carros
 int intervaloGeneracion = 3000;  // Intervalo en milisegundos para generar carros
 int screenWidth = 1920;  // Ancho de la pantalla
 Uint8 fondoR = 100, fondoG = 149, fondoB = 237;  // Azul del fondo
+bool enPausALosCARROS = false;
 
 SDL_Color generarColorAleatorio() {
     SDL_Color color;

@@ -4,10 +4,14 @@
 #include "Carro.hpp"
 #include "Semaforo.hpp"
 #include "grafo.hpp"
+extern bool enPausALosCARROS;
 
 class botones {
 public:
+
+    //bool enPausALosCARROS = false;
     //botones de calles para ruta
+    
     SDL_Texture * botonRuta1;
     SDL_Texture * botonRuta2;
     SDL_Texture * botonRuta3;
@@ -49,6 +53,7 @@ public:
     bool carroCreado = false; 
     bool puntoInicioSeleccionado = false;
     bool puntoDestinoSeleccionado = false;
+    
     
 
     int estadoCarro = 0;  // 0 para primer carro, 1 para segundo carro
@@ -409,7 +414,8 @@ void botones::actualizarBotones(int mouseX, int mouseY, bool clicIzquierdo, SDL_
     mouseY > rutaRect.y && mouseY < (rutaRect.y + rutaRect.h)) {
     if (clicIzquierdo) {
         rutaClickeado = true;
-        mostrarBotonesRuta = !mostrarBotonesRuta; // Alternar visibilidad de los botones de ruta
+        mostrarBotonesRuta = !mostrarBotonesRuta; 
+        enPausALosCARROS = !enPausALosCARROS;
         std::cout << "Botón de ruta clickeado" << std::endl;
     }
     } else 
@@ -510,8 +516,6 @@ if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) 
         if (!carroCreado) {
             puntoInicio = 1; // Ruta 2 como punto de inicio
             std::cout << "Punto de inicio seleccionado: Ruta 5" << std::endl;
-
-            // Crear y agregar un nuevo carro en el punto de inicio
             SDL_Color color = {255, 0, 255}; // Color del carro
             carros.push_back(Carro(1430, 90, 30, 50, 'V', 2, false, color));  // Coordenadas de inicio
             std::cout << "Carro agregado en Ruta 5" << std::endl;
@@ -519,7 +523,6 @@ if (mouseX > botonRuta5Rect.x && mouseX < (botonRuta5Rect.x + botonRuta5Rect.w) 
         } else if (!puntoDestinoSeleccionado) {
         puntoDestino = seleccionarNodoDestino(mouseX, mouseY);
         puntoDestinoSeleccionado = true;
-        std::cout << "Punto de destino seleccionado: Nodo " << puntoDestino << std::endl;
     }
 }
 
@@ -558,7 +561,7 @@ if (mouseX > atrasRect.x && mouseX < (atrasRect.x + atrasRect.w) &&
     if (clicIzquierdo) {
         atrasClickeado = true;
         mostrarBotonesRuta = !mostrarBotonesRuta; 
-        std::cout << "Botón de atras clickeado" << std::endl;
+        enPausALosCARROS = !enPausALosCARROS;
     }
 } else {
     atrasClickeado = false;
