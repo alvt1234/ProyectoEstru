@@ -35,6 +35,7 @@ public:
     SDL_Texture * agregar;
     SDL_Texture * ruta;
     SDL_Texture * atras;
+    SDL_Texture * ambulancia;
     //rectangulos
     SDL_Rect nieblaRect;
     SDL_Rect startRect;
@@ -42,7 +43,9 @@ public:
     SDL_Rect rutaRect;
     SDL_Rect agregarRect;
     SDL_Rect atrasRect;
-
+    SDL_Rect ambulanciaRect; 
+    
+    bool ambulanciaClickeado = false;   
     bool atrasClickeado = false;
     bool agregarClickeado = false;
     bool lluviaClickeado = false;
@@ -75,8 +78,8 @@ public:
 
 botones::botones(SDL_Renderer* renderer) {
     startRect = {1700, 300, 200, 300}; // Posición y tamaño del botón
-    lluviaRect = {1800, 120, 70, 100}; // Posición y tamaño del botón
-    nieblaRect = {1800, 220, 70, 100}; // Posición y tamaño del botón
+    lluviaRect = {1800, 120, 100, 100}; // Posición y tamaño del botón
+    nieblaRect = {1800, 220, 100, 100}; // Posición y tamaño del botón
     agregarRect = {1800, 800, 80, 80}; // Posición y tamaño del botón
     rutaRect = {1800, 700, 80,80}; // posicion y tamaño 
     botonRuta1Rect = {0, 450 , 40 , 40}; 
@@ -84,11 +87,12 @@ botones::botones(SDL_Renderer* renderer) {
     botonRuta3Rect = {720, 980 , 40 , 40}; 
     botonRuta4Rect = {900, 0 , 40 , 40}; 
     botonRuta5Rect = {1400, 980 , 40 , 40}; 
-    atrasRect = {1800, 900, 80, 80}; 
+    atrasRect = {1800, 900, 80, 80};
+    ambulanciaRect = {1760, 530, 150, 150}; 
 
     // Cargar imagen BMP del botón
-   SDL_Surface* tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/start.bmp");
-   // SDL_Surface* tempSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/start.bmp");
+   //SDL_Surface* tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/start.bmp");
+    SDL_Surface* tempSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/start.bmp");
     if (!tempSurface) {
         fprintf(stderr, "Error al cargar la imagen del botón: %s\n", SDL_GetError());
         exit(1);
@@ -103,8 +107,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
 
     //BOTON LLUVIA
-    SDL_Surface* tempSurfaceLluvia = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/lluvia.bmp");
-    //SDL_Surface* tempSurfaceLluvia = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/lluvia.bmp");
+    //SDL_Surface* tempSurfaceLluvia = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/lluvia.bmp");
+    SDL_Surface* tempSurfaceLluvia = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/lluvia.bmp");
     if (!tempSurfaceLluvia) {
         fprintf(stderr, "Error al cargar la imagen del botón Lluvia: %s\n", SDL_GetError());
         exit(1);
@@ -119,8 +123,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
 
     //NIEBLA
-    SDL_Surface* tempSurfaceNiebla = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/niebla.bmp");
-    //SDL_Surface* tempSurfaceNiebla = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/niebla.bmp");
+    //SDL_Surface* tempSurfaceNiebla = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/niebla.bmp");
+    SDL_Surface* tempSurfaceNiebla = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/niebla.bmp");
     if (!tempSurfaceNiebla) {
         fprintf(stderr, "Error al cargar la imagen del botón Niebla: %s\n", SDL_GetError());
         exit(1);
@@ -135,8 +139,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
 
     //AGREGAR
-    SDL_Surface* tempSurfaceAgregar = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/agregar.bmp");
-    //SDL_Surface* tempSurfaceAgregar = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/agregar.bmp");
+    //SDL_Surface* tempSurfaceAgregar = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/agregar.bmp");
+    SDL_Surface* tempSurfaceAgregar = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/agregar.bmp");
     if (!tempSurfaceAgregar) {
         fprintf(stderr, "Error al cargar la imagen del botón agregar: %s\n", SDL_GetError());
         exit(1);
@@ -151,8 +155,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
 
     //RUTA
-    SDL_Surface* tempSurfaceRuta = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/ruta.bmp");
-     //SDL_Surface* tempSurfaceRuta = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/ruta.bmp");
+    //SDL_Surface* tempSurfaceRuta = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/ruta.bmp");
+     SDL_Surface* tempSurfaceRuta = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/ruta.bmp");
     if(!tempSurfaceRuta){
         fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
         exit(1);    
@@ -169,8 +173,8 @@ botones::botones(SDL_Renderer* renderer) {
 
     //BOTONES PARA LA RUTA
     //boton1
-    SDL_Surface * tempSurfaceBotonRuta1 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero1.bmp");
-    //SDL_Surface * tempSurfaceBotonRuta1 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero1.bmp");
+    //SDL_Surface * tempSurfaceBotonRuta1 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero1.bmp");
+    SDL_Surface * tempSurfaceBotonRuta1 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero1.bmp");
     if(!tempSurfaceBotonRuta1){
         fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
         exit(1);    
@@ -184,8 +188,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
     //boton2
 
-     SDL_Surface * tempSurfaceBotonRuta2 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero2.bmp");
-     //SDL_Surface * tempSurfaceBotonRuta2 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero2.bmp");
+     //SDL_Surface * tempSurfaceBotonRuta2 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero2.bmp");
+     SDL_Surface * tempSurfaceBotonRuta2 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero2.bmp");
     if(!tempSurfaceBotonRuta2){
         fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
         exit(1);    
@@ -198,8 +202,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
 
     //boton3
-     SDL_Surface * tempSurfaceBotonRuta3 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero3.bmp");
-     //SDL_Surface * tempSurfaceBotonRuta3 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero3.bmp");
+     //SDL_Surface * tempSurfaceBotonRuta3 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero3.bmp");
+     SDL_Surface * tempSurfaceBotonRuta3 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero3.bmp");
     if(!tempSurfaceBotonRuta3){
         fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
         exit(1);    
@@ -212,8 +216,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
 
     //boton4
-    //SDL_Surface * tempSurfaceBotonRuta4 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero4.bmp");
-    SDL_Surface * tempSurfaceBotonRuta4 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero4.bmp");
+    SDL_Surface * tempSurfaceBotonRuta4 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero4.bmp");
+    //SDL_Surface * tempSurfaceBotonRuta4 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero4.bmp");
     if(!tempSurfaceBotonRuta4){
         fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
         exit(1);    
@@ -226,8 +230,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
 
     //boton5
-      SDL_Surface * tempSurfaceBotonRuta5 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero5.bmp");
-      //SDL_Surface * tempSurfaceBotonRuta5 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero5.bmp");
+      //SDL_Surface * tempSurfaceBotonRuta5 = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/numero5.bmp");
+      SDL_Surface * tempSurfaceBotonRuta5 = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/numero5.bmp");
     if(!tempSurfaceBotonRuta5){
         fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
         exit(1);    
@@ -240,8 +244,8 @@ botones::botones(SDL_Renderer* renderer) {
     }
 
     //atras cargar
-    //SDL_Surface * tempSurfaceAtras = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/atras.bmp");
-    SDL_Surface * tempSurfaceAtras = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/atras.bmp");
+    SDL_Surface * tempSurfaceAtras = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/atras.bmp");
+    //SDL_Surface * tempSurfaceAtras = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/atras.bmp");
     if(!tempSurfaceAtras){
         fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
         exit(1);    
@@ -253,6 +257,22 @@ botones::botones(SDL_Renderer* renderer) {
         fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
         exit(1);
     }
+    
+    //AMBULANCIA
+    SDL_Surface * tempSurfaceAmbulancia = SDL_LoadBMP("/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/img/ambulancia.bmp");
+    if(!tempSurfaceAmbulancia){
+        fprintf(stderr, "ERROR AL cargar el boton de la ruta: %s\n", SDL_GetError());
+        exit(1);    
+    }
+    //ambulancia textura
+    ambulancia = SDL_CreateTextureFromSurface(renderer, tempSurfaceAmbulancia);
+    SDL_FreeSurface(tempSurfaceAmbulancia);
+    if(!ambulancia){
+        fprintf(stderr, "error al crear la textura del boton ruta: %s\n", SDL_GetError());
+        exit(1);
+    }
+
+
      
     // Inicializar la textura del carro (primer carro)
     carro = NULL;
@@ -272,11 +292,11 @@ void botones::cambiarCarro(SDL_Renderer* renderer) {
 
     SDL_Surface* tempSurface = NULL;
     if (estadoCarro == 0) {
-    tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
-    //  tempSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
+    //tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/caromp.bmp");
+      tempSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/caromp.bmp");
     } else {
-        tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/carro2.bmp");
-        //tempSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/carro2.bmp");
+        //tempSurface = SDL_LoadBMP("/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/img/carro2.bmp");
+        tempSurface = SDL_LoadBMP("/home/anareyes/Documentos/Proyecto/img/carro2.bmp");
     }
 
     if (!tempSurface) {
@@ -315,6 +335,7 @@ void botones::dibujarBotones(SDL_Renderer* renderer)
         SDL_RenderCopy(renderer, agregar, NULL, &agregarRect);
         SDL_RenderCopy(renderer, ruta, NULL, &rutaRect);
         SDL_RenderCopy(renderer, atras, NULL, &atrasRect);
+        SDL_RenderCopy(renderer, ambulancia, NULL, &ambulanciaRect);
     }
 
     if (carro) {
@@ -596,6 +617,19 @@ if (mouseX > atrasRect.x && mouseX < (atrasRect.x + atrasRect.w) &&
     }
 } else {
     atrasClickeado = false;
+}
+
+//boton Ambulancia
+if (mouseX > ambulanciaRect.x && mouseX < (ambulanciaRect.x + ambulanciaRect.w) &&
+    mouseY > ambulanciaRect.y && mouseY < (ambulanciaRect.y + ambulanciaRect.h)) {
+    if (clicIzquierdo) {
+        ambulanciaClickeado = true;
+        std::cout << "Botón de ambulancia clickeado" << std::endl;
+        SDL_Color color = {255, 255, 255, 255}; 
+        carros.push_back(Carro(0, 0, 50, 50, 'V', 5, true, color));
+    }
+} else {
+    ambulanciaClickeado = false;
 }
 
 

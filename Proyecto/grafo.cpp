@@ -131,5 +131,14 @@ std::vector<int> Grafo::dijkstra(int inicio, int fin) const {
 }
 
 
-void configurarRuta(Carro& carro, Grafo& grafo, int nodoInicioID, int nodoDestinoID) {
+void Grafo::configurarRuta(Carro& carro, int nodoInicioID, int nodoDestinoID) {
+    // Llamar a Dijkstra para obtener la ruta más corta entre nodoInicioID y nodoDestinoID
+    std::vector<int> ruta = dijkstra(nodoInicioID, nodoDestinoID);
+    
+    // Si la ruta es válida (no está vacía), asignarla al carro
+    if (!ruta.empty()) {
+        carro.establecerRuta(ruta);
+    } else {
+        std::cerr << "No se pudo encontrar una ruta entre los nodos" << std::endl;
+    }
 }

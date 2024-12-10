@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Semaforos.cpp" "CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o" "gcc" "CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o.d"
-  "/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.cpp" "CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o" "gcc" "CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o.d"
-  "/home/allison/Documents/GitHub/ProyectoEstru/Proyecto/main.cpp" "CMakeFiles/SDLSimpleApp.dir/main.cpp.o" "gcc" "CMakeFiles/SDLSimpleApp.dir/main.cpp.o.d"
+  "/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Semaforos.cpp" "CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o" "gcc" "CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o.d"
+  "/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.cpp" "CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o" "gcc" "CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o.d"
+  "/home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp" "CMakeFiles/SDLSimpleApp.dir/main.cpp.o" "gcc" "CMakeFiles/SDLSimpleApp.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

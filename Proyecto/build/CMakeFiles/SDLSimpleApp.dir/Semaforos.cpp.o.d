@@ -1,7 +1,7 @@
 CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o: \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Semaforos.cpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Semaforos.cpp \
  /usr/include/stdc-predef.h \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp \
  /usr/include/SDL2/SDL.h /usr/include/SDL2/SDL_main.h \
  /usr/include/SDL2/SDL_stdinc.h /usr/include/SDL2/SDL_config.h \
  /usr/include/SDL2/SDL_config-x86_64.h /usr/include/SDL2/SDL_platform.h \
@@ -262,7 +262,7 @@ CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o: \
  /usr/include/c++/14/bits/basic_ios.tcc \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Carro.hpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Carro.hpp \
  /usr/include/SDL2/SDL_image.h /usr/include/SDL2/SDL.h \
  /usr/include/c++/14/random /usr/include/c++/14/cstdint \
  /usr/include/c++/14/limits /usr/include/c++/14/bits/random.h \
@@ -270,7 +270,7 @@ CMakeFiles/SDLSimpleApp.dir/Semaforos.cpp.o: \
  /usr/include/c++/14/x86_64-redhat-linux/bits/opt_random.h \
  /usr/include/c++/14/bits/random.tcc /usr/include/c++/14/numeric \
  /usr/include/c++/14/bits/stl_numeric.h \
- /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
+ /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
  /usr/include/c++/14/algorithm /usr/include/c++/14/bits/stl_algo.h \
  /usr/include/c++/14/bits/algorithmfwd.h \
  /usr/include/c++/14/bits/stl_heap.h \
