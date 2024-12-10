@@ -1,5 +1,5 @@
 CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/main.cpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/main.cpp \
  /usr/include/stdc-predef.h /usr/include/SDL2/SDL.h \
  /usr/include/SDL2/SDL_main.h /usr/include/SDL2/SDL_stdinc.h \
  /usr/include/SDL2/SDL_config.h /usr/include/SDL2/SDL_config-x86_64.h \
@@ -181,7 +181,7 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
  /usr/include/SDL2/SDL_version.h /usr/include/SDL2/SDL_locale.h \
  /usr/include/SDL2/SDL_misc.h /usr/include/SDL2/SDL_image.h \
  /usr/include/SDL2/SDL.h \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/botones.hpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/botones.hpp \
  /usr/include/c++/14/iostream /usr/include/c++/14/ostream \
  /usr/include/c++/14/ios /usr/include/c++/14/iosfwd \
  /usr/include/c++/14/bits/stringfwd.h \
@@ -262,7 +262,7 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
  /usr/include/c++/14/bits/basic_ios.tcc \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Carro.hpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Carro.hpp \
  /usr/include/c++/14/random /usr/include/c++/14/cstdint \
  /usr/include/c++/14/limits /usr/include/c++/14/bits/random.h \
  /usr/include/c++/14/vector /usr/include/c++/14/bits/stl_uninitialized.h \
@@ -273,9 +273,9 @@ CMakeFiles/SDLSimpleApp.dir/main.cpp.o: \
  /usr/include/c++/14/x86_64-redhat-linux/bits/opt_random.h \
  /usr/include/c++/14/bits/random.tcc /usr/include/c++/14/numeric \
  /usr/include/c++/14/bits/stl_numeric.h \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
  /usr/include/c++/14/algorithm /usr/include/c++/14/bits/stl_algo.h \
  /usr/include/c++/14/bits/algorithmfwd.h \
  /usr/include/c++/14/bits/stl_heap.h \
  /usr/include/c++/14/bits/stl_tempbuf.h \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp

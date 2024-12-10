@@ -29,14 +29,15 @@ public:
     if (lloviendo) {
         velocidad = 2;
     } else {
-        velocidad =6; 
+        velocidad =4;
+         
     }
     }
     void aumetarVelocidadPorNiebla(bool neblina) {
         if(neblina){
             velocidad = 1;
         }else{
-            velocidad = 6;
+            velocidad = 3;
         }
     }
 
@@ -75,13 +76,14 @@ public:
             }
         }
 
-        // Detectar y ajustar al nodo más cercano
-        for (const auto& nodo : grafo.getNodos()) {
-            if (detectarNodo(nodo)) {
-                ajustarPosicionAlNodo(nodo);
-                break;
-            }
+         if (!rutaActual.empty() && indiceRuta < rutaActual.size()) {
+        Nodo nodoDestino = grafo.getNodo(rutaActual[indiceRuta]);
+        moverHaciaDestino(nodoDestino.x, nodoDestino.y);
+
+        if (detectarNodo(nodoDestino)) {
+            indiceRuta++;
         }
+    }
     }
 
       void girarHaciaArista(const Grafo& grafo) {
@@ -91,7 +93,10 @@ public:
                 // Encontrar todas las aristas conectadas a este nodo
                 std::vector<std::pair<Nodo, Nodo>> conexiones;
                 for (const auto& arista : grafo.getAristas()) {
-                   if (grafo.getNodo(arista.nodo1).x == nodo.x && grafo.getNodo(arista.nodo1).y == nodo.y) {
+                    if (arista.first.x == nodo.x && arista.first.y == nodo.y) {
+                        conexiones.push_back(arista);
+                    }
+                   /*if (grafo.getNodo(arista.nodo1).x == nodo.x && grafo.getNodo(arista.nodo1).y == nodo.y) {
                     // Nodo 1 coincide con el nodo actual
                     Nodo nodo2 = grafo.getNodo(arista.nodo2);
                     conexiones.push_back({nodo, nodo2});
@@ -99,7 +104,7 @@ public:
                     // Nodo 2 coincide con el nodo actual
                     Nodo nodo1 = grafo.getNodo(arista.nodo1);
                     conexiones.push_back({nodo1, nodo});
-                }
+                }*/
                     }
                 
 
@@ -120,14 +125,14 @@ public:
                         velocidad = (destino.y > rect.y) ? std::abs(velocidad) : -std::abs(velocidad);
                     }
 
-                    std::cout << "Nodo actual: (" << rect.x << ", " << rect.y << ") -> Nodo destino: (" 
+                    /*std::cout << "Nodo actual: (" << rect.x << ", " << rect.y << ") -> Nodo destino: (" 
                         << destino.x << ", " << destino.y << ")" << std::endl;
                     std::cout << "Dirección: " << direccion << " Velocidad: " << velocidad << std::endl;
                     if (rect.x == destino.x && rect.y == destino.y) {
                         std::cout << "Vehículo alcanzó el nodo destino: (" << destino.x << ", " << destino.y << ")" << std::endl;
                     } else {
                         std::cout << "Vehículo en movimiento hacia: (" << destino.x << ", " << destino.y << ")" << std::endl;
-                    }
+                    }*/
                 }
                 break;
             }
@@ -187,39 +192,29 @@ public:
         indiceRuta = 0; // Empezar desde el primer nodo
     }
 
-    void moverEnRuta(const Grafo& grafo) {
-    if (indiceRuta >= rutaActual.size()) 
-    return;
+   void moverEnRuta(const Grafo& grafo) {
+    if (indiceRuta >= rutaActual.size() - 1) return; // Ruta completada
 
-    Nodo nodoActual = grafo.getNodo(rutaActual[indiceRuta]);
     Nodo nodoDestino = grafo.getNodo(rutaActual[indiceRuta + 1]);
-   
     moverHaciaDestino(nodoDestino.x, nodoDestino.y);
 
-    
-    if (detectarNodo(nodoDestino))
-     {
+    if (detectarNodo(nodoDestino)) {
         indiceRuta++;
     }
 }
     void moverHaciaDestino(int destinoX, int destinoY) {
-   
-    if (rect.x < destinoX) 
-    {
-        rect.x += velocidad; 
-    } else if (rect.x > destinoX) 
-    {
-        rect.x -= velocidad; 
+     if (std::abs(rect.x - destinoX) <= velocidad) {
+        rect.x = destinoX;  // Ajustar posición exacta
+    } else {
+        rect.x += (destinoX > rect.x) ? velocidad : -velocidad;
     }
-    
-    if (rect.y < destinoY) 
-    {
-        rect.y += velocidad; 
-    } else if (rect.y > destinoY) 
-    {
-        rect.y -= velocidad;  
+
+    if (std::abs(rect.y - destinoY) <= velocidad) {
+        rect.y = destinoY;  // Ajustar posición exacta
+    } else {
+        rect.y += (destinoY > rect.y) ? velocidad : -velocidad;
     }
-            }
+}
 
 };
 

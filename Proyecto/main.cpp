@@ -44,8 +44,8 @@ void generarCarros(int intervalo) {
     if (tiempoActual - ultimoCarro > intervalo) {
         // Crear un nuevo carro en una posición inicial predeterminada
         carros.push_back(Carro(0, 5, 15, 10, 'H', 4,false,color));  // Carro nuevo
-        //carros.push_back(Carro(1430, 910, 15, 10, 'V', 3,false,color));  // Carro nuevo
-       // carros.push_back(Carro(1370, 5, 18, 10, 'V', 4,false,color));  // Carro nuevo
+        carros.push_back(Carro(1430, 910, 15, 10, 'V', 3,false,color));  // Carro nuevo
+        carros.push_back(Carro(1370, 5, 18, 10, 'V', 4,false,color));  // Carro nuevo
         //carros.push_back(Carro(0, 605, 18, 10, 'H', 5,true,color));  // Carro nuevo
         ultimoCarro = tiempoActual;
     }
@@ -123,7 +123,7 @@ void crearPantalla()
     // Función para dibujar el mapa (calles, edificios, etc.)
     void dibujarMapa(botones& boton) {
         SDL_SetRenderDrawColor(renderer, 144, 238, 144, 255); // Azul claro
-       //calles();
+       calles();
      //   dibujarRectangulo(1500, 5, 50, 1080, renderer);
         actualizarSemaforos();  // Actualiza el estado de los semáforos
         dibujarSemaforos(renderer);  // Dibuja los semáforos
@@ -303,6 +303,8 @@ void actualizarCarros(const Grafo& grafo, const std::vector<Semaforo>& semaforos
         return !carro.activo;  
     }), carros.end());
 }
+
+
 void inicializarGrafo(Grafo& grafo) {
     SDL_Color colorNodo = {255, 0, 0, 255};  // Rojo para las intersecciones
 

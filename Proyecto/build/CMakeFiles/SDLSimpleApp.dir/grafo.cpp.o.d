@@ -1,7 +1,7 @@
 CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.cpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.cpp \
  /usr/include/stdc-predef.h \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/grafo.hpp \
  /usr/include/c++/14/vector /usr/include/c++/14/bits/requires_hosted.h \
  /usr/include/c++/14/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -269,11 +269,11 @@ CMakeFiles/SDLSimpleApp.dir/grafo.cpp.o: \
  /usr/include/c++/14/bits/basic_ios.tcc \
  /usr/include/c++/14/bits/ostream.tcc /usr/include/c++/14/istream \
  /usr/include/c++/14/bits/istream.tcc \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Carro.hpp \
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Carro.hpp \
  /usr/include/SDL2/SDL_image.h /usr/include/SDL2/SDL.h \
  /usr/include/c++/14/random /usr/include/c++/14/cstdint \
  /usr/include/c++/14/bits/random.h \
  /usr/include/c++/14/x86_64-redhat-linux/bits/opt_random.h \
  /usr/include/c++/14/bits/random.tcc /usr/include/c++/14/numeric \
  /usr/include/c++/14/bits/stl_numeric.h \
- /home/anareyes/Documentos/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp
+ /home/allison/Documents/GitHub/ProyectoEstru/Proyecto/Semaforo.hpp
